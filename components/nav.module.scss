@@ -1,0 +1,139 @@
+.appNav{
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 1rem;
+
+  svg{
+    height: 24px;
+    width: 24px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+
+}
+
+
+.appNavHead{
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &.hover{
+    cursor: pointer;
+  }
+
+  .appNavHeadTitle{
+    vertical-align: middle;
+    margin-left: 0.5rem
+  }
+}
+.appNavRow {
+  background-color:white;
+  height: 22px;
+  padding: 22px;
+  font-size: 18px;
+  color: #555;
+
+  @media (max-width: 600px){
+    display: none;
+  }
+
+  a:visited, a:hover, a:focus, a:active, a {
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+  }
+
+  .appNavTitle{
+    margin: 0 2rem;
+  }
+}
+
+.appNavTitle {
+  float: left;
+  margin: 0 2rem;
+}
+
+
+
+
+.burgerNav{
+
+  &.hidden{
+    display: none;
+  }
+
+  a:visited, a:hover, a:focus, a:active, a {
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+  }
+
+  @media (min-width: 601px){
+    display: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  position: fixed;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  height: 100%;
+  z-index: 10;
+  background: #fff;
+
+  .burgerNavTitle{
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.burgerIcon{
+
+  @media (min-width: 601px){
+    display: none;
+  }
+}
+
+
+
+
+.appNavButton {
+  float: right;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4rem;
+
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.appNavImg {
+  cursor: pointer;
+  height: 45px;
+  margin-top: -11px;
+  border-radius: 50%;
+}
+

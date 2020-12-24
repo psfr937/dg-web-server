@@ -9,9 +9,13 @@
     "export": "next export"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "contentful": "^7.14.6",
+    "netlify-identity-widget": "^1.9.1",
     "next": "9.5.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "safe-json-stringify": "^1.2.0",
+    "sass": "^1.30.0"
   }
 }
