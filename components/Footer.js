@@ -1,26 +1,28 @@
+import st from './footer.module.scss'
+
 export default function Footer() {
   return (
     <>
-      <footer>
-        Made with{' '}
-        <img src="/netliheart.svg" alt="Netlify Logo" className="logo" /> for
-        you
+      <footer className={st.footer}>
+        <div className={st.socialMediaList}>
+          <a href={"https://facebook.com"}>
+            <img src="/facebook.png" alt="facebook icon" className="logo" />
+          </a>
+          <a href={"https://twitter.com"}>
+            <img src="/twitter.png" alt="twitter icon" className="logo" />
+          </a>
+          <a href={"https://instagram.com"}>
+            <img src="/instagram.png" alt="instagram icon" className="logo" />
+          </a>
+          <a href={"https://instagram.com"}>
+            <img src="/email.png" alt="email icon" className="logo" />
+          </a>
+        </div>
+        <div className={st.footerInfo}>
+          <h6>AEEA</h6>
+          <h6>Copyright @ 2021</h6>
+        </div>
       </footer>
-      <style jsx>{`
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .logo {
-          height: 1em;
-          margin: 5px;
-        }
-      `}</style>
     </>
   )
 }

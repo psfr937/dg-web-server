@@ -1,49 +1,111 @@
-import Head from 'next/head'
+import Head from '@components/Head'
 import { fetchEntries } from '@utils/contentfulPosts'
 import safeJsonStringify from 'safe-json-stringify';
 import Footer from '@components/Footer'
 import Post from '@components/Post'
-import st from './test.module.scss'
+import TitledPost from '@components/TitledPost'
+import st from './home.module.scss'
 import React from "react";
 import Nav from "@components/Nav"
+import classNames from 'classnames'
+import Fade from 'react-reveal/Fade'
 
 export default function Home({ posts }) {
-  console.log(posts)
   return (
     <div>
       <style jsx global>{`
       body {
         margin: 0;
+        overflow-x: hidden;
       }
     `}</style>
-      <Head>
-        <title>AEEA</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <Head/>
       <main className={st.app}>
 
         <Nav/>
 
-        <div>
-          <div className={st.appHeader}>
-            <div className={st.appHeaderTextContainer}>
-              <h2 className={st.appHeaderText}>成功是1%的天才，加上99%的努力</h2>
+        <div className={st.navPadding}>
+
+            <div className={st.mainAppHeaderTextContainer}>
+              <img className={st.appHeaderLogo} src={'/logo.png'}/>
+              <h2 className={st.appHeaderText}>亞太禮儀教育協會</h2>
+              <h4 className={st.appHeaderPara}>推廣禮儀文化，透過日常生活認識禮儀文化的知識、態度和技巧，從而提升人際關係，加強與子女、家庭、工作及民族同儕之間的互動溝通，發揮彼此尊重和關愛的精神。</h4>
             </div>
-            <img className={st.coolPic1} src={"/hongkong.png"}>
-            </img>
-            <img className={st.coolPic2} src={"/hongkong.png"}>
-            </img>
+            <div className={classNames(st.homePageSection, st.first)}>
+              <div className={st.introBox}>
+
+              <div className={st.doubleBars}>
+                <Fade left duration={500} delay={100}>
+                <h4>「亞太禮儀教育協會」成立於2020年，主要傳承中華民族禮儀之邦文化，融合西方禮儀文化，塑造由內而外的品格修為，共同普及禮儀文化，將禮儀文化及教育推廣致日常生活，達致全民有禮，促進社會與家庭和諧。
+                </h4>
+                </Fade>
+              </div>
+              </div>
+            </div>
+
+
+            <div className={st.appHeaderTextContainer}>
+              <h2 className={st.appHeaderText}>禮儀培訓教育</h2>
+              <div className={st.posts}>
+                {posts.filter(p => p.category === 'education').map((p) => {
+                  return <Post key={p.date} date={p.date} image={p.image.fields} title={p.title} />
+                })}
+              </div>
+              <div className={st.appHeaderPara}>
+                <h4>香港幼兒教育及服務聯會Blossoms 就職典禮禮儀專題講座</h4>
+                <h4>校內受愛戴 校外獲尊敬—理想校長的舉止形象</h4>
+              </div>
+            </div>
+            <div className={classNames(st.homePageSection, st.second)}>
+              <ul className={st.ulList}>
+                <Fade left duration={500} delay={0}>
+                <li>提升個人對禮儀的修為，營造一個良好的禮儀習慣及環境</li>
+                </Fade>
+                <Fade left duration={500} delay={50}>
+                <li>推廣生活及文化禮儀，從小做起</li>
+                </Fade>
+                <Fade left duration={500} delay={100}>
+                <li>普及禮儀文化教育，並推廣民族、家庭、生活、工作、餐桌、外交等禮儀活動。</li>
+                </Fade>
+                <Fade left duration={500} delay={150}>
+                <li>以禮儀為媒體，建立友誼，從而建構更和諧的社會</li>
+                </Fade>
+              </ul>
+            </div>
+            <div className={st.appHeaderTextContainer}>
+              <h2 className={st.appHeaderText}>商業禮儀培訓</h2>
+              <div className={st.posts}>
+                {posts.filter(p => p.category === 'business').map((p) => {
+                  return <Post key={p.date} date={p.date} image={p.image.fields} title={p.title} />
+                })}
+              </div>
+
+              <div className={st.appHeaderPara}>
+                <h4>中銀香港導賞員專業賓客來訪接待禮儀培訓</h4>
+                </div>
+            </div>
+          <div className={classNames(st.homePageSection, st.third)}>
+            <div className={st.missionBox}>
+              <div className={st.missionBoxTitleContainer}><h3>使命</h3></div>
+              <h4>打造100,000家禮儀家
+              </h4><h4>打造1000所禮儀學校</h4>
+            </div>
           </div>
-        </div>
-        <div className={st.posts}>
-          {posts.map((p) => {
-            return <Post key={p.date} date={p.date} image={p.image.fields} title={p.title} />
-          })}
+            <div className={st.appHeaderTextContainer}>
+              <h2 className={st.appHeaderText}>傳媒訪問</h2>
+              <div className={st.posts}>
+                {posts.filter(p => p.category === 'media').map((p) => {
+                  return <TitledPost key={p.date} date={p.date} image={p.image.fields} title={p.title} />
+                })}
+              </div>
+            </div>
         </div>
       </main>
 
       <Footer />
+
+
+
     </div>
   )
 }

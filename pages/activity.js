@@ -1,27 +1,25 @@
-import Head from 'next/head'
+
 import { fetchEntries } from '@utils/contentfulPosts'
 import safeJsonStringify from 'safe-json-stringify';
 import Footer from '@components/Footer'
 import Post from '@components/Post'
-import st from './test.module.scss'
+import st from './home.module.scss'
 import React from "react";
 import Nav from "@components/Nav"
+import Head from "@components/Head"
+import classNames from 'classnames'
 
 export default function ActivityPage({ courses }) {
   return (
     <div>
-      <Head>
-        <title>AEEA</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head/>
 
       <main className={st.app}>
 
         <Nav/>
 
-        <div>
-        </div>
-        <div className={st.posts}>
+
+        <div className={classNames(st.navPadding, st.posts)}>
           {courses.map((p) => {
             return <Post key={p.date} date={p.date} image={p.image.fields} title={p.title} />
           })}

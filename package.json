@@ -15,6 +15,7 @@
     "next": "9.5.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-reveal": "^1.2.2",
     "safe-json-stringify": "^1.2.0",
     "sass": "^1.30.0"
   }

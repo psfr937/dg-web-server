@@ -6,8 +6,10 @@ function Post({ date, image, title }) {
   return (
     <div className={st.post}>
       <img alt={description} src={`https:${file.url}`} />
-
-
+      <div className={st.description}>
+        <h4>{description}
+        </h4>
+      </div>
     </div>
   )
 }
