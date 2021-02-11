@@ -5,6 +5,12 @@ function SiteHead({title = 'AEEA'}) {
     <Head>
       <title>AEEA</title>
       <link rel="icon" href="/logo.png"/>
+      <link
+        rel="preload"
+        href="/fonts/Roboto-Medium.ttf"
+        as="font"
+        crossOrigin=""
+      />
     </Head>
   )
 }

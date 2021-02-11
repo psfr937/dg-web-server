@@ -16,19 +16,16 @@ function Nav() {
     <div className={st.appNav}>
 
       <div className={burgerOpened ? classNames(st.hidden, st.appNavHead): st.appNavHead}>
-        <img alt="aeea" src="/logo.png"/>
+        <img alt="aeea" src="/pallysky_logo_2.svg"/>
 
         <div>
-          <span className={st.appNavHeadTitle}>AEEA</span>
-          <span className={st.appNavHeadTitle}>亞太禮儀教育協會</span>
+          <span className={st.appNavHeadTitle}>Pally AI</span>
         </div>
       </div>
       <div>
         <div className={st.appNavRow}>
-          <a className={st.appNavTitle} href={"/"}>首頁</a>
-          <a className={st.appNavTitle} href={"/activity"}>活動</a>
-          <a className={st.appNavTitle} href={"/blog"}>文章</a>
-          <a className={st.appNavTitle} href={"/contact"}>聯絡</a>
+          <a className={st.appNavTitle} href={"/console"}>Console</a>
+          <a className={st.appNavTitle} href={"/blog"}>Docs</a>
         </div>
 
           <div onClick={toggleBurger} className={st.burgerMenuButton}>
@@ -48,16 +45,10 @@ function Nav() {
 
     <div className={burgerOpened? st.burgerNav : classNames(st.burgerNav, st.hidden)}>
       <Fade delay={50} duration={300} top when={burgerOpened === true}>
-        <a href={"/"} className={st.burgerNavTitle}>首頁</a>
-      </Fade>
-      <Fade delay={100} duration={300} top when={burgerOpened === true}>
-        <a href={"/activity"} className={st.burgerNavTitle}>活動</a>
+        <a href={"/console"} className={st.burgerNavTitle}>Console</a>
       </Fade>
       <Fade delay={150} duration={300} top when={burgerOpened === true}>
-        <a href={"/blog"} className={st.burgerNavTitle}>文章</a>
-      </Fade>
-      <Fade delay={200} duration={300} top when={burgerOpened === true}>
-        <a href={"/contact"} className={st.burgerNavTitle}>聯絡</a>
+        <a href={"/blog"} className={st.burgerNavTitle}>Docs</a>
       </Fade>
     </div>
 

@@ -4,4 +4,7 @@
     <option name="languageLevel" value="JSX" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/redux/actions/checkout.js" />
+  </component>
 </project>

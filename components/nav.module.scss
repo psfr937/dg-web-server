@@ -7,7 +7,8 @@
   height: 60px;
   padding: 0 1rem;
   position: absolute;
-  background: none;
+  background: #28303d;
+  color: #fff;
   z-index: 10;
   width: 100%;
   top:0;
@@ -66,6 +67,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  fill: white;
   span{
     line-height: 30px;
   }
@@ -86,7 +88,7 @@
 
   a:visited, a:hover, a:focus, a:active, a {
     text-decoration: none;
-    color:black;
+    color: #fff;
     cursor: pointer;
   }
 

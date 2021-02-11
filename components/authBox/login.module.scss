@@ -1,0 +1,479 @@
+$primary-color: white;
+$secondary-color: yellow;
+$third-color: blue;
+
+.loginContainerFull {
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.imgur.com/VyId9FC.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.loginFormContainer{
+  position:  fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background: #28303d;
+
+  video{
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+.video{
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.svgMorph{
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loginForm {
+  z-index: 3;
+  position: absolute;
+  float: right;
+  margin: 20px 20px;
+  flex-wrap: wrap;
+  vertical-align: middle;
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  max-width: 400px;
+  background: #28303d;
+  color: white;
+
+  &.hidden{
+    z-index: 1;
+
+  }
+}
+
+.form{
+  width: 100%;
+  height: 100%;
+    @media only screen and (max-width: 700px) {
+      right: auto;
+      width: 280px;
+    }
+
+    & > form{
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.hidden{
+      opacity: 0;
+    }
+
+}
+
+
+
+
+
+.loginFormTitleContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+.loginFormTitle {
+  width: 100%;
+  font-size: 2.8rem;
+  font-weight: 500;
+  pointer: cursor;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.loginFormCloseButton{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  path{
+    fill: #555;
+  }
+
+  &:hover{
+    path{
+      fill: #555;
+    }
+  }
+
+  right: 1rem;
+  top: 1rem;
+}
+
+.loginFormSeparator{
+  margin: 2rem 0;
+  background-color: black;
+  color: black;
+  height: 1px;
+  border: none;
+}
+
+.loginFormSubTitle{
+  width: 100%;
+  font-size: 1rem;
+  color: #aaa;
+  text-align: left;
+  margin: 0 0 1rem 0;
+}
+
+.loginFormTitle.active {
+  color: #3276ff;
+  border-bottom: 1px solid #3276ff;
+}
+.loginFormText {
+  color: rgb(96, 96, 96);
+  text-decoration: underline;
+  vertical-align: middle;
+  margin: 1rem 0;
+
+}
+
+.alignCenter{
+  align-content: center;
+}
+
+.textCenter{
+  align-content: center;
+}
+
+.loginFormTextSeparator {
+  margin: 0 20px;
+  vertical-align: middle;
+
+}
+
+.orSeparator {
+  display: block;
+  margin: 0 -20px;
+  border: 0;
+  border-top: 3px solid $secondary-color;
+}
+.loginFormFooter{
+  .switchFormText{
+    color: #888;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 4px;
+    u, a {
+      margin-left: 1rem;
+      color: darken($primary-color, 10%);
+      cursor: pointer;
+    }
+
+  }
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.errorLabel{
+  font-size: 0.8em;
+  transition: all 0.5s ease;
+  color: #ff5252 !important;
+  line-height: 80%;
+
+}
+
+.loginFormField {
+  position: relative;
+  height: 50px;
+  width: 300px;
+
+  label {
+    color: $third-color;
+    position: absolute;
+    top: 25px;
+    font-size: 1em;
+    transition: all 0.5s ease;
+
+  }
+
+  hr {
+    display: block;
+    border: 0;
+    float: none;
+    border-top: 1px solid $third-color;
+    margin: 0;
+    padding: 0;
+  }
+
+  .validColor{
+    color: $third-color;
+  }
+
+  .invalidColor{
+    color: #ff5252;
+  }
+
+
+
+
+  input {
+    color: #606060;
+    display: block;
+    outline: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    padding-top: 15px;
+    border: none;
+    font-size: 0.8em;
+    font-weight: 200;
+    background: transparent;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    transition: all 0.5s ease;
+  }
+
+  .active input {
+    transition: all 0.5s ease 0.3s;
+    outline: none;
+    background: transparent;
+    border: none;
+  }
+
+
+
+  .input {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+
+  .input.invalid {
+    transform-origin: center;
+  }
+
+  .input.valid {
+    transform-origin: bottom;
+  }
+
+
+  .input::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 3px;
+    right: 15px;
+    bottom: -50px;
+    background-color: transparent;
+    transform-origin: inherit;
+    transform: rotate(0deg);
+    transition: transform 0.4s ease, bottom 0.4s ease 0.3s, background-color 0.2s ease 0.6s;
+  }
+
+  .input::after {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 3px;
+    right: 15px;
+    bottom: -50px;
+    visibility: hidden;
+    background-color: transparent;
+    transform-origin: inherit;
+    transform: rotate(0deg);
+    transition: transform 0.4s ease, visibility 0.4s ease, bottom 0.4s ease 0.3s, background-color 0.2s ease 0.6s, height 0.2s ease 0.6s;
+  }
+
+  .valid::before {
+    bottom: 5px;
+    right: 16px;
+    visibility: visible;
+    background-color: $third-color;
+    transform-origin: inherit;
+    transform: rotate(40deg);
+    transition: bottom 0.4s ease, transform 0.4s ease 0.3s;
+  }
+
+  .valid::after {
+    bottom: 5px;
+    height: 8px;
+    visibility: visible;
+    background-color: $third-color;
+    transform-origin: inherit;
+    transform: rotate(-45deg);
+    transition: bottom 0.4s ease, visibility 0.4s ease 0.3s, transform 0.4s ease 0.3s;
+  }
+
+  .invalid::before {
+    bottom: 3px;
+    visibility: visible;
+    background-color: #ff5252;
+    transform: rotate(40deg);
+    transition: bottom 0.4s ease, transform 0.4s ease 0.3s;
+  }
+
+  .invalid::after {
+    height: 18px;
+    bottom: 3px;
+    visibility: visible;
+    background-color: #ff5252;
+    transform: rotate(-45deg);
+    transition: bottom 0.4s ease, visibility 0.4s ease 0.3s, transform 0.4s ease 0.3s;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus{
+    border: none;
+    -webkit-text-fill-color: darken(yellow, 10);
+    -webkit-box-sizing: content-box;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+.contactInfoFormSubmitButton{
+
+}
+
+
+.icon-wrapper {
+  position: relative;
+  display: inline;
+  float: right;
+  size: (50 px, 50 px);
+  background-color: #fff;
+  transition: background-color 0.25s ease-out;
+  cursor: pointer;
+
+  .ion-eye, .ion-more {
+    font-size: 2.6em;
+    position: absolute;
+    top: 11px;
+    right: 12px;
+    color: #ccc;
+    transition: color 0.25s ease-out;
+
+    .ion-more {
+      right: 14px;
+    }
+
+    &:hover {
+      transition: background-color 0.25s ease-out;
+      background-color: #fff;
+
+      .ion-eye, .ion-more {
+        color: $primary-color;
+        transition: color 0.25s ease-in;
+      }
+    }
+  }
+}
+
+.strength-lines {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  size: (calc(100% - 50px), 6px);
+  z-index: 3;
+
+  .line {
+    position: absolute;
+    background-color: transparent;
+    height: 6px;
+    border-radius: 2px;
+    transition: background-color 0.25s ease-in;
+
+    &:first-of-type {
+      left: 4px;
+      right: 68%;
+    }
+
+    &:last-of-type {
+      left: 68%;
+      right: 4px;
+    }
+
+    &:not(:first-of-type):not(:last-of-type) {
+      left: 33%;
+      right: 33%;
+    }
+  }
+}
+
+.loginFormBox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  margin: 1rem 0;
+  .loginFieldItem{
+    display: flex;
+    flex-direction:  column;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: flex-start;
+    margin: 1rem 0;
+
+    .loginFieldInputContainer{
+      width: 100%;
+      input{
+        width: 100%;
+        height: 40px;
+        border-radius: 4px;
+        background: darken(#28303d, 10%);
+        border: 1px solid black;
+        color: white;
+      }
+    }
+
+    h4{
+      width: 100px;
+      text-align: left;
+      margin: 0.2rem;
+      color: #888;
+      font-size: 1rem;
+    }
+  }
+
+}
+
+.loginFormSubmitButton{
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  font-size: 18px;
+  background: #3b5998;
+  color: white;
+  margin: 1rem 0;
+}
+
+
+

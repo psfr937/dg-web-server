@@ -1,0 +1,24 @@
+.fundingSummaryList{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin: 1rem;
+  max-width: 80%;
+  height: 80px;
+  justify-content: stretch;
+
+  .fundingSummaryBox{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    div{
+      &:nth-of-type(1){
+        width: 60%;
+      }
+      border: 1px solid #ccc;
+      flex-grow: 1;
+    }
+
+  }
+
+}

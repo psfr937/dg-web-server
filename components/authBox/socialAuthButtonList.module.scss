@@ -1,0 +1,106 @@
+.socialAuthButtonList{
+  display: flex; flex-direction: row; align-items: center;
+  margin: 2rem 0;
+}
+
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('/fonts/Roboto-Medium.ttf');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+.loginButtonBox {
+  clear: both;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4em;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.5s;
+  margin: 0 0 15px 0.5rem;
+  flex-direction: row;
+  width: min-content;
+  height: 40px;
+  padding: 0 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  img{
+    margin-right: 24px;
+    height: 18px;
+
+  }
+
+  text{
+    white-space: nowrap;
+    font-family: 'Roboto-Medium';
+    size: 14px;
+  }
+}
+
+.buttonBoxEmail{
+
+  // background: url('../public/email.svg') 4px 4px no-repeat;
+  // background-color: transparent;
+  // background-position: left 5% center;
+  // background-size: auto 80%;
+
+  width: 100%;
+  display: block;
+  padding:3px 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 1px solid #555;
+  color: #555;
+  @extend .loginButtonBox;
+
+  &.login{
+    margin-top: 4px;
+  }
+
+  &.register{
+    margin-top: 30px;
+  }
+}
+
+.buttonBoxFB{
+  margin: 0 0.5rem 15px 0;
+  background-color: #3b5998;
+
+  text{
+    color: #fff;
+  }
+  @extend .loginButtonBox;
+}
+
+
+.buttonBoxGoogle{
+  background-color: #fff;
+  color: #555;
+
+  text{
+    color: rgba(#000, 54%);
+  }
+
+  @extend .loginButtonBox;
+}
+
+.btnFacebook {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+}
+
+.btnGoogle {
+  display: inline-block;
+  position: relative;
+}
+
+

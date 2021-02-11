@@ -1,0 +1,44 @@
+{
+  "description": [
+    {
+      "type": 0,
+      "value": "An example app integrating React Intl with Next.js"
+    }
+  ],
+  "dynamic.no.ssr": [
+    {
+      "type": 0,
+      "value": "Dynamic Component No SSR"
+    }
+  ],
+  "greeting": [
+    {
+      "type": 0,
+      "value": "Hello World!"
+    }
+  ],
+  "happy.days": [
+    {
+      "type": 0,
+      "value": "Happy Days"
+    }
+  ],
+  "nav.about": [
+    {
+      "type": 0,
+      "value": "About"
+    }
+  ],
+  "nav.home": [
+    {
+      "type": 0,
+      "value": "Home"
+    }
+  ],
+  "title": [
+    {
+      "type": 0,
+      "value": "React Intl Next.js Example"
+    }
+  ]
+}
