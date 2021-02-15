@@ -7,10 +7,12 @@ export const FETCH_PLANS_REQUESTING = 'FETCH_PLANS_REQUESTING'
 export const FETCH_PLANS_SUCCESS = 'FETCH_PLANS_SUCCESS'
 export const FETCH_PLANS_FAILURE = 'FETCH_PLANS_FAILURE'
 
+
 const initialState = {
   readyStatus: FETCH_PLANS_INVALID,
   err: null,
-  data: {}
+  data: {},
+  selectedPlanId: null
 }
 
 
@@ -37,6 +39,7 @@ export default (state, action) => {
         readyStatus:  FETCH_PLANS_SUCCESS,
         data: action.data
       }
+
 
     default:
       return state;

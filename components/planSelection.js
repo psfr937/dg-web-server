@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { FETCH_PLANS_INVALID} from "../redux/reducers/fetchPlans";
-import { fetchPlans } from "../redux/actions/fetchPlans";
-import { selectPlan } from "../redux/actions/checkout";
+import { fetchPlans, selectPlan } from "../redux/actions/plan";
 import st from './planSelection.module.scss'
 
 class PlanList extends PureComponent{

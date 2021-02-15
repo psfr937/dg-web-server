@@ -20,3 +20,13 @@ export const planSchema = new schema.Entity(
 
 export const arrayOfPlans = new schema.Array(planSchema);
 
+
+export const pmSchema = new schema.Entity(
+  'pms',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfPms = new schema.Array(pmSchema);

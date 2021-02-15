@@ -9,9 +9,15 @@ import account from './account/account'
 import editQuestion from "./questionReducer/editQuestion";
 import questions from "./questionReducer/questions";
 import saveQuestions from "./questionReducer/saveQuestions";
-import fetchPlans from './fetchPlans'
-import checkout from './checkout'
-
+import cartItems from "./cart/cartItems";
+import purchase from "./cart/purchase";
+import addPm from "./pms/addPm";
+import fetchPms from "./pms/fetchPms";
+import selectPm from "./pms/selectPm";
+import fetchPlans from './fetchPlans';
+import selectPlan from "./plans/selectPlan";
+import subscribe from "./plans/subscribe";
+import createPaymentIntent from "./cart/createPaymentIntent";
 import { combineReducers } from 'redux'
 
 const reducer = {
@@ -25,8 +31,15 @@ const reducer = {
   questions,
   saveQuestions,
   fetchData,
+  cartItems,
+  purchase,
+  addPm,
+  fetchPms,
+  selectPm,
   fetchPlans,
-  checkout
+  selectPlan,
+  subscribe,
+  createPaymentIntent
 }
 
 

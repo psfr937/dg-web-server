@@ -6,6 +6,7 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import Router from 'next/router';
 import "react-vis/dist/style.css";
+import "../styles/checkout.css"
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
 // Router.events.on('routeChangeComplete', () => {

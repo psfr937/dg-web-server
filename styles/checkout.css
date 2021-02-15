@@ -1,0 +1,207 @@
+.StripeForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+    margin: 1rem;
+    justify-content: stretch;
+
+}
+
+.StripeForm > label {
+    width: 100%;
+    flex-grow: 1;
+}
+.StripeForm > label > h4{
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: stretch;
+}
+
+
+.FormBase{
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    vertical-align: middle;
+    padding: 1rem;
+    font-size: 18px;
+    line-height: 24px;
+    box-sizing: border-box;
+    width: 100%;
+    box-shadow: none;
+
+}
+
+.FormBase.SpecialFormBase{
+    margin: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+
+.ExpiryAndCvcRow{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.ExpiryAndCvcRow label{
+    flex-grow: 1;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.ExpiryAndCvcRow label{
+    flex-grow: 1;
+    margin: 0;
+    border-radius: 0;
+}
+
+.ExpiryBox, .CvcBox{
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+.ExpiryBox{
+    border-bottom-left-radius: 4px;
+}
+
+.CvcBox{
+    border-bottom-right-radius: 4px;
+    border-left: 1px solid #fff;
+}
+
+
+
+
+.ExpiryAndCvc:nth-of-type(1){
+    border-bottom-left-radius: 4px;
+}
+
+.ExpiryBox .__PrivateStripeElement,
+.CvcBox .__PrivateStripeElement,
+.FormBase .__PrivateStripeElement{
+    line-height: 100%;
+    height: 100%;
+}
+.ExpiryBox .__PrivateStripeElement iframe,
+.CvcBox .__PrivateStripeElement iframe,
+.FormBase .__PrivateStripeElement iframe{
+    height: 100%;
+}
+
+label {
+    color: #6b7c93;
+    font-weight: 300;
+    letter-spacing: 0.025em;
+}
+
+
+
+button:hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: #7795f8;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+input,
+.StripeElement {
+    display: block;
+    margin: 10px 0 20px 0;
+    max-width: 500px;
+    padding: 10px 14px;
+    font-size: 1em;
+    font-family: "Source Code Pro", monospace;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border: 0;
+    outline: 0;
+    border-radius: 4px;
+    background: white;
+}
+
+input::placeholder {
+    color: #aab7c4;
+}
+
+input:focus,
+.StripeElement--focus {
+    box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
+    rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+}
+
+.StripeElement.IdealBankElement,
+.StripeElement.FpxBankElement,
+.StripeElement.PaymentRequestButton {
+    padding: 0;
+}
+
+.StripeElement.PaymentRequestButton {
+    height: 40px;
+}
+
+
+.spinner{
+    color: #ffffff;
+    font-size: 22px;
+    text-indent: -99999px;
+    margin: 0px auto;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    box-shadow: inset 0 0 0 2px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+.spinner:before,
+.spinner:after {
+    position: absolute;
+    content: "";
+}
+.spinner:before {
+    width: 10.4px;
+    height: 20.4px;
+    background: #5469d4;
+    border-radius: 20.4px 0 0 20.4px;
+    top: -0.2px;
+    left: -0.2px;
+    -webkit-transform-origin: 10.4px 10.2px;
+    transform-origin: 10.4px 10.2px;
+    -webkit-animation: loading 2s infinite ease 1.5s;
+    animation: loading 2s infinite ease 1.5s;
+}
+.spinner:after {
+    width: 10.4px;
+    height: 10.2px;
+    background: #5469d4;
+    border-radius: 0 10.2px 10.2px 0;
+    top: -0.1px;
+    left: 10.2px;
+    -webkit-transform-origin: 0px 10.2px;
+    transform-origin: 0px 10.2px;
+    -webkit-animation: loading 2s infinite ease;
+    animation: loading 2s infinite ease;
+}
+@keyframes loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
