@@ -1,4 +1,4 @@
-
+import {HYDRATE} from 'next-redux-wrapper';
 
 export const FETCH_ONE_INVENTORY_REQUESTING = 'FETCH_ONE_INVENTORY_REQUESTING';
 export const FETCH_ONE_INVENTORY_SUCCESS = 'FETCH_ONE_INVENTORY_SUCCESS';
@@ -29,12 +29,14 @@ export default (state, action) => {
   }
 
   switch (action.type) {
+    case HYDRATE:
+      return {...state, ...action.payload.oneInventory};
     case FETCH_ONE_INVENTORY_REQUESTING:
       return {
         data: {
           ...state.data,
           [action.pid]: {
-            status: FETCH_ONE_INVENTORY_REQUESTING,
+            readyStatus: FETCH_ONE_INVENTORY_REQUESTING,
             err: null,
             data: null
           }
@@ -45,9 +47,9 @@ export default (state, action) => {
     case FETCH_ONE_INVENTORY_FAILURE:
       return {
         data: {
-          ...state,
+          ...state.data,
           [action.pid]: {
-            status: FETCH_ONE_INVENTORY_FAILURE,
+            readyStatus: FETCH_ONE_INVENTORY_FAILURE,
             err: action.err,
             data: null
           }
@@ -56,17 +58,16 @@ export default (state, action) => {
       };
 
     case FETCH_ONE_INVENTORY_SUCCESS:
-      return {
-        data: {
-          ...state,
-          [action.pid]: {
-            status: FETCH_ONE_INVENTORY_SUCCESS,
-            err: null,
-            data: action.data
-          }
-        },
-        ...state
-      };
+      state.data = {
+        ...state.data,
+        [`${action.pid}`]: {
+          readyStatus: FETCH_ONE_INVENTORY_SUCCESS,
+          err: null,
+          data: action.data
+        }
+      }
+      console.log(state);
+      return state;
     case SELECT_INVENTORY_ID:
         return {
           ...state,

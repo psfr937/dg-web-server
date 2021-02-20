@@ -73,5 +73,4 @@ export const createPaymentIntent = () => async (
   catch(err){
     dispatch({type: CREATE_PAYMENT_INTENT_FAILURE, err});
   }
-
 }
