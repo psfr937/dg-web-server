@@ -55,9 +55,7 @@ function *fetchOneInventory({ pid }){
   }
 }
 
-function* rootSaga() {
-  yield takeEvery(FETCH_INVENTORIES, fetchInventories);
-  yield takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory);
-}
-
-export default rootSaga;
+export default [
+  takeEvery(FETCH_INVENTORIES, fetchInventories),
+  takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory)
+]

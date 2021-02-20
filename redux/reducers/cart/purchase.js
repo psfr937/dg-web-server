@@ -2,6 +2,7 @@ export const PURCHASE_INVALID = 'PURCHASE_INVALID';
 export const PURCHASE_REQUESTING = 'PURCHASE_REQUESTING';
 export const PURCHASE_FAILURE = 'PURCHASE_FAILURE';
 export const PURCHASE_SUCCESS = 'PURCHASE_SUCCESS';
+export const PURCHASE = 'PURCHASE'
 
 const initialState = {
   planId: null,

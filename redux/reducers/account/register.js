@@ -2,7 +2,7 @@ export const REGISTER_INVALID = ' REGISTER_INVALID'
 export const REGISTER_REQUESTING = ' REGISTER_REQUESTING'
 export const REGISTER_FAILURE = 'REGISTER_FAILURE'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-
+export const REGISTER = 'REGISTER'
 
 const initialState = {
   readyStatus: REGISTER_INVALID,

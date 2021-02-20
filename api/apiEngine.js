@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
 import nextCookie from "next-cookies";
-import getApiUrl from "@utils/getApiUrl";
+import getApiUrl from "../helpers/getApiUrl";
 
 
 export default (method, path, { params, data, files, query, cache, ctx } = {}) => {

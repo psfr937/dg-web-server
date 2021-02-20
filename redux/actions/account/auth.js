@@ -1,104 +1,102 @@
 import Router from 'next/router';
-import { AUTHENTICATE, DEAUTHENTICATE } from '../../reducers/account/auth';
+import {SAVE_COOKIE, REMOVE_COOKIE, DEAUTHENTICATE,
+AUTHENTICATE, LOGOUT, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE,
+ VERIFY_EMAIL} from '../../reducers/account/auth';
 import userAPI from '../../../api/user';
-import { setCookie, removeCookie } from '../../../helpers/cookie';
 import chalk from 'chalk'
 import {LOGIN_INVALID} from "../../reducers/account/login";
+import { put, call, takeEvery } from "redux-saga/effects"
+
+import cookie from 'js-cookie';
+
+
+
+const setCookie = (key, value) => {
+  if(key === 'info' && typeof value === 'string') value = value.replace('=', '^')
+  if (process.browser) {
+    cookie.set(key, value, {
+      expires: 1,
+      path: '/'
+    });
+  }
+};
+
+const removeCookie = (key) => {
+  if (process.browser) {
+    cookie.remove(key, {
+      expires: 1
+    });
+  }
+};
 
 // gets token from the api and stores it in the redux store and in cookie
-export const authenticate = ({ token=null, info=null }, res = null) => (dispatch, getState) => {
-  console.log(token)
-  console.log(info)
+function *authenticate({ token=null, info=null }) {
+  console.log(token);
+  console.log(info);
   if(token !== null) setCookie('token', token);
   if(info !== null) setCookie('info', info);
-  dispatch({type: AUTHENTICATE, payload: {
+  yield put({type: SAVE_COOKIE, payload: {
       token, info
     }
   });
-  console.log(chalk.green('[action/auth line 19]') + JSON.stringify(getState().auth))
-};
+}
 
-// gets the token from the cookie and saves it in the store
-export const reauthenticate = ({token, info}) => (dispatch) => {
-  dispatch({type: AUTHENTICATE, payload: {
-      token, info
-    }
-  });
-};
-
-// removing the token
-export const deauthenticate = () => (dispatch) => {
+function *deauthenticate(){
   removeCookie('token');
   removeCookie('info');
-  dispatch({type: DEAUTHENTICATE});
-  dispatch({type: LOGIN_INVALID})
-  Router.push('/');
-};
+  yield put({type: REMOVE_COOKIE});
+  yield put({type: LOGIN_INVALID});
+  yield call(router.push,'/');
+}
 
-export const emailRegister = values =>
-  async (dispatch, getState, apiEngine) => {
-    try{
-      const json = await userAPI(apiEngine).emailRegister(values);
-      return json;
-    } catch (err) {
-      throw err;
-    }
-  };
+function *loginWithFacebook({nextLocation}) {
+  if (typeof nextLocation !== 'string' || nextLocation === '') {
+    nextLocation = ''
+  }
+  try {
+    const json = yield call(userAPI.loginWithFacebook, nextLocation);
+    return json
+  } catch (err) {
+    throw err;
+  }
+}
 
-export const emailLogin = values =>
-  async (dispatch, getState, apiEngine) => {
-    try{
-      const json = await userAPI(apiEngine).emailLogin(values);
-      return json
-    } catch (err){
-      throw err;
-    }
-  };
-
-export const loginWithFacebook = (nextLocation) =>
-  async (dispatch, getState, apiEngine) => {
-    if (typeof nextLocation !== 'string' || nextLocation === ''){
-      nextLocation = ''
-    }
-    try{
-      const json = await userAPI(apiEngine).loginWithFacebook(nextLocation);
-      return json
-    } catch (err){
-      throw err;
-    }
-  };
-
-export const loginWithGoogle = (nextLocation) =>
-  async (dispatch, getState, apiEngine) => {
+function *loginWithGoogle({nextLocation}){
     try{
       if (typeof nextLocation !== 'string' || nextLocation === ''){
         nextLocation = ''
       }
-      const json = await userAPI(apiEngine).loginWithGoogle(nextLocation);
+      const json = yield call(userAPI.loginWithGoogle, nextLocation);
       return json
     } catch (err){
       throw err;
     }
-  };
+}
 
-export const logoutUser = () =>
-  async (dispatch, getState, apiEngine) => {
+function *logoutUser(){
     try {
-      await userAPI(apiEngine).logout();
-      dispatch(deauthenticate());
+      yield call(userAPI.logout);
+      yield call(deauthenticate)
     } catch (err) {
       alert('Logout user fail');
       throw err;
     }
-  };
+  }
 
-export const verifyEmail = token =>
-  async (dispatch, getState, apiEngine) => {
+function *verifyEmail({token}){
     try {
-      const json = await userAPI(apiEngine).verifyEmail({token});
-      return json;
+      const json = yield call(userAPI.verifyEmail, {token: token});
     }catch (err){
       // console.log(err.stack);
       throw err;
     }
-  };
+}
+
+export default [
+  takeEvery(AUTHENTICATE, authenticate ),
+  takeEvery(DEAUTHENTICATE, deauthenticate),
+  takeEvery(LOGOUT, logoutUser),
+  takeEvery(LOGIN_WITH_FACEBOOK, loginWithFacebook),
+  takeEvery(LOGIN_WITH_GOOGLE, loginWithGoogle),
+  takeEvery(VERIFY_EMAIL, verifyEmail)
+]

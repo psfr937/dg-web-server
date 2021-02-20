@@ -1,5 +1,5 @@
 import Head from '@components/Head'
-import { fetchEntries } from '@utils/contentfulPosts'
+import { fetchEntries } from '../helpers/contentfulPosts'
 import safeJsonStringify from 'safe-json-stringify';
 import Footer from '@components/Footer'
 import st from './home.module.scss'

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import {connect} from "react-redux";
 import { authenticate } from "../redux/actions/account/auth";
 import Router from 'next/router'
-import { getCookieFromServer } from '../helpers/cookie'
+import nextCookie from "next-cookies";
 import App from './index'
 class Authenticator extends PureComponent{
   constructor(props){
@@ -10,9 +10,9 @@ class Authenticator extends PureComponent{
   }
 
   componentDidMount() {
-    const { next, token, info } = this.props
+    const { next, token, info } = this.props;
     console.log('hello pony')
-    this.props.authenticate(token, info)
+    this.props.authenticate(token, info);
     Router.replace('/')
   }
 
@@ -35,7 +35,7 @@ const HOCAuthenticator = connector(Authenticator)
 
 
 const Oauth = ({query, token}) => {
-  const { next, user } = query
+  const { next, user } = query;
   console.log(query)
   // let avatar_url = ''
   // let display_name = ''
@@ -44,8 +44,8 @@ const Oauth = ({query, token}) => {
   if(typeof user !== 'undefined') {
     info = JSON.parse(user)
   }
-  console.log(token)
-  console.log(info)
+  console.log(token);
+  console.log(info);
   return (
     <HOCAuthenticator
       next = {next}
@@ -55,9 +55,9 @@ const Oauth = ({query, token}) => {
   )
 }
 
-Oauth.getInitialProps = ({query, req}) => {
-  const token = getCookieFromServer('token', req)
-  return {query, token}
+Oauth.getInitialProps = (ctx) => {
+  const cookie = nextCookie(ctx)
+  return {query: ctx.query, token: cookie.token}
 }
 
 export default Oauth

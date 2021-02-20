@@ -3,7 +3,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import {createWrapper} from 'next-redux-wrapper';
 import reducer from '../redux/reducers/index';
-import rootSaga from '../redux/actions/inventories';
+import rootSaga from '../redux/actions/index';
 
 
 

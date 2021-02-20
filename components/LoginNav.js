@@ -1,5 +1,4 @@
 import st from "./nav.module.scss";
-import LoginButton from "@components/LoginButton";
 import React, {useEffect, useState} from "react";
 import classNames from 'classnames'
 import Fade from 'react-reveal/Fade'

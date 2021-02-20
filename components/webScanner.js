@@ -1,5 +1,5 @@
 import React from 'react'
-import pusher from '../utils/pusher'
+import pusher from '../helpers/pusher'
 
 class WebScanner extends React.PureComponent{
 

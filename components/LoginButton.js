@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import netlifyAuth from '../utils/netlifyAuth.js'
+import netlifyAuth from '../helpers/netlifyAuth.js'
 import st from "../pages/home.module.scss";
 
 

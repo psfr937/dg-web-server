@@ -1,76 +1,52 @@
 
 
 import cartAPI from '../../api/carts'
-import { PURCHASE_FAILURE, PURCHASE_INVALID, PURCHASE_REQUESTING } from "../reducers/cart/purchase";
+import { PURCHASE_FAILURE, PURCHASE_INVALID, PURCHASE_REQUESTING, PURCHASE } from "../reducers/cart/purchase";
 import router from 'next/router'
 import {
   CREATE_PAYMENT_INTENT_FAILURE,
   CREATE_PAYMENT_INTENT_INVALID,
-  CREATE_PAYMENT_INTENT_REQUESTING, CREATE_PAYMENT_INTENT_SUCCESS
+  CREATE_PAYMENT_INTENT_REQUESTING, CREATE_PAYMENT_INTENT_SUCCESS,
+  CREATE_PAYMENT_INTENT
 } from "../reducers/cart/createPaymentIntent";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM} from "../reducers/cart/cartItems";
-
-export const addCartItem = (itemId) => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  dispatch({type: ADD_CART_ITEM, data: itemId })
-}
-
-export const removeCartItem = (itemId) => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  dispatch({type: REMOVE_CART_ITEM, data: itemId })
-}
+import { select, put, call, takeEvery } from "redux-saga/effects"
 
 
-
-export const purchase = (pmId) => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  const cartItems = getState().cartItems;
-  const pmId = getState().cartItems;
-  const readyStatus = getState().purchase.readyStatus;
-  console.log(readyStatus)
+function *purchase({pmId}) {
+  const cartItems = select(state => state.cartItems);
+  const readyStatus = select(state => state.purchase.readyStatus);
   if (readyStatus !== PURCHASE_INVALID &&
     readyStatus !== PURCHASE_FAILURE
   ) return
 
-  dispatch({type: PURCHASE_REQUESTING});
-  const json = await cartAPI(apiEngine).purchase({pmId, cartItems});
-  console.log(json.data.data);
+  yield put({type: PURCHASE_REQUESTING});
+  const json = yield call(cartAPI.purchase, {pmId, cartItems});
 
   router.push('/checkout/success')
+}
 
-  return json.data.data
-};
-
-export const createPaymentIntent = () => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  const cartItems = getState().cartItems;
-  const readyStatus = getState().createPaymentIntent.readyStatus;
+function *createPaymentIntent(){
+  const cartItems =  select(state => state.cartItems);
+  const readyStatus = select(state => state.createPaymentIntent.readyStatus);
   console.log(readyStatus)
   if (readyStatus !== CREATE_PAYMENT_INTENT_INVALID &&
     readyStatus !== CREATE_PAYMENT_INTENT_FAILURE
   ) return
 
-  dispatch({type: CREATE_PAYMENT_INTENT_REQUESTING});
+  yield put({type: CREATE_PAYMENT_INTENT_REQUESTING});
   let json
   try {
-    json = await cartAPI(apiEngine).createPaymentIntent({cartItems});
+    json = yield call(cartAPI.createPaymentIntent,{cartItems});
     console.log(json)
-    dispatch({type: CREATE_PAYMENT_INTENT_SUCCESS, data: json.data.result});
-    console.log(getState().createPaymentIntent)
+    yield put({type: CREATE_PAYMENT_INTENT_SUCCESS, data: json.data.result});
   }
   catch(err){
-    dispatch({type: CREATE_PAYMENT_INTENT_FAILURE, err});
+    yield put({type: CREATE_PAYMENT_INTENT_FAILURE, err});
   }
 }
+
+export default [
+  takeEvery(PURCHASE, purchase),
+  takeEvery(CREATE_PAYMENT_INTENT, createPaymentIntent)
+
+]

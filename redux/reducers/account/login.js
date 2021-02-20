@@ -2,7 +2,7 @@ export const LOGIN_INVALID = 'LOGIN_INVALID'
 export const LOGIN_REQUESTING = 'LOGIN_REQUESTING'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-
+export const LOGIN = 'LOGIN'
 
 const initialState = {
   readyStatus: LOGIN_INVALID,
