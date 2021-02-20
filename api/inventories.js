@@ -10,6 +10,7 @@ export default {
      return apiEngine(GET, `/api/inventories/${pid}`)
    },
   serverGet: (pid, ctx) => {
+
     return apiEngine(GET, `/api/inventories/${pid}`, { ctx })
   }
 }

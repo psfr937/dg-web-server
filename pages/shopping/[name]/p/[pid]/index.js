@@ -43,8 +43,9 @@ class Product extends PureComponent{
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps(async ({store}) => {
-  store.dispatch({type: FETCH_ONE_INVENTORY});
+export const getServerSideProps = wrapper.getServerSideProps(async ({store, query}) => {
+  const { pid } = query
+  store.dispatch({type: FETCH_ONE_INVENTORY, pid });
   store.dispatch(END);
   await store.sagaTask.toPromise();
   return {props: {custom: 'custom'}};

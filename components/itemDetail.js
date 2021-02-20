@@ -12,6 +12,8 @@ class ItemDetail extends PureComponent{
 
   render(){
     let { ready, oneInventory } = this.props;
+    console.log(ready)
+    console.log(oneInventory)
     return (
       <div className={st.itemDetail}>
         <div>
@@ -27,18 +29,19 @@ class ItemDetail extends PureComponent{
 
 const mapStateToProps = ({ oneInventory }) => {
   let pid = oneInventory.selectedInventoryId
-
+  console.log(pid);
+  console.log(oneInventory);
   if(pid !== null) {
-    const pid = router.query.pid;
-    console.log(pid);
-    console.log(oneInventory);
+
 
     return {
+      ready: true,
        oneInventory: pid in oneInventory && oneInventory.readyStatus === FETCH_ONE_INVENTORY_SUCCESS
         ? oneInventory.pid : null
     }
   }
   return{
+    ready: false,
     oneInventory: null
   }
 }

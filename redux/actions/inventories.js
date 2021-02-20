@@ -12,32 +12,49 @@ import {
   FETCH_ONE_INVENTORY_REQUESTING, FETCH_ONE_INVENTORY, SELECT_INVENTORY_ID
 } from "../reducers/oneInventory";
 
-import { all, select, put, call, takeEvery } from "redux-saga/effects"
+import { all, select, put, call, fork, takeEvery } from "redux-saga/effects"
 
 
-function *fetchInventories(){
-  console.log(lolololololol)
-  const status = select( state => state.inventories.readyStatus);
-  if(status === FETCH_INVENTORIES_SUCCESS ||
-    status ===  FETCH_INVENTORIES_REQUESTING
-  ) return
-  yield put({type: FETCH_INVENTORIES_REQUESTING});
+// function *fetchInventories(){
+//   const status = select( state => state.inventories.readyStatus);
+//   if(status === FETCH_INVENTORIES_SUCCESS ||
+//     status ===  FETCH_INVENTORIES_REQUESTING
+//   ) return
+//   yield put({type: FETCH_INVENTORIES_REQUESTING});
+//
+//   try {
+//     const json = yield call(inventoryAPI.list);
+//     const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
+//     let data = normalizedData.entities.inventories;
+//     if(typeof data === 'undefined') data = {};
+//
+//     yield put({type: FETCH_INVENTORIES_SUCCESS, data: data})
+//   } catch (err) {
+//     yield put({type: FETCH_INVENTORIES_FAILURE, data: data})
+//   }
+// }
+//
+// function *fetchInventories_2(){
+//   const status = select( state => state.inventories.readyStatus);
+//   if(status === FETCH_INVENTORIES_SUCCESS ||
+//     status ===  FETCH_INVENTORIES_REQUESTING
+//   ) return
+//   yield put({type: FETCH_INVENTORIES_REQUESTING});
+//
+//   try {
+//     const json = yield call(inventoryAPI.list);
+//     const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
+//     let data = normalizedData.entities.inventories;
+//     if(typeof data === 'undefined') data = {};
+//
+//     yield put({type: FETCH_INVENTORIES_SUCCESS, data: data})
+//   } catch (err) {
+//     yield put({type: FETCH_INVENTORIES_FAILURE, data: data})
+//   }
+// }
 
-  try {
-    const json = yield call(inventoryAPI.list);
-    const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
-    let data = normalizedData.entities.inventories;
-    if(typeof data === 'undefined') data = {};
 
-    yield put({type: FETCH_INVENTORIES_SUCCESS, data: data})
-  } catch (err) {
-    yield put({type: FETCH_INVENTORIES_FAILURE, data: data})
-  }
-}
-
-
-
-function *fetchOneInventory(pid){
+function *fetchOneInventory({ pid }){
   console.log('lolololololololol')
   let oneInventory = select(state => state.oneInventory);
 
@@ -59,7 +76,10 @@ function *fetchOneInventory(pid){
 }
 
 function* rootSaga() {
-  yield takeEvery(FETCH_INVENTORIES, fetchInventories)
+
+ // yield takeEvery(FETCH_INVENTORIES, fetchInventories);
+  yield takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory);
+
 
 }
 

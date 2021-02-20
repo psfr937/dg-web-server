@@ -31,11 +31,11 @@ export default (method, path, { params, data, files, query, cache, ctx } = {}) =
   }
 //  console.log('apiEngine nextCookie(ctx).token')
 //  console.log( nextCookie(ctx).token )
-  if (!(typeof window === 'object')) {
-    const { token, info } = nextCookie(ctx);
-      Object.assign(credentials, 'include');
-      Object.assign(headers, { 'cookie': `token=${token}` })
-  }
+//   if (!(typeof window === 'object')) {
+//     const { token, info } = nextCookie(ctx);
+//       Object.assign(credentials, 'include');
+//       Object.assign(headers, { 'cookie': `token=${token}` })
+//   }
 
   if (files) {
     const formData = new FormData();
