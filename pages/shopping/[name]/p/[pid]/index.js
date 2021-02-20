@@ -4,27 +4,16 @@ import Nav from "@components/Nav";
 import appSt from '../../../../home.module.scss'
 import st from "../../../../catalogPage.module.scss"
 import ItemDetail from "@components/itemDetail";
-import {getInventory, serverGetInventory} from "../../../../../redux/actions/inventories"
-import {FETCH_ONE_INVENTORY_SUCCESS} from "../../../../../redux/reducers/oneInventory";
-import withRedux from "../../../../../lib/withRedux";
-import {addCartItem, purchase, removeCartItem} from "../../../../../redux/actions/cart";
-import fetchPlts from "../../../../../redux/reducers/plts";
-import clientStore from "../../../../../redux/actions/clientStore";
-import {connect} from "react-redux";
+import {FETCH_ONE_INVENTORY} from "../../../../../redux/reducers/oneInventory";
+import {END} from 'redux-saga';
+import { wrapper } from "../../../../../redux/store";
+
 class Product extends PureComponent{
 
   constructor(props){
     super(props)
     this.state = {
       serverResult: null
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-    if (nextProps.serverResult !== this.state.serverResult) {
-      this.setState({serverResult: nextProps.serverResult})
-      this.props.clientStore(this.props.serverResult);
     }
   }
 
@@ -51,29 +40,17 @@ class Product extends PureComponent{
       </div>
     )
   }
-
-  static async getInitialProps(ctx){
-    const serverResult = await serverGetInventory(ctx.query.pid, ctx);
-    return {
-      serverResult
-    }
-
-  }
 }
 
 
-const mapDispatchToProps = dispatch => {
-  return {
-    clientStore: (result) => dispatch(clientStore(result))
-  };
-};
-
-const connector = connect(
-  null,
-  mapDispatchToProps
-);
+export const getServerSideProps = wrapper.getServerSideProps(async ({store}) => {
+  store.dispatch({type: FETCH_ONE_INVENTORY});
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+  return {props: {custom: 'custom'}};
+});
 
 
-export default withRedux(connector(Product))
+export default Product
 
 

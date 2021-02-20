@@ -1,11 +1,13 @@
 
 import inventories from "./inventories";
+import oneInventory from "./oneInventory";
 
 
 import { combineReducers } from 'redux'
 
 const reducer = {
-  inventories
+  inventories,
+  oneInventory
 }
 
 
