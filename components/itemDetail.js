@@ -5,21 +5,22 @@ import fetchPlts from "../redux/reducers/plts";
 import {connect} from "react-redux";
 import router from 'next/router'
 import {FETCH_ONE_INVENTORY_SUCCESS} from "../redux/reducers/oneInventory";
+import clientStore from "../redux/actions/clientStore";
 
 class ItemDetail extends PureComponent{
 
   constructor(props){
     super(props)
+    this.state = {
+      serverResult: null
+    }
   }
 
-  componentDidMount() {
-    const { pid } = router.query;
-    console.log(this.props.inv)
-    const { oneInventory } = this.props;
-    let ready = 'pid' in oneInventory && oneInventory['pid'].readyStatus === FETCH_ONE_INVENTORY_SUCCESS
-    let inventory = null;
-    if(ready){
-      inventory = oneInventory['pid'].data
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+    if (nextProps.serverResult !== this.state.serverResult) {
+      this.setState({serverResult: nextProps.serverResult})
+      this.props.clientStore(this.props.serverResult);
     }
   }
 
@@ -50,10 +51,14 @@ const mapDispatchToProps = dispatch => {
     purchase: (id) => dispatch(purchase(id)),
     fetchPlts: () => dispatch(fetchPlts()),
     addCartItem: (id) => dispatch(addCartItem(id)),
-    removeCartItem: (id) => dispatch(removeCartItem(id))
+    removeCartItem: (id) => dispatch(removeCartItem(id)),
+    clientStore: (result) => dispatch(clientStore(result))
    };
 };
 
+ItemDetail.defaultProps = {
+  serverResult: null
+}
 
 const connector = connect(
   mapStateToProps,

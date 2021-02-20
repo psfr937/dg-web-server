@@ -4,13 +4,13 @@ import nextCookie from "next-cookies";
 import getApiUrl from "@utils/getApiUrl";
 
 
-export default (method, path, { params, data, files, query } = {}, { cache, ctx } = {}) => {
+export default (method, path, { params, data, files, query, cache, ctx } = {}) => {
   const content = {
     method,
     url: getApiUrl(path, query),
     withCredentials: true
   };
-  console.log(method);
+
   const headers = {};
   const config = {};
   const credentials = {};
@@ -32,7 +32,7 @@ export default (method, path, { params, data, files, query } = {}, { cache, ctx 
 //  console.log('apiEngine nextCookie(ctx).token')
 //  console.log( nextCookie(ctx).token )
   if (!(typeof window === 'object')) {
-    const { token, info } = nextCookie(ctx)
+    const { token, info } = nextCookie(ctx);
       Object.assign(credentials, 'include');
       Object.assign(headers, { 'cookie': `token=${token}` })
   }

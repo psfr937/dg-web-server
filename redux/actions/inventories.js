@@ -59,6 +59,21 @@ export const getInventory = (pid) => async (
 };
 
 
+export const serverGetInventory = async (pid, ctx) =>  {
+  try {
+    const json = await inventoryAPI.serverGet(pid, ctx);
+
+    return {type: FETCH_ONE_INVENTORY_SUCCESS, pid: pid, data: json.data.data}
+  } catch (err) {
+
+    return {type: FETCH_ONE_INVENTORY_FAILURE, pid: pid, err: err}
+  }
+};
+
+
+
+
+
 export const resetEditInventories = () => async (
   dispatch,
   getState,
