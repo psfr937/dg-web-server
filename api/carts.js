@@ -1,8 +1,11 @@
-export default apiEngine => ({
+import apiEngine from "./apiEngine";
+import { POST } from "./methods"
+
+export default {
   purchase: data => {
-    return apiEngine.post('/api/cart/purchase', { data })
+    return apiEngine(POST,'/api/cart/purchase', { data })
   },
   createPaymentIntent: data => {
-    return apiEngine.post('/api/payment/create-payment-intent', { data })
+    return apiEngine(POST, '/api/payment/create-payment-intent', { data })
   },
-});
+};

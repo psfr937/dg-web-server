@@ -1,4 +1,5 @@
-
+$dark-green: #266150;
+$light-green: #65807C;
 
 .posts {
   display: flex;
@@ -42,6 +43,32 @@
   border-radius: 16px;
   color: white;
 
+}
+
+.buySellSplit{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  & > div {
+    flex: 0 0 auto;
+    padding: 2rem;
+
+  }
+  .buySection{
+    h4 {
+      font-size: 0.8rem;
+      background: #fff;
+    }
+  }
+
+  .sellSection{
+    background: $dark-green;
+    color: #fff;
+    h4 {
+      font-size: 0.8rem;
+
+    }
+  }
 }
 
 
@@ -137,22 +164,88 @@
   }
 }
 
+.categoryNavBar{
+  background: $dark-green;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  button{
+    background: $light-green;
+    width: 120px;
+    border: none;
+    color: #ccc;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .homePageSection{
-  min-height: 300px;
+  height: 300px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-items: center;
-  padding: 2rem 0;
+  background: red;
+  position: relative;
+
+
+  & > .after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #0008;
+    z-index: 2;
+    color: white;
+
+    h4{
+      font-size: 2rem;
+    }
+
+    h5{
+      font-size: 1.4rem;
+      max-width: 600px;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    button{
+      background: white;
+      color: black;
+      padding: 1rem 2rem;
+      width: 150px;
+      border: none;
+    }
+  }
+
+  & > img{
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+
+  }
+
+
 
 
   &.first {
-    background: linear-gradient(0deg, rgba(238, 197, 229, 0.81),  rgba(238, 197, 229, 0.81)),url("../public/background.jpg");
-    clip-path: polygon(0 0, 61% 50px, 100% 0, 100% 85%, 70% 95%,24% 90%, 0 100%);
+
+
   }
 
+
   &.second {
-    background: linear-gradient(0deg, rgba(188, 255, 205, 0.58), rgba(188, 255, 205, 0.58)),url("../public/background.jpg");
+    background: linear-gradient(0deg, rgba(188, 255, 205, 0.58), rgba(188, 255, 205, 0.58)),url("../public/landfill.png");
     clip-path: polygon(0 0, 61% 50px, 100% 0, 100% 100%, 24% 90%, 0 100%);
     padding: 5rem 0;
   }
@@ -171,14 +264,241 @@
   padding-top: 60px;
 }
 
+.categoryBannerList{
+  display: flex;
+  flex-direction:row;
+
+  height: min-content;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 600px){
+    flex-direction: column;
+  }
+}
+
+.categoryBannerSection{
+  display: flex;
+  min-width: 220px;
+  flex-direction: column;
+  flex: 1 1 auto;
+  flex-basis: 50%;
+
+  height: 600px;
+  margin: 1rem;
+  box-sizing: border-box;
+
+
+}
+.categoryBanner{
+  display: block;
+  flex: 1 1 auto;
+  margin: 1rem 0;
+  background: grey;
+  overflow: hidden;
+  position: relative;
+
+  @media screen and (max-width: 600px){
+    height: 300px;
+  }
+
+  &>img{
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .categoryBannerContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 3;
+
+
+    h4{
+      margin: 1rem;
+      color: #b29b8a;
+      font-weight: 100;
+      font-size: 2rem;
+      font-family: 'Helvetica', 'Arial', sans-serif;
+    }
+
+
+  }
+
+}
+
+.mainAppBanner{
+  display: block;
+  flex: 1 1 auto;
+  margin: 1rem 0;
+  background: grey;
+  overflow: hidden;
+  position: relative;
+  height: 350px;
+
+
+  &>img{
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .mainAppBannerContent{
+    position: absolute;
+    top: 0;
+    padding: 2rem;
+    left: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
+    box-sizing: border-box;
+
+
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      span{
+        background:white;
+        padding: 0.1rem;
+        margin: 0.2rem;
+      }
+      h4{
+        margin: 1rem;
+        color: #b29b8a;
+        font-weight: 100;
+        font-size: 1.8rem;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+
+      }
+    }
+
+
+
+
+  }
+}
+
+.sellingStepList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 2rem auto;
+  padding: 1rem;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 8px;
+  max-width: 800px;
+
+
+  .sellingPointCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    min-width: 300px;
+
+    .sellingPointNumber{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background: black;
+        font-size: 1.6rem;
+        margin: 1rem;
+        flex-shrink: 0;
+
+
+    }
+
+    img{
+      height: 80px;
+    }
+
+    .sellingPointCardTitle{
+      font-size: 1.4rem;
+      font-weight: 300;
+      text-align: left;
+    }
+
+    .sellingPointCardPara{
+      font-size: 1.2rem;
+      font-weight: 200;
+    }
+  }
+
+}
+
+.sellingPointList{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2rem;
+  flex-wrap: wrap;
+
+  .sellingPointCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin: 2rem;
+
+    img{
+     height: 80px;
+      object-fit: cover;
+      margin: 2rem;
+    }
+
+    .sellingPointCardTitle{
+      font-size: 1.4rem;
+      height: 50px;
+      margin: 0;
+    }
+
+    .sellingPointCardPara{
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin: 0;
+    }
+  }
+
+
+}
+
+
+.sectionContainer{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin: 1rem 0;
+  padding: 2rem 0;
+}
 
 .mainAppHeaderTextContainer, .appHeaderTextContainer{
-  margin: 2rem 0;
+
   text-align: center;
   position: relative;
   right: 0;
   width: 100%;
   height: 100%;
+
 
 
   vertical-align: middle;
@@ -195,10 +515,11 @@
 }
 
 .appHeaderPara {
-  max-width: 500px;
   color: #333;
   font-weight: 300;
+  font-size: 1.4rem;
   margin: 0;
+  max-width: 500px;
   @media only screen and (max-width: 600px) {
     max-width: 80%;
   }
@@ -225,12 +546,19 @@
 
 .appHeaderText{
   color: #333;
+  border-bottom: 10px solid $dark-green;
   //float: right;
   max-width: 500px;
   @media only screen and (max-width: 600px){
     max-width: 80%;
   }
 
+
+}
+
+.mainHeaderContainer{
+  display: flex;
+  flex-direction: column;
 
 }
 
@@ -290,78 +618,11 @@
 
 
 
-
-.ulList{
-  display: block;
-  text-align: left;
-  list-style: none;
-
-  color: #333;
-  max-width: 500px;
-  @media only screen and (max-width: 600px){
-    max-width: 80%;
-  }
-  li{
-    font-size: 1.5rem;
-    margin: 2rem 0;
-  }
-
-  li:before{
-    content: "";
-    border-color: transparent #111;
-    border-style: solid;
-    border-width: 0.35em 0 0.35em 0.45em;
-    display: block;
-    height: 0;
-    width: 0;
-    left: -1em;
-    top: 0.9em;
-    position: relative;
-  }
-}
-
-.missionBox{
-  position: relative;
-  padding: 2rem;
-  border: 4px solid black;
-  display: flex;
-  flex-direction: column;
-  background-color:  #28303d;
-
-  max-width: 500px;
-  @media only screen and (min-width: 601px){
-    width: 500px;
-  }
-
-  @media only screen and (max-width: 600px){
-    max-width: 80%;
-  }
-
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin: 4rem auto;
-}
-
-.missionBox h4{
+.actionButton{
+  border: none;
+  background: $dark-green;
   color: #fff;
-  line-height: 40px;
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  width: 100%;
+  padding: 1rem;
+  width: 150px;
+
 }
-
-
-.missionBoxTitleContainer{
-  position: absolute;
-  border: 4px solid #28303d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 2rem;
-
-  top: -20px;
-  width: 80px;
-  height: 50px;
-  background-color:  #fff;
-}
-

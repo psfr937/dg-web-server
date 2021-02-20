@@ -30,3 +30,24 @@ export const pmSchema = new schema.Entity(
 );
 
 export const arrayOfPms = new schema.Array(pmSchema);
+
+export const pltSchema = new schema.Entity(
+  'plts',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfPlts = new schema.Array(pltSchema);
+
+
+export const inventorySchema = new schema.Entity(
+  'inventories',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfInventories = new schema.Array(inventorySchema);

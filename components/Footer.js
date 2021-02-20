@@ -19,7 +19,7 @@ export default function Footer() {
           </a>
         </div>
         <div className={st.footerInfo}>
-          <h6>AEEA</h6>
+          <h6>DRESS GREEN</h6>
           <h6>Copyright @ 2021</h6>
         </div>
       </footer>

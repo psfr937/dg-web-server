@@ -2,7 +2,7 @@
 
 import pmAPI from '../../api/pms'
 import { ADD_PM_INVALID, ADD_PM_FAILURE, ADD_PM_REQUESTING} from "../reducers/pms/addPm";
-import {  FETCH_PMS_SUCCESS, } from "../reducers/pms/fetchPms";
+import {  FETCH_PMS_SUCCESS, } from "../reducers/pms/pms";
 import { SELECT_PM } from "../reducers/pms/selectPm";
 import router from 'next/router'
 

@@ -6,6 +6,9 @@
   justify-content: center;
 }
 
+.hidden{
+  opacity: 0;
+}
 
 
 .app {
@@ -13,9 +16,6 @@
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
   Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
 
   h2{
     font-size: 2rem;
@@ -28,47 +28,6 @@
 
 }
 
-.leftBar{
-  background: #28303d;
-  height: 100%;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-
-  .leftBarMenuContainer{
-    margin: 1rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    border-bottom: 1px solid #ccc;
-
-    .leftBarMenuContainerTitle{
-      font-size: 1.4rem;
-    }
-
-    .leftBarMenu{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      font-size: 1rem;
-
-      h5{
-        margin-top: 0.2rem;
-        color: #ccc;
-        font-size: 1rem;
-      }
-    }
-  }
-}
-
-.rightPage{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
 .mainLogo {
   height: 80px;
@@ -185,52 +144,11 @@
   flex-direction: column;
   justify-items: center;
   padding: 2rem 0;
-
-
-  &.first {
-    background: linear-gradient(0deg, rgba(238, 197, 229, 0.81),  rgba(238, 197, 229, 0.81)),url("../public/background.jpg");
-    clip-path: polygon(0 0, 61% 50px, 100% 0, 100% 85%, 70% 95%,24% 90%, 0 100%);
-  }
-
-  &.second {
-    background: linear-gradient(0deg, rgba(188, 255, 205, 0.58), rgba(188, 255, 205, 0.58)),url("../public/background.jpg");
-    clip-path: polygon(0 0, 61% 50px, 100% 0, 100% 100%, 24% 90%, 0 100%);
-    padding: 5rem 0;
-  }
-
-  &.third {
-    background: linear-gradient(0deg, rgba(255, 244, 206, 0.64), rgba(255, 244, 206, 0.64)),url("../public/background.jpg");
-    clip-path: polygon(0 0, 61% 50px, 100% 0, 100% 100%, 24% 90%, 0 100%);
-    padding: 5rem 0;
-
-  }
-
-
 }
 
-.nav{
-  height: 60px;
-  background: lighten(#28303d, 10%);
-  display: flex;
-  font-size: 2rem;
-  color: #fff;
-  justify-content: stretch;
-  flex-direction: row;
-  align-items: center;
-
-  div{
-    flex-grow: 1;
-    cursor: pointer;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover{
-      background: #28303d;
-    }
-  }
+.navPadding{
+  padding-top: 60px;
 }
-
 
 
 .mainAppHeaderTextContainer, .appHeaderTextContainer{

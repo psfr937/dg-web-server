@@ -4,7 +4,7 @@ import safeJsonStringify from 'safe-json-stringify';
 import Footer from '@components/Footer'
 import Post from '@components/Post'
 import TitledPost from '@components/TitledPost'
-import st from './home.module.scss'
+import st from './aeea.module.scss'
 import React from "react";
 import Nav from "@components/Nav"
 import classNames from 'classnames'

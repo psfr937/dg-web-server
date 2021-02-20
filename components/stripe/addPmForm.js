@@ -152,12 +152,7 @@ class AddPmForm extends React.PureComponent{
             <h4> Name on card </h4>
             <input className="FormBase"/>
           </label>
-          <label>
-            <h4> Delivery Address </h4>
-            <input placeholder="Address Line 1" type="address" className="FormBase"/>
-            <input placeholder="Address Line 2" type="address" className="FormBase"/>
-          </label>
-
+        
 
           <button
             disabled={this.isButtonDisabled()}

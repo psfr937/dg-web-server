@@ -8,6 +8,25 @@ import {
   CREATE_PAYMENT_INTENT_INVALID,
   CREATE_PAYMENT_INTENT_REQUESTING, CREATE_PAYMENT_INTENT_SUCCESS
 } from "../reducers/cart/createPaymentIntent";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM} from "../reducers/cart/cartItems";
+
+export const addCartItem = (itemId) => async (
+  dispatch,
+  getState,
+  apiEngine
+) => {
+  dispatch({type: ADD_CART_ITEM, data: itemId })
+}
+
+export const removeCartItem = (itemId) => async (
+  dispatch,
+  getState,
+  apiEngine
+) => {
+  dispatch({type: REMOVE_CART_ITEM, data: itemId })
+}
+
+
 
 export const purchase = (pmId) => async (
   dispatch,

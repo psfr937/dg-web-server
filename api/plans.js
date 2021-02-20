@@ -1,8 +1,11 @@
-export default apiEngine => ({
+import { GET, POST } from './methods'
+import apiEngine from "./apiEngine";
+
+export default {
   list: () => {
-    return apiEngine.get(`/api/plans`)
+    return apiEngine(GET, `/api/plans`)
   },
   subscribe: data => {
-    return apiEngine.post('/api/plans/subscribe', { data })
+    return apiEngine(POST, '/api/plans/subscribe', { data })
   },
-});
+};

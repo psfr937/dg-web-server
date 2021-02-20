@@ -6,9 +6,6 @@ import dynamic from 'next/dynamic'
 import st from './checkout-success.module.scss'
 import MiniCartSection from '@components/CartMini'
 import ShipmentDetail from "@components/ShipmentDetail";
-const StripePmContainer = dynamic(() => import("../components/stripe/StripeAddPmContainer"), { ssr: false });
-
-
 
 class CheckoutSuccess extends PureComponent{
 

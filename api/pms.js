@@ -1,8 +1,11 @@
-export default apiEngine => ({
+import apiEngine from "./apiEngine";
+import { GET, POST } from "./methods";
+
+export default {
   list: () => {
-    return apiEngine.get(`/api/pms`)
+    return apiEngine(GET, `/api/pms`)
   },
   addPaymentMethod: data => {
-    return apiEngine.post('/api/pms/add', { data })
+    return apiEngine(POST, '/api/pms/add', { data })
   },
-});
+};

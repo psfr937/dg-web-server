@@ -1,0 +1,15 @@
+.addressForm{
+  display: flex;
+  flex-direction: column;
+}
+
+.addressFormField{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label{
+    width: 150px;
+    text-align: right;
+    margin-right: 2rem;
+  }
+}

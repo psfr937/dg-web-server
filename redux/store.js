@@ -1,41 +1,44 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-} from 'redux';
-import thunk from 'redux-thunk';
-import promiseListener from '../helpers/reduxPromiseListener';
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import ApiEngine from '../helpers/apiEngine'
-import reducers from './reducers';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
+import thunkMiddleware from "redux-thunk";
+import combinedReducer from '../redux/reducers/index'
 
-const persistConfig = {
-  key: 'primary',
-  storage,
-  whitelist: ['exampleData'] // place to select which state you want to persist
-}
-
-const persistedReducer = persistReducer(persistConfig, reducers)
-
-export const initializeStore = (initialState = {}, ctx = null, options = null) => {
-
-  let apiEngine= typeof window !== 'undefined' ?
-    new ApiEngine()
-    : new ApiEngine(ctx)
-
-  const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-  /* eslint-enable */
-
-  const middlewares = [
-    thunk.withExtraArgument(apiEngine),
-    promiseListener.middleware
-    // Add other middlewares here
-  ];
-
-  return createStore(
-    persistedReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(...middlewares)),
-  );
+// BINDING MIDDLEWARE
+const bindMiddleware = (middleware) => {
+  if (process.env.NODE_ENV !== "production") {
+    const { composeWithDevTools } = require("redux-devtools-extension");
+    return composeWithDevTools(applyMiddleware(...middleware));
+  }
+  return applyMiddleware(...middleware);
 };
+
+const makeStore = ({ isServer }) => {
+  if (isServer) {
+    //If it's on server side, create a store
+    return createStore(combinedReducer, bindMiddleware([thunkMiddleware]));
+  } else {
+    //If it's on client side, create a store which will persist
+    const { persistStore, persistReducer } = require("redux-persist");
+    const storage = require("redux-persist/lib/storage").default;
+
+    const persistConfig = {
+      key: "nextjs",
+      whitelist: ["counter"], // only counter will be persisted, add other reducers if needed
+      storage, // if needed, use a safer storage
+    };
+
+    const persistedReducer = persistReducer(persistConfig, combinedReducer); // Create a new reducer with our existing reducer
+
+    const store = createStore(
+      persistedReducer,
+      bindMiddleware([thunkMiddleware])
+    ); // Creating the store again
+
+    store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+
+    return store;
+  }
+};
+
+// Export the wrapper & wrap the pages/_app.js with this wrapper only
+export const wrapper = createWrapper(makeStore);

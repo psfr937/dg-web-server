@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import React from "react";
-function SiteHead({title = 'AEEA'}) {
+function SiteHead({title = 'Dress Green'}) {
   return (
     <Head>
-      <title>AEEA</title>
+      <title>Dress Green</title>
       <link rel="icon" href="/logo.png"/>
       <link
         rel="preload"
