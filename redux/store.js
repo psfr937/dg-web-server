@@ -1,36 +1,24 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-} from 'redux';
-import thunk from 'redux-thunk';
-import promiseListener from '../helpers/reduxPromiseListener';
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import reducers from './reducers';
+import {createStore, applyMiddleware} from 'redux';
+import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import {createWrapper} from 'next-redux-wrapper';
+import reducer from '../redux/reducers/index';
+import rootSaga from '../redux/actions/inventories';
 
-const persistConfig = {
-  key: 'primary',
-  storage,
-  whitelist: ['exampleData'] // place to select which state you want to persist
-}
 
-const persistedReducer = persistReducer(persistConfig, reducers)
 
-export const initializeStore = (initialState = {}, ctx = null, options = null) => {
+const makeStore = (context) => {
+  // 1: Create the middleware
+  const sagaMiddleware = createSagaMiddleware();
 
-  const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-  /* eslint-enable */
+  // 2: Add an extra parameter for applying middleware:
+  const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
 
-  const middlewares = [
-    thunk,
-    promiseListener.middleware
-    // Add other middlewares here
-  ];
+  // 3: Run your sagas on server
+  store.sagaTask = sagaMiddleware.run(rootSaga);
 
-  return createStore(
-    persistedReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(...middlewares)),
-  );
+  // 4: now return the store:
+  return store;
 };
+
+export const wrapper = createWrapper(makeStore);

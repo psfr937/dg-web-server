@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { purchase } from "../redux/actions/cart";
 import st from './catalog.module.scss'
 import Link from 'next/link'
-import {fetchInventories} from "../redux/actions/inventories";
-import {FETCH_INVENTORIES_SUCCESS} from "../redux/reducers/inventories";
+import {FETCH_INVENTORIES, FETCH_INVENTORIES_SUCCESS} from "../redux/reducers/inventories";
 
 class CatalogList extends PureComponent{
 
@@ -65,8 +63,7 @@ const mapStateToProps = ({cartItems, inventories}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    purchase: (id) => dispatch(purchase(id)),
-    fetchInventories: () => dispatch(fetchInventories())
+    fetchInventories: () => dispatch({type: FETCH_INVENTORIES})
   };
 };
 

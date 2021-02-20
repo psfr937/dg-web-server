@@ -37,6 +37,7 @@
     "react-vis": "^1.11.7",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-promise-listener": "^1.1.1",
     "redux-saga": "^1.1.3",

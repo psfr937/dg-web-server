@@ -4,80 +4,78 @@ import { arrayOfInventories } from '../../schemas/index'
 import {
   FETCH_INVENTORIES_REQUESTING,
   FETCH_INVENTORIES_SUCCESS,
-  FETCH_INVENTORIES_FAILURE
+  FETCH_INVENTORIES_FAILURE, FETCH_INVENTORIES
 } from "../reducers/inventories";
-import {FETCH_ONE_INVENTORY_SUCCESS,
- FETCH_ONE_INVENTORY_FAILURE,
-FETCH_ONE_INVENTORY_REQUESTING} from "../reducers/oneInventory";
-import ApiEngine from "../../api/apiEngine";
+
+import { select, put, call, takeEvery } from "redux-saga/effects"
 
 
-export const fetchInventories = () => async (
-  dispatch,
-  getState
-) => {
-  const status = getState().inventories.readyStatus;
+function *fetchInventories(){
+  const status = select( state => state.inventories.readyStatus);
   if(status === FETCH_INVENTORIES_SUCCESS ||
     status ===  FETCH_INVENTORIES_REQUESTING
   ) return
-  dispatch({type: FETCH_INVENTORIES_REQUESTING});
+  yield put({type: FETCH_INVENTORIES_REQUESTING});
 
   try {
-    const json = await inventoryAPI.list();
-    const normalizedData = await normalize(json.data.data, arrayOfInventories)
+    const json = yield call(inventoryAPI.list);
+    const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
     let data = normalizedData.entities.inventories;
     if(typeof data === 'undefined') data = {};
     console.log(data)
-    dispatch({type: FETCH_INVENTORIES_SUCCESS, data: data})
+    yield put({type: FETCH_INVENTORIES_SUCCESS, data: data})
   } catch (err) {
-    dispatch({type: FETCH_INVENTORIES_FAILURE, data: data})
+    yield put({type: FETCH_INVENTORIES_FAILURE, data: data})
   }
-};
+}
 
-export const getInventory = (pid) => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  let oneInventory = getState().oneInventory;
-  if(pid in oneInventory &&
-    (oneInventory[pid].readyStatus === FETCH_ONE_INVENTORY_SUCCESS ||
-      oneInventory[pid].readyStatus ===  FETCH_ONE_INVENTORY_REQUESTING)
-  ) return;
+function* rootSaga() {
+  yield takeEvery(FETCH_INVENTORIES, fetchInventories);
+}
 
+export default rootSaga;
 
-
-  dispatch({type: FETCH_ONE_INVENTORY_REQUESTING, pid: pid})
-  try {
-    const json = await inventoryAPI.get(pid);
-
-    dispatch({type: FETCH_ONE_INVENTORY_SUCCESS, pid: pid, data: json.data.data});
-    return json.data.data
-  } catch (err) {
-    dispatch({type: FETCH_ONE_INVENTORY_FAILURE, pid: pid, err: err})
-  }
-};
-
-
-export const serverGetInventory = async (pid, ctx) =>  {
-  try {
-    const json = await inventoryAPI.serverGet(pid, ctx);
-
-    return {type: FETCH_ONE_INVENTORY_SUCCESS, pid: pid, data: json.data.data}
-  } catch (err) {
-
-    return {type: FETCH_ONE_INVENTORY_FAILURE, pid: pid, err: err}
-  }
-};
-
-
-
-
-
-export const resetEditInventories = () => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  const originalData = getState().inventories.data
-};
+// export const getInventory = (pid) => async (
+//   dispatch,
+//   getState,
+//   apiEngine
+// ) => {
+//   let oneInventory = getState().oneInventory;
+//   if(pid in oneInventory &&
+//     (oneInventory[pid].readyStatus === FETCH_ONE_INVENTORY_SUCCESS ||
+//       oneInventory[pid].readyStatus ===  FETCH_ONE_INVENTORY_REQUESTING)
+//   ) return;
+//
+//
+//
+//   dispatch({type: FETCH_ONE_INVENTORY_REQUESTING, pid: pid})
+//   try {
+//     const json = await inventoryAPI.get(pid);
+//
+//     dispatch({type: FETCH_ONE_INVENTORY_SUCCESS, pid: pid, data: json.data.data});
+//     return json.data.data
+//   } catch (err) {
+//     dispatch({type: FETCH_ONE_INVENTORY_FAILURE, pid: pid, err: err})
+//   }
+// };
+//
+//
+// export const serverGetInventory = async (pid, ctx) =>  {
+//   try {
+//     const json = await inventoryAPI.serverGet(pid, ctx);
+//
+//     return {type: FETCH_ONE_INVENTORY_SUCCESS, pid: pid, data: json.data.data}
+//   } catch (err) {
+//
+//     return {type: FETCH_ONE_INVENTORY_FAILURE, pid: pid, err: err}
+//   }
+// };
+//
+//
+// export const resetEditInventories = () => async (
+//   dispatch,
+//   getState,
+//   apiEngine
+// ) => {
+//   const originalData = getState().inventories.data
+// };
