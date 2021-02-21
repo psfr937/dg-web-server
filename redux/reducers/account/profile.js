@@ -11,6 +11,7 @@ export const FETCH_DETAIL_INFO_SUCCESS = 'FETCH_DETAIL_INFO_SUCCESS';
 export const FETCH_DETAIL_INFO_INVALID = 'FETCH_DETAIL_INFO_INVALID';
 export const FETCH_DETAIL_INFO = 'FETCH_DETAIL_INFO';
 
+
 const initialState = {
   basic: {
     readyStatus: FETCH_BASIC_INFO_INVALID,
@@ -70,8 +71,5 @@ export default (state = initialState, action) => {
           data: action.data
         }
       });
-
-    default:
-      return state;
   }
-};
+}

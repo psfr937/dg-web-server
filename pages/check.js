@@ -9,7 +9,7 @@ import CartSection from '../components/CartSection'
 const StripePmContainer = dynamic(() => import("../components/stripe/StripeAddPmContainer"), { ssr: false });
 
 
-class Cart extends PureComponent{
+class Checkout extends PureComponent{
 
   constructor(props){
     super(props)
@@ -34,7 +34,6 @@ class Cart extends PureComponent{
 
               <div>
                 <CartSection/>
-
               </div>
               <div>
                 <StripePmContainer/>
@@ -48,4 +47,4 @@ class Cart extends PureComponent{
 }
 
 
-export default Cart
+export default Checkout

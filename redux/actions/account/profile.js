@@ -1,12 +1,13 @@
+import {call, put, takeEvery} from "redux-saga/effects";
+
+import userAPI from "../../../api/user";
+
 import {
   FETCH_DETAIL_INFO_FAILURE,
   FETCH_DETAIL_INFO_SUCCESS,
   FETCH_DETAIL_INFO_REQUESTING,
   FETCH_DETAIL_INFO
-} from "../../reducers/account/me";
-
-import userAPI from '../../../api/user';
-import { put, call, takeEvery } from "redux-saga/effects"
+} from '../../reducers/account/profile'
 
 function *fetchUser(){
   yield put({ type: FETCH_DETAIL_INFO_REQUESTING });
@@ -26,8 +27,9 @@ function *fetchUser(){
       throw { err: err.message }
     }
   }
-};
+}
 
 export default [
   takeEvery(FETCH_DETAIL_INFO, fetchUser )
 ]
+

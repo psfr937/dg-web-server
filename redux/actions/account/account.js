@@ -18,7 +18,7 @@ import {
 import Router from 'next/router'
 import {select, put, call, takeEvery} from "redux-saga/effects"
 import {
-  AUTHENTICATE,
+  AUTHENTICATE, DEAUTHENTICATE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT, VERIFY_EMAIL,
 } from "../../reducers/account/auth";
 
 function *login({data}){
@@ -88,7 +88,55 @@ function *register({data}){
   }
 }
 
+
+function *loginWithFacebook({nextLocation}) {
+  if (typeof nextLocation !== 'string' || nextLocation === '') {
+    nextLocation = ''
+  }
+  try {
+    const json = yield call(userAPI.loginWithFacebook, nextLocation);
+    return json
+  } catch (err) {
+    throw err;
+  }
+}
+
+function *loginWithGoogle({nextLocation}){
+  try{
+    if (typeof nextLocation !== 'string' || nextLocation === ''){
+      nextLocation = ''
+    }
+    const json = yield call(userAPI.loginWithGoogle, nextLocation);
+    return json
+  } catch (err){
+    throw err;
+  }
+}
+
+function *logoutUser(){
+  try {
+    yield call(userAPI.logout);
+    yield put({type: DEAUTHENTICATE})
+  } catch (err) {
+    alert('Logout user fail');
+    throw err;
+  }
+}
+
+function *verifyEmail({token}){
+  try {
+    const json = yield call(userAPI.verifyEmail, {token: token});
+  }catch (err){
+    // console.log(err.stack);
+    throw err;
+  }
+}
+
 export default[
   takeEvery(LOGIN, login),
-  takeEvery(REGISTER, register)
+  takeEvery(REGISTER, register),
+  takeEvery(LOGOUT, logoutUser),
+  takeEvery(LOGIN_WITH_FACEBOOK, loginWithFacebook),
+  takeEvery(LOGIN_WITH_GOOGLE, loginWithGoogle),
+  takeEvery(VERIFY_EMAIL, verifyEmail)
 ]

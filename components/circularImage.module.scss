@@ -1,0 +1,18 @@
+.profileIconWrapper{
+  display: flex;
+  align-content: center;
+  background: #eee;
+  border-radius: 50%;
+
+  .profileIcon{
+    height: 28px;
+    width: 28px;
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+

@@ -7,9 +7,11 @@ export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
 export const VERIFY_EMAIL = 'VERIFY_EMAIL';
 
+
+
 const initialState = {
   token: null,
-  info: null
+  info: null,
 };
 
 export default (state = initialState, action) => {

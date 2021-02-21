@@ -4,7 +4,11 @@ import Nav from "@components/Nav";
 import Footer from "@components/Footer";
 import appSt from './home.module.scss'
 import dynamic from 'next/dynamic'
+import st from './checkout.module.scss'
+import CartSection from '../components/CartSection'
 const StripePmContainer = dynamic(() => import("../components/stripe/StripeAddPmContainer"), { ssr: false });
+
+
 class Cart extends PureComponent{
 
   constructor(props){
@@ -26,8 +30,9 @@ class Cart extends PureComponent{
         <main className={appSt.app}>
           <Nav/>
           <div className={appSt.navPadding}>
-
-           <StripePmContainer/>
+            <div className={st.container}>
+              <CartSection/>
+            </div>
           </div>
         </main>
       </div>

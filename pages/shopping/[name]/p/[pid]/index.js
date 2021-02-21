@@ -8,40 +8,27 @@ import {FETCH_ONE_INVENTORY} from "../../../../../redux/reducers/oneInventory";
 import {END} from 'redux-saga';
 import { wrapper } from "../../../../../redux/store";
 
-class Product extends PureComponent{
-
-  constructor(props){
-    super(props)
-    this.state = {
-      serverResult: null
+export default function Product(){
+  return (
+    <div>
+      <style jsx global>{`
+    body {
+      margin: 0;
+      overflow-x: hidden;
     }
-  }
-
-  render() {
-    return (
-      <div>
-        <style jsx global>{`
-      body {
-        margin: 0;
-        overflow-x: hidden;
-      }
-    `}</style>
-        <Head/>
-        <main className={appSt.app}>
-          <Nav/>
-          <div className={appSt.navPadding}>
-            <div className={st.catalogPage}>
-              <ItemDetail
-                serverResult={this.props.serverResult}
-              />
-            </div>
+  `}</style>
+      <Head/>
+      <main className={appSt.app}>
+        <Nav/>
+        <div className={appSt.navPadding}>
+          <div className={st.catalogPage}>
+            <ItemDetail/>
           </div>
-        </main>
-      </div>
-    )
-  }
+        </div>
+      </main>
+    </div>
+  )
 }
-
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({store, query}) => {
   const { pid } = query
@@ -50,8 +37,5 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({store, quer
   await store.sagaTask.toPromise();
   return {props: {custom: 'custom'}};
 });
-
-
-export default Product
 
 

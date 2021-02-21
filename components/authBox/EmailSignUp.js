@@ -1,27 +1,11 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import st from './login.module.scss'
 
-class EmailSignUp extends PureComponent {
+function EmailSignUp(email, setEmail,
+                     password, setPassword,
+                     username, setUsername){
 
-
-  constructor(props){
-    super(props)
-    this.onSubmit = this.onSubmit()
-  }
-
-  onSubmit(){
-
-  }
-
-  render() {
-
-    const {
-      email, setEmail,
-      password, setPassword,
-    } = this.props
-
-    return (
-
+  return (
       <div className={st.loginFormBox}>
         <div  className={st.loginFieldItem}>
           <h4>
@@ -32,6 +16,19 @@ class EmailSignUp extends PureComponent {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+
+        </div>
+        <div  className={st.loginFieldItem}>
+          <h4>
+            USERNAME
+          </h4>
+          <div className={st.loginFieldInputContainer}>
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
             />
           </div>
         </div>
@@ -47,19 +44,8 @@ class EmailSignUp extends PureComponent {
             />
           </div>
         </div>
-
       </div>
-
     )
-  }
-}
-
-EmailSignUp.defaultProps = {
-  hasButton: false,
-  formType: 'login',
-  onFormSubmit: () => {
-
-  }
 }
 
 export default EmailSignUp

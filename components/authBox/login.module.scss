@@ -125,19 +125,30 @@ $third-color: blue;
 
 .loginFormTitleContainer{
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
 
+
+  .registerFormTitle {
+
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .loginFormTitle {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .loginFormSubTitle{
+    font-size: 1rem;
+    color: #aaa;
+    font-weight: 300;
+    margin: 0;
+  }
 }
 
-.loginFormTitle {
-  width: 100%;
-  font-size: 2.8rem;
-  font-weight: 500;
-  pointer: cursor;
-  text-align: left;
-  margin-bottom: 1rem;
-}
 
 .loginFormCloseButton{
   position: absolute;
@@ -165,13 +176,6 @@ $third-color: blue;
   border: none;
 }
 
-.loginFormSubTitle{
-  width: 100%;
-  font-size: 1rem;
-  color: #aaa;
-  text-align: left;
-  margin: 0 0 1rem 0;
-}
 
 .loginFormTitle.active {
   color: #3276ff;
@@ -518,18 +522,20 @@ $third-color: blue;
 
 }
 
+$button-background: rgba(67, 81, 130, 0.98);
+
 .loginFormSubmitButton{
   width: 100%;
   border: none;
   border-radius: 4px;
   height: 40px;
   font-size: 18px;
-  background: #3b5998;
+  background:$button-background;
   color: white;
   margin: 0.5rem 0;
 
   &:hover{
-    background: lighten(#3b5998, 10%);
+    background: lighten($button-background, 10%);
     cursor: pointer;
   }
 }

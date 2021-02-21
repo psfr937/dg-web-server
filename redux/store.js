@@ -31,7 +31,7 @@ const makeStore = (context) => {
 
     const persistConfig = {
       key: 'nextjs',
-      whitelist: ['auth'], // make sure it does not clash with server keys
+      whitelist: [], // make sure it does not clash with server keys
       storage
     };
     let persistedReducer = persistReducer(persistConfig, reducer);

@@ -1,14 +1,14 @@
 // index.js
+import { all } from "redux-saga/effects"
+
 import inventories from './inventories';
 import cart from './cart';
 import account from "./account/account";
 import auth from "./account/auth";
-import me from "./account/me";
 import plts from "./plts";
 import plan from "./plan";
-import pms from './pms'
-
-import { all } from "redux-saga/effects"
+import pms from './pms';
+import profile from "./account/profile";
 
 
 export default function* rootSaga() {
@@ -17,7 +17,7 @@ export default function* rootSaga() {
     ...inventories,
     ...cart,
     ...auth,
-    ...me,
+    ...profile,
     ...plan,
     ...plts,
     ...pms

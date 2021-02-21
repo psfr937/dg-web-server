@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { purchase } from "../redux/actions/cart";
 import st from './kitForm.module.scss'
-import fetchPlts from "../redux/reducers/plts";
+import { FETCH_PLTS } from "../redux/reducers/plts";
 
 class KitForm extends PureComponent{
 
@@ -66,19 +65,18 @@ class KitForm extends PureComponent{
   }
 }
 
-const mapStateToProps = ({cartItems, packList, fetchPlts}) => {
+const mapStateToProps = ({cartItems, packList, plts}) => {
   return {
     cartItems,
     packList,
-    plts: fetchPlts.readyStatus === 'FETCH_PLTS_SUCCESS' ?
-      (Object.keys(fetchPlts).map(k => fetchPlts[k])) : []
+    plts: plts.readyStatus === 'FETCH_PLTS_SUCCESS' ?
+      (Object.keys(plts).map(k => plts[k])) : []
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    purchase: (id) => dispatch(purchase(id)),
-    fetchPlts: () => dispatch(fetchPlts())
+    fetchPlts: () => dispatch({ type: FETCH_PLTS })
   };
 };
 
