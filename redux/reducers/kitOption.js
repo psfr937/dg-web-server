@@ -8,7 +8,7 @@ const initialState = {
   mailLabel: true,
   recycleUnused: false,
   packList: []
-}
+};
 
 
 export default (state, action) => {

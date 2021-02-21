@@ -1,25 +1,26 @@
-import {FETCH_PLTS_SUCCESS} from "../reducers/plts";
+import {FETCH_PLTS_SUCCESS, FETCH_PLTS_FAILURE, FETCH_PLTS} from "../reducers/plts";
 import pltAPI from "../../api/plts";
 import {normalize} from "normalizr";
 import {arrayOfPlts} from "../../schemas";
-import {pushErrors} from "./errorAction";
 
-export const plts = () => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
+import { call, select, put, takeEvery } from "redux-saga/effects"
 
-  if(getState().fetchPlts.readyStatus === FETCH_PLTS_SUCCESS) return;
+function *plts(){
+  const readyStatus = select(state => state.readyStatus);
+  if(readyStatus === FETCH_PLTS_SUCCESS) return;
   try {
-    const json = await pltAPI(apiEngine).list()
-    const normalizedData = await normalize(json.data.data, arrayOfPlts);
+    const json = yield call(pltAPI.list);
+    const normalizedData = yield call(normalize, json.data.data, arrayOfPlts);
     console.log(normalizedData)
-    let plts = normalizedData.entities.plts
-    if(typeof plts === 'undefined') plts = {}
+    let plts = normalizedData.entities.plts;
+    if(typeof plts === 'undefined') plts = {};
 
-    dispatch({type: FETCH_PLTS_SUCCESS, data: plts})
+   yield put({type: FETCH_PLTS_SUCCESS, data: plts})
   } catch (err) {
-    dispatch(pushErrors(err))
+    yield put({type: FETCH_PLTS_FAILURE, err: err})
   }
-};
+}
+
+export default [
+  takeEvery(FETCH_PLTS, plts),
+]

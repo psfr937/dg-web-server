@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { purchase } from "../redux/actions/cart";
 import st from './cart.module.scss'
+import {PURCHASE} from "../redux/reducers/cart/purchase";
 
 class CartSection extends PureComponent{
 
@@ -89,7 +90,7 @@ const mapStateToProps = ({cartItems}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    purchase: (id) => dispatch(purchase(id)),
+    purchase: (id) => dispatch({type: PURCHASE, id: id}),
   };
 };
 

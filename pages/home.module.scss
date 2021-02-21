@@ -624,5 +624,9 @@ $light-green: #65807C;
   color: #fff;
   padding: 1rem;
   width: 150px;
+  &:hover{
+    background: lighten($dark-green, 10%);
+    cursor: pointer;
+  }
 
 }

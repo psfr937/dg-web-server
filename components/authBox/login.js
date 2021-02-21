@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import { compose } from 'redux'
 import { connect } from 'react-redux';
-import { withRouter } from 'next/router';
-import { login } from "../../redux/actions/account/account";
 import st from './login.module.scss'
+import { LOGIN, LOGIN_REQUESTING } from "../../redux/reducers/account/login";
 import { SET_AUTH_BOX_PAGE } from "../../redux/reducers/ux";
-import Link from "next/link";;
+import Link from "next/link";
+import Spinner from "../spinner"
 
 import EmailSignUp from "@components/authBox/EmailSignUp";
 import SocialAuthButtonList from "@components/authBox/SocialAuthButtonList";
@@ -25,11 +24,13 @@ class AuthBoxSubContainer extends PureComponent{
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onSubmit(){
+  onSubmit(e){
     this.props.login({
       email: this.state.email,
       password: this.state.password,
-    })
+    });
+
+    e.preventDefault();
   }
 
   setValue(key){
@@ -40,7 +41,7 @@ class AuthBoxSubContainer extends PureComponent{
 
   render() {
     return (
-      <div className={st.form}>
+      <form onSubmit={this.onSubmit} autoComplete="on" className={st.form}>
         <div className={st.loginFormTitleContainer}>
           <span className={st.loginFormTitle}>Welcome back!</span>
         </div>
@@ -55,8 +56,8 @@ class AuthBoxSubContainer extends PureComponent{
           hasButton
           formType={this.props.page}
         />
-        <button onClick={this.onSubmit} className={st.loginFormSubmitButton}>
-          Login
+        <button type="submit" className={st.loginFormSubmitButton}>
+          { this.props.loading ? <Spinner/> : 'Login' }
         </button>
         <SocialAuthButtonList
           prependText='Sign In'
@@ -65,40 +66,40 @@ class AuthBoxSubContainer extends PureComponent{
             <span className={st.switchFormText}>
            Need an account?
               <Link href={"/register"} passHref>
-                <u>
+                <u className={st.registerFormLink}>
                   Register
                 </u>
               </Link>
             </span>
         </div>
-      </div>
+      </form>
     )
   }
 }
 
-const mapStateToProps = ({ ux, register }) => {
-  const {authBoxActive, authBoxPage} = ux
-  const registerReadyStatus = register.readyStatus
+const mapStateToProps = ({ ux, login }) => {
+  const {authBoxActive, authBoxPage} = ux;
+  const loginReadyStatus = login.readyStatus;
+  const loading = loginReadyStatus === LOGIN_REQUESTING
   return {
     authBoxActive,
     authBoxPage,
-    registerReadyStatus,
+    loginReadyStatus,
+    loading
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  login: data => dispatch(login(data)),
+  login: data => dispatch({type: LOGIN, data: data}),
   setAuthBoxPage: (page) => dispatch({type: SET_AUTH_BOX_PAGE, page}),
 });
-
 
 const connector = connect(
   mapStateToProps,
   mapDispatchToProps
 );
 
-// Enable hot reloading for async componet
-export default compose(connector, withRouter)(AuthBoxSubContainer);
+export default connector(AuthBoxSubContainer);
 
 
 

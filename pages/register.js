@@ -30,26 +30,29 @@ export default function Home() {
         <LoginNav/>
         <section className={loginSt.loginFormContainer}>
 
+          <div>
+            <motion.div
+              className={classNames(loginSt.loginForm, loginSt.hidden)}
+              layoutId={'login'}
+              initial={{opacity: 0, scale: 1,top: 0}}
+              animate={{opacity: 0, scale: 1.1, top: -50}}
+              transition={{duration:0.4}}
+            >
+              <Login/>
+            </motion.div>
+          </div>
+          <div>
+            <motion.div
+              className={loginSt.loginForm}
+              layoutId={'register'}
+              initial={{opacity: 0, scale: 1.1, top: -20}}
+              animate={{opacity: 1, scale: 1,top: 0}}
+              transition={{duration:0.4, delay: 0.2, ease: [0.175, 0.885, 0.32, 1.275]}}
 
-          <motion.div
-            className={classNames(loginSt.loginForm, loginSt.hidden)}
-            layoutId={'login'}
-            initial={{opacity: 0, scale: 1,top: 100}}
-            animate={{opacity: 0, scale: 1.1, top: 50}}
-            transition={{duration:0.4}}
-          >
-            <Login/>
-          </motion.div>
-          <motion.div
-            className={loginSt.loginForm}
-            layoutId={'register'}
-            initial={{opacity: 0, scale: 1.1, top: 0}}
-            animate={{opacity: 1, scale: 1,top: 50}}
-            transition={{duration:0.4, delay: 0.2, ease: [0.175, 0.885, 0.32, 1.275]}}
-
-          >
-            <Register/>
-          </motion.div>
+            >
+              <Register/>
+            </motion.div>
+          </div>
         </section>
       </main>
 

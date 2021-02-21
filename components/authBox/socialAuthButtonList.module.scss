@@ -1,6 +1,11 @@
 .socialAuthButtonList{
-  display: flex; flex-direction: row; align-items: center;
-  margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  justify-content: space-around;
+
 }
 
 @font-face {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
-import nextCookie from "next-cookies";
 import getApiUrl from "../helpers/getApiUrl";
 
 
@@ -15,7 +14,7 @@ export default (method, path, { params, data, files, query, cache, ctx } = {}) =
   const config = {};
   const credentials = {};
   if (cache) {
-    Object.assign(headers, { 'Cache-Control': 'no-cache' })
+    Object.assign(headers, { 'Cache-Control': 'no-cache' });
     Object.assign(config, {
       adapter: cacheAdapterEnhancer(axios.defaults.adapter, true)
     })

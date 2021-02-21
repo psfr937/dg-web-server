@@ -1,5 +1,6 @@
 
 export const SELECT_PM = 'SELECT_PM';
+export const SELECT_PM_SAGA = 'SELECT_PM_SAGA'
 
 const initialState = {
   selectedPmId: null

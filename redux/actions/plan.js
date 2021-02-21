@@ -1,60 +1,56 @@
-
-import { pushErrors } from './errorAction';
 import { arrayOfPlans } from "../../schemas";
 import { normalize } from "normalizr";
 import planAPI from '../../api/plans'
 
-import { FETCH_PLANS_SUCCESS } from "../reducers/fetchPlans";
-import {SUBSCRIBE_FAILURE, SUBSCRIBE_INVALID, SUBSCRIBE_REQUESTING} from "../reducers/plans/subscribe";
-import { SELECT_PLAN } from "../reducers/plans/selectPlan";
+import { FETCH_PLANS_FAILURE, FETCH_PLANS_SUCCESS, FETCH_PLANS } from "../reducers/plans/plans";
+import {SUBSCRIBE_FAILURE, SUBSCRIBE_SUCCESS, SUBSCRIBE_INVALID, SUBSCRIBE_REQUESTING} from "../reducers/plans/subscribe";
+import { SELECT_PLAN, SELECT_PLAN_SAGA } from "../reducers/plans/selectPlan";
 import paymentAPI from "../../api/carts";
 import router from "next/dist/client/router";
 
-export const fetchPlans = () => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
+import {call, select, put, takeEvery} from 'redux-saga/effects'
+import {FETCH_INVENTORIES} from "../reducers/inventories";
+import {FETCH_ONE_INVENTORY} from "../reducers/oneInventory";
 
-  if(getState().fetchPlans.readyStatus === FETCH_PLANS_SUCCESS) return;
+function* fetchPlans(){
+  const readyStatus = select(state => state.fetchPlans.readyStatus)
+  if(readyStatus === FETCH_PLANS_SUCCESS) return;
   try {
-    const json = await planAPI(apiEngine).list()
-    const normalizedData = await normalize(json.data.data, arrayOfPlans);
+    const json = yield call(planAPI.list)
+    const normalizedData = yield call (normalize,json.data.data, arrayOfPlans);
     console.log(normalizedData)
     let plans = normalizedData.entities.plans
     if(typeof plans === 'undefined') plans = {}
 
-    dispatch({type: FETCH_PLANS_SUCCESS, data: plans})
+    yield put({type: FETCH_PLANS_SUCCESS, data: plans})
   } catch (err) {
-    dispatch(pushErrors(err))
+    yield put({type: FETCH_PLANS_FAILURE, err: err})
   }
-};
+}
 
-export const subscribe = (pmId, token) => async (
-  dispatch,
-  getState,
-  apiEngine
-) => {
-  const planId = getState().subscribe.planId;
-  const pmId = getState().subscribe.pmId;
-  const readyStatus = getState().subscribe.readyStatus;
-  console.log(readyStatus)
+function *subscribe({pmId, token}){
+  const readyStatus = select(state => state.subscribe.readyStatus);
   if (readyStatus !== SUBSCRIBE_INVALID &&
     readyStatus !== SUBSCRIBE_FAILURE
   ) return
 
-  dispatch({type: SUBSCRIBE_REQUESTING});
-  const json = await paymentAPI(apiEngine).subscribe({pmId, token});
-  console.log(json.data.data);
+  yield put({type: SUBSCRIBE_REQUESTING});
+  try {
+    const json = yield call(paymentAPI.subscribe, {pmId, token});
+    yield put({type: SUBSCRIBE_SUCCESS, data: json.data})
+  }
+  catch(err){
+    yield put({type: SUBSCRIBE_FAILURE, err: err})
+  }
+}
 
-  return json.data.data
-};
-
-export const selectPlan = (id) => async( dispatch,
-                                         getState,
-                                         apiEngine,
-) => {
+function *selectPlan ({id}) {
   dispatch({type: SELECT_PLAN, data: id});
-  router.push('/subscribe')
-};
+  yield call(router.push,'/subscribe')
+}
 
+
+export default [
+  takeEvery(FETCH_PLANS, fetchPlans),
+  takeEvery(SELECT_PLAN_SAGA, selectPlan)
+]

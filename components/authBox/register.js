@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import { withRouter } from 'next/router';
-import { register } from "../../redux/actions/account/account";
+import { REGISTER } from "../../redux/reducers/account/register";
 import st from './login.module.scss'
 import Link from 'next/link';
 import EmailSignUp from "@components/authBox/EmailSignUp";
@@ -24,8 +24,8 @@ class AuthBoxSubContainer extends PureComponent{
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onSubmit(){
-    console.log('hi1')
+  onSubmit(e){
+    e.preventDefault();
     this.props.register({
       email: this.state.email,
       password: this.state.password,
@@ -40,7 +40,7 @@ class AuthBoxSubContainer extends PureComponent{
 
   render() {
     return (
-          <div className={st.form}>
+          <form onSubmit={this.onSubmit} className={st.form}>
             <div className={st.loginFormTitleContainer}>
               <span className={st.loginFormTitle}>Create an account</span>
             </div>
@@ -55,15 +55,15 @@ class AuthBoxSubContainer extends PureComponent{
               hasButton
               formType={this.props.page}
             />
-            <button onClick={this.onSubmit} className={st.loginFormSubmitButton}>
+            <button type="submit" className={st.loginFormSubmitButton}>
               Continue
             </button>
             <div className={st.loginFormFooter}>
 
-                <span className={st.switchFormText}>
+                <span className={st.statementText}>
                   By proceeding, you agree to our&nbsp;
-                  <a href="/terms" className={st.goToLogin}>Terms of Use </a>
-                  and confirm you have read our&nbsp;
+                  <a href="/terms" className={st.goToLogin}>Terms of Use</a>
+                   &nbsp; and confirm you have read our&nbsp;
                   <a href="/privacy" className={st.goToLogin}>Privacy Policy</a>.
                 </span>
             </div>
@@ -77,20 +77,20 @@ class AuthBoxSubContainer extends PureComponent{
                 </Link>
               </span>
             </div>
-          </div>
+          </form>
     )
   }
 }
 
 const mapStateToProps = ({ register }) => {
-  const registerReadyStatus = register.readyStatus
+  const registerReadyStatus = register.readyStatus;
   return {
     registerReadyStatus
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  register: data => dispatch(register(data)),
+  register: data => dispatch({type: REGISTER, data: data}),
 });
 
 

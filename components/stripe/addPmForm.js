@@ -8,11 +8,12 @@ import {
 } from "@stripe/react-stripe-js";
 import router from 'next/router'
 import {connect} from "react-redux";
-import { addPm } from "../../redux/actions/pms";
-import { createPaymentIntent } from '../../redux/actions/cart'
-import {CREATE_PAYMENT_INTENT_SUCCESS} from "../../redux/reducers/cart/createPaymentIntent";
+import {CREATE_PAYMENT_INTENT, CREATE_PAYMENT_INTENT_SUCCESS} from "../../redux/reducers/cart/createPaymentIntent";
 import { numberOptions, cvcOptions, expiryOptions } from "@components/stripe/stripeElementsOptions";
 import loaderSt from './loader.module.scss'
+import {ADD_PM} from "../../redux/reducers/pms/addPm";
+import Spinner from "../spinner"
+
 class AddPmForm extends React.PureComponent{
 
   constructor(props){
@@ -161,12 +162,7 @@ class AddPmForm extends React.PureComponent{
           >
             {this.state.processing || !this.props.createPaymentIntentReady ? (
 
-                <div className={loaderSt.loader}>
-                  <svg className={loaderSt.circular} viewBox="25 25 50 50">
-                    <circle className={loaderSt.path} cx="50" cy="50" r="20" fill="none" stroke-width="4"
-                            stroke-miterlimit="10"/>
-                  </svg>
-                </div>
+               <Spinner/>
 
             ) : (
               "Continue"
@@ -186,8 +182,8 @@ const mapStateToProps = ({createPaymentIntent}) => {
 
 
 const mapDispatchToProps = (dispatch, ourProps) => ({
-  createPaymentIntent: () => dispatch(createPaymentIntent()),
-  addPm: (token) => dispatch( addPm(token))
+  createPaymentIntent: () => dispatch({ type: CREATE_PAYMENT_INTENT}),
+  addPm: (token) => dispatch( {type: ADD_PM, token: token})
 });
 
 const ConnectedAddPmForm = connect(

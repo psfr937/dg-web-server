@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import st from './filterMenu.module.scss'
 
 class FilterMenu extends PureComponent{
-
   constructor(props){
-    super(props)
+    super(props);
     this.onClickPlan = this.onClickPlan.bind(this)
   }
 
@@ -30,13 +29,12 @@ const mapStateToProps = ({cartItems}) => {
   return {
     cartItems
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
   };
 };
-
 
 const connector = connect(
   mapStateToProps,

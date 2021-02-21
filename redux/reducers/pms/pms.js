@@ -2,6 +2,7 @@ export const FETCH_PMS_INVALID = 'FETCH_PMS_INVALID';
 export const FETCH_PMS_REQUESTING = 'FETCH_PMS_REQUESTING';
 export const FETCH_PMS_FAILURE = 'FETCH_PMS_FAILURE';
 export const FETCH_PMS_SUCCESS = 'FETCH_PMS_SUCCESS';
+export const FETCH_PMS = 'FETCH_PMS';
 
 const initialState = {
   readyStatus: FETCH_PMS_INVALID,

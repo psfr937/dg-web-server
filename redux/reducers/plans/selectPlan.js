@@ -1,5 +1,6 @@
 
 export const SELECT_PLAN = 'SELECT_PLAN';
+export const SELECT_PLAN_SAGA = 'SELECT_PLAN_SAGA'
 
 const initialState = {
   selectedPlanId: null

@@ -10,27 +10,7 @@ $third-color: blue;
   color: #fff;
 }
 
-.loginFormContainer{
-  position:  fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  background: #28303d;
 
-  video{
-    position: fixed;
-    top:0;
-    left: 0;
-    height: 100%;
-    opacity: 1;
-  }
-}
 
 .video{
   height: 100%;
@@ -50,19 +30,74 @@ $third-color: blue;
   height: 100%;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.loginFormContainer{
+  @extend .noselect;
+  position:  fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background: #28303d;
+  font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
+
+  & > div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  video{
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100%;
+    opacity: 1;
+  }
+}
+
 .loginForm {
   z-index: 3;
-  position: absolute;
-  float: right;
-  margin: 20px 20px;
+  position: relative;
   flex-wrap: wrap;
   vertical-align: middle;
   padding: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 4px;
-  max-width: 400px;
+  max-width: 450px;
   background: #28303d;
   color: white;
+
+  @media only screen and (min-width: 601px) {
+    margin: 20px 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: auto 0;
+  }
 
   &.hidden{
     z-index: 1;
@@ -73,20 +108,15 @@ $third-color: blue;
 .form{
   width: 100%;
   height: 100%;
-    @media only screen and (max-width: 700px) {
-      right: auto;
-      width: 280px;
-    }
 
-    & > form{
-      display: flex;
-      flex-direction: column;
-    }
+  & > form{
+    display: flex;
+    flex-direction: column;
+  }
 
-    &.hidden{
-      opacity: 0;
-    }
-
+  &.hidden{
+    opacity: 0;
+  }
 }
 
 
@@ -176,24 +206,41 @@ $third-color: blue;
   border-top: 3px solid $secondary-color;
 }
 .loginFormFooter{
-  .switchFormText{
-    color: #888;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 4px;
-    u, a {
-      margin-left: 1rem;
-      color: darken($primary-color, 10%);
-      cursor: pointer;
-    }
-
-  }
-
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 3rem;
+
+  .statementText {
+    color: #888;
+    font-size: 0.8rem;
+    margin: 4px;
+    font-weight: 300;
+    text-align: left;
+
+    u, a {
+      color: darken($primary-color, 10%);
+      cursor: pointer;
+    }
+  }
+
+
+    .switchFormText{
+    color: #888;
+    font-size: 0.8rem;
+    margin: 0 4px;
+    font-weight: 300;
+    text-align: left;
+    u, a {
+      color: darken($primary-color, 10%);
+      cursor: pointer;
+    }
+
+    .registerFormLink{
+      margin-left: 1rem;
+    }
+
+  }
 }
 
 .errorLabel{
@@ -213,9 +260,9 @@ $third-color: blue;
     color: $third-color;
     position: absolute;
     top: 25px;
-    font-size: 1em;
+    font-size: 0.8rem;
     transition: all 0.5s ease;
-
+    font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
   }
 
   hr {
@@ -439,7 +486,7 @@ $third-color: blue;
     justify-content: flex-start;
     width: 100%;
     align-items: flex-start;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 
     .loginFieldInputContainer{
       width: 100%;
@@ -447,18 +494,25 @@ $third-color: blue;
         width: 100%;
         height: 40px;
         border-radius: 4px;
-        background: darken(#28303d, 10%);
+        background: darken(#28303d, 2%);
         border: 1px solid black;
         color: white;
+
+        &:focus{
+          outline: none;
+          border: 1px solid #47489c;
+        }
       }
     }
 
     h4{
       width: 100px;
       text-align: left;
-      margin: 0.2rem;
+      margin: 0.5rem 0;
       color: #888;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
     }
   }
 
@@ -472,7 +526,12 @@ $third-color: blue;
   font-size: 18px;
   background: #3b5998;
   color: white;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
+
+  &:hover{
+    background: lighten(#3b5998, 10%);
+    cursor: pointer;
+  }
 }
 
 

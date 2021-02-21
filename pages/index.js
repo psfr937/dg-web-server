@@ -1,15 +1,15 @@
-import Head from '@components/Head'
-import { fetchEntries } from '../helpers/contentfulPosts'
+import Head from '@components/Head';
+import { fetchEntries } from '../helpers/contentfulPosts';
 import safeJsonStringify from 'safe-json-stringify';
-import Footer from '@components/Footer'
-import st from './home.module.scss'
+import Footer from '@components/Footer';
+import st from './home.module.scss';
 import React from "react";
-import Nav from "@components/Nav"
-import classNames from 'classnames'
-import Fade from 'react-reveal/Fade'
+import Nav from "@components/Nav";
+import classNames from 'classnames';
+import Fade from 'react-reveal/Fade';
+import Link from 'next/link';
 
-
-export default function Home({ posts }) {
+export default function Home({ posts }){
   return (
     <div>
       <style jsx global>{`
@@ -99,9 +99,11 @@ export default function Home({ posts }) {
             </div>
 
           </div>
-            <button className={st.actionButton}>
-              Recycle now
-            </button>
+            <Link href="/recycle">
+              <button className={st.actionButton}>
+                Recycle now
+              </button>
+            </Link>
           </div>
 
 
@@ -145,10 +147,11 @@ export default function Home({ posts }) {
               </div>
 
             </div>
-
-            <button className={st.actionButton}>
-              Shop now
-            </button>
+            <Link href="/shopping">
+              <button className={st.actionButton}>
+                Shop now
+              </button>
+            </Link>
           </div>
           <div className={classNames(st.homePageSection, st.second)}>
             <div className={st.after}>
@@ -186,11 +189,7 @@ export default function Home({ posts }) {
           </div>
         </div>
       </main>
-
-      <Footer />
-
-
-
+      <Footer/>
     </div>
   )
 }

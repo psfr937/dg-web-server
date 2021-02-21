@@ -22,10 +22,11 @@ import {
 } from "../../reducers/account/auth";
 
 function *login({data}){
+
   const readyStatus = select(state => state.login.readyStatus);
-  if (readyStatus !== LOGIN_INVALID &&
-    readyStatus !== LOGIN_FAILURE
-  ) return;
+  // if (readyStatus !== LOGIN_INVALID &&
+  //   readyStatus !== LOGIN_FAILURE
+  // ) return;
 
   yield put({type: LOGIN_REQUESTING});
   try {
@@ -51,6 +52,7 @@ function *login({data}){
       })
     } else {
       yield put({type: LOGIN_FAILURE, err});
+
     }
   }
 }
@@ -60,14 +62,14 @@ function *register({data}){
   if (readyStatus !== REGISTER_INVALID && readyStatus !== REGISTER_FAILURE
   ) return;
 
-  yield put({type: REGISTER_REQUESTING})
+  yield put({type: REGISTER_REQUESTING});
   try {
-    const json = yield call(userAPI.emailRegister, data)
+    const json = yield call(userAPI.emailRegister, data);
     const result = json.data;
     console.log(json);
     const { info, token } = result;
     yield put({type: REGISTER_SUCCESS});
-    yield put({type: AUTHENTICATE, info, token})
+    yield put({type: AUTHENTICATE, info, token});
     yield call(Router.push,`/`)
 
   } catch (err) {
