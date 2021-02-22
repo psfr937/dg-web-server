@@ -1,20 +1,23 @@
-import React from 'react'
-import { useSelector} from 'react-redux'
+import React, { useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import st from './cart.module.scss'
+import {FETCH_CIDS, FETCH_CIDS_SUCCESS} from "../redux/reducers/cart/cartItemDetail";
 
 export default function CartSection(){
 
-  const cartItems = useSelector(state => state.cartItems);
-  const oneInventory = useSelector(state => state.oneInventory);
-  const items = cartItems
-    .filter(c => c in oneInventory.data)
-    .map(c => {
-      return oneInventory.data[c].data
-  });
+  const dispatch = useDispatch()
+  const cids = useSelector(state => state.cartItemDetail);
+
+  useEffect(() => dispatch({type: FETCH_CIDS}), []);
+  console.log(cids)
+  const items = (cids.readyStatus !== FETCH_CIDS_SUCCESS) ? []
+    : Object.keys(cids.data).map(k => cids.data[k]);
 
   return (
     <div className={st.cartSection}>
-      <div className={st.cartItemListHeader}>
+
+      <div className={st.cartItemList}>
+        <div className={st.cartItemCard}>
           <div className={st.cartItemImage}/>
           <h4 className={st.cartItemCardTitle}>
             Name
@@ -25,9 +28,7 @@ export default function CartSection(){
           <h4 className={st.cartItemCardPrice}>
             Unit Price
           </h4>
-      </div>
-
-      <div className={st.cartItemList}>
+        </div>
         {
           items.map(k =>
             <div className={st.cartItemCard}>
@@ -41,25 +42,23 @@ export default function CartSection(){
                 {k.size}
               </h4>
               <h4 className={st.cartItemCardPrice}>
-                {k.unit_price}
+                {k.price}
               </h4>
             </div>
           )
         }
-      </div>
-      <div className={st.cartItemListFooter}>
-        <div className={st.cartItemImage}>
+        <div className={st.cartItemCard}>
+          <div className={st.cartItemImage}/>
+          <h4 className={st.cartItemCardTitle}>
 
+          </h4>
+          <h4 className={st.cartItemCardPrice}>
+            Total Price
+          </h4>
+          <h4 className={st.cartItemCardPrice}>
+
+          </h4>
         </div>
-        <h4 className={st.cartItemCardTitle}>
-
-        </h4>
-        <h4 className={st.cartItemCardPrice}>
-
-        </h4>
-        <h4 className={st.cartItemCardPrice}>
-          Total
-        </h4>
       </div>
     </div>
   )

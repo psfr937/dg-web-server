@@ -11,6 +11,7 @@ import auth from "./account/auth"
 import plts from './plts'
 import addPm from "./pms/addPm";
 import kitOption from "./kitOption";
+import cartItemDetail from "./cart/cartItemDetail"
 
 import { combineReducers } from 'redux'
 
@@ -19,6 +20,7 @@ const reducer = {
   oneInventory,
   cartItems,
   createPaymentIntent,
+  cartItemDetail,
   purchase,
   ux,
   login,

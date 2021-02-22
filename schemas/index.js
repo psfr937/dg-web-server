@@ -51,3 +51,13 @@ export const inventorySchema = new schema.Entity(
 );
 
 export const arrayOfInventories = new schema.Array(inventorySchema);
+
+export const cidSchema = new schema.Entity(
+  'cids',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfCids = new schema.Array(cidSchema);

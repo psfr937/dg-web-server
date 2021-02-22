@@ -3,15 +3,18 @@ import "react-vis/dist/style.css";
 import "../styles/checkout.css"
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import {wrapper} from '../redux/store';
-
+import {PersistGate} from 'redux-persist/integration/react';
+import {useStore} from "react-redux";
 
 const WrappedApp = (ctx) => {
-    console.log(ctx);
     const {Component, pageProps, router} = ctx;
+    const store = useStore();
     return(
-          <AnimateSharedLayout>
+      <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+         <AnimateSharedLayout>
             <Component {...pageProps} key={router.route}/>
           </AnimateSharedLayout>
+      </PersistGate>
     )
 };
 
