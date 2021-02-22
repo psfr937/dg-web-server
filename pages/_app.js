@@ -6,8 +6,8 @@ import {wrapper} from '../redux/store';
 
 
 const WrappedApp = (ctx) => {
-    console.log(ctx)
-    const {Component, pageProps, router} = ctx
+    console.log(ctx);
+    const {Component, pageProps, router} = ctx;
     return(
           <AnimateSharedLayout>
             <Component {...pageProps} key={router.route}/>

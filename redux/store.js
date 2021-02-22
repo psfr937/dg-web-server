@@ -6,7 +6,6 @@ import reducer from '../redux/reducers/index';
 import rootSaga from '../redux/actions/index';
 
 
-
 const makeStore = (context) => {
   // 1: Create the middleware
   const sagaMiddleware = createSagaMiddleware();

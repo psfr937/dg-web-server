@@ -11,12 +11,10 @@ import Login from "@components/authBox/login";
 import {motion} from "framer-motion";
 import Register from "@components/authBox/register";
 import classNames from "classnames";
-import LoginVideo from "@components/authBox/loginVideo";
-
-import dynamic from "next/dynamic";
+//import LoginVideo from "@components/authBox/loginVideo";
 
 
-export default function Home() {
+export default function Login() {
   return (
     <div>
       <style jsx global>{`

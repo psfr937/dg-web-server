@@ -6,37 +6,27 @@ import AddressForm from "@components/addressForm"
 import st from "./catalogPage.module.scss"
 import KitForm from "@components/kitForm";
 
-class Recycle extends PureComponent{
+export default function Recycle(){
 
-  constructor(props){
-    super(props)
-  }
-
-
-  render(){
-
-    return (
-      <div>
-        <style jsx global>{`
-      body {
-        margin: 0;
-        overflow-x: hidden;
-      }
-    `}</style>
-        <Head/>
-        <main className={appSt.app}>
-          <Nav/>
-          <div className={appSt.navPadding}>
-            <div className={st.catalogPage}>
-              <KitForm/>
-              <AddressForm/>
-            </div>
+  return (
+    <div>
+      <style jsx global>{`
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+  `}</style>
+      <Head/>
+      <main className={appSt.app}>
+        <Nav/>
+        <div className={appSt.navPadding}>
+          <div className={st.catalogPage}>
+            <KitForm/>
+            <AddressForm/>
           </div>
-        </main>
-      </div>
-    )
-  }
+        </div>
+      </main>
+    </div>
+  )
+
 }
-
-
-export default Recycle

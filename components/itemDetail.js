@@ -1,12 +1,18 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import st from "./itemDetail.module.scss"
-import fetchPlts from "../redux/reducers/plts";
-import {useSelector, useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {FETCH_ONE_INVENTORY_SUCCESS} from "../redux/reducers/oneInventory";
+import {ADD_CART_ITEM} from "../redux/reducers/cart/cartItems";
 
 function ItemDetail(){
 
   const oneInventory = useSelector(state => state.oneInventory);
+
+  const dispatch = useDispatch();
+
+  const addCartItem = (id) => {
+    dispatch({type: ADD_CART_ITEM, id: id})
+  }
 
   let pid = oneInventory.selectedInventoryId;
   let data = oneInventory.data;
@@ -22,7 +28,7 @@ function ItemDetail(){
           <h1> { ready ? inventoryDetail.name: 'loading'}</h1>
           { ready ?  <img src={inventoryDetail.picture_url}/> : null}
           <h2> { ready ? inventoryDetail.price: 'loading'}</h2>
-          <button> Add To Cart </button>
+          <button onClick={() => addCartItem(inventoryDetail.id)}> Add To Cart </button>
         </div>
       </div>
     )

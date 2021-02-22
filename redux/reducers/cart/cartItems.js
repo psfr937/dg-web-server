@@ -11,7 +11,7 @@ export default (state, action) => {
 
   switch (action.type) {
     case ADD_CART_ITEM:
-      return [...state, action.data];
+      return [...state, action.id];
     case REMOVE_CART_ITEM:
       return [...state.filter(d => d !== action.id)];
     default:

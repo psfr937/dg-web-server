@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import Head from "@components/Head";
 import Nav from "@components/Nav";
-import Footer from "@components/Footer";
 import appSt from '../home.module.scss'
 import CatalogList from "@components/catelogList"
 import FilterMenu from "@components/filterMenu"

@@ -9,42 +9,30 @@ import CartSection from '../components/CartSection'
 const StripePmContainer = dynamic(() => import("../components/stripe/StripeAddPmContainer"), { ssr: false });
 
 
-class Checkout extends PureComponent{
+export default function Checkout(){
+  return (
+    <div>
+      <style jsx global>{`
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+  `}</style>
+      <Head/>
+      <main className={appSt.app}>
+        <Nav/>
+        <div className={appSt.navPadding}>
+          <div className={st.container}>
 
-  constructor(props){
-    super(props)
-  }
-
-
-  render(){
-
-    return (
-      <div>
-        <style jsx global>{`
-      body {
-        margin: 0;
-        overflow-x: hidden;
-      }
-    `}</style>
-        <Head/>
-        <main className={appSt.app}>
-          <Nav/>
-          <div className={appSt.navPadding}>
-            <div className={st.container}>
-
-              <div>
-                <CartSection/>
-              </div>
-              <div>
-                <StripePmContainer/>
-              </div>
+            <div>
+              <CartSection/>
+            </div>
+            <div>
+              <StripePmContainer/>
             </div>
           </div>
-        </main>
-      </div>
-    )
-  }
+        </div>
+      </main>
+    </div>
+  )
 }
-
-
-export default Checkout

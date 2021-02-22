@@ -1,8 +1,4 @@
 import Head from '@components/Head'
-import { fetchEntries } from '../helpers/contentfulPosts'
-import safeJsonStringify from 'safe-json-stringify';
-import Footer from '@components/Footer'
-import LoginVideo from '../components/authBox/loginVideo'
 import st from './home.module.scss'
 import loginSt from '../components/authBox/login.module.scss'
 import React from "react";
@@ -12,10 +8,8 @@ import Register from "@components/authBox/register";
 import Login from "@components/authBox/login";
 import {motion} from "framer-motion";
 import classNames from 'classnames'
-import dynamic from "next/dynamic";
 
-
-export default function Home() {
+export default function Register() {
   return (
     <div>
       <style jsx global>{`

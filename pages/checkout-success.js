@@ -7,49 +7,37 @@ import st from './checkout-success.module.scss'
 import MiniCartSection from '@components/CartMini'
 import ShipmentDetail from "@components/ShipmentDetail";
 
-class CheckoutSuccess extends PureComponent{
-
-  constructor(props){
-    super(props)
-  }
-
-
-  render(){
-
-    return (
-      <div>
-        <style jsx global>{`
-      body {
-        margin: 0;
-        overflow-x: hidden;
-      }
-    `}</style>
-        <Head/>
-        <main className={appSt.app}>
-          <Nav/>
-          <div className={appSt.navPadding}>
-            <div className={appSt.container}>
-              <div className={st.successMessage}>
-                <svg className={st.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                  <circle className={st.checkmark__circle} cx="26" cy="26" r="25" fill="none"/>
-                  <path className={st.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                </svg>
-                <h3 className={st.successText}>
-                  <pre>THANK YOU!</pre>
-                  <pre> We have received your order.</pre>
-                </h3>
-              </div>
-              <div className={st.checkoutSuccessDetail}>
-                <MiniCartSection/>
-                <ShipmentDetail/>
-              </div>
+export default function CheckoutSuccess(){
+  return (
+    <div>
+      <style jsx global>{`
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+  `}</style>
+      <Head/>
+      <main className={appSt.app}>
+        <Nav/>
+        <div className={appSt.navPadding}>
+          <div className={appSt.container}>
+            <div className={st.successMessage}>
+              <svg className={st.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle className={st.checkmark__circle} cx="26" cy="26" r="25" fill="none"/>
+                <path className={st.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+              <h3 className={st.successText}>
+                <pre>THANK YOU!</pre>
+                <pre> We have received your order.</pre>
+              </h3>
+            </div>
+            <div className={st.checkoutSuccessDetail}>
+              <MiniCartSection/>
+              <ShipmentDetail/>
             </div>
           </div>
-        </main>
-      </div>
-    )
-  }
+        </div>
+      </main>
+    </div>
+  )
 }
-
-
-export default CheckoutSuccess
