@@ -5,7 +5,7 @@ import {FETCH_CIDS, FETCH_CIDS_SUCCESS} from "../redux/reducers/cart/cartItemDet
 
 export default function CartSection(){
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cids = useSelector(state => state.cartItemDetail);
 
   useEffect(() => dispatch({type: FETCH_CIDS}), []);

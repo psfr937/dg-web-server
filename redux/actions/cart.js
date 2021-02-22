@@ -14,6 +14,9 @@ import { select, put, call, takeEvery } from "redux-saga/effects"
 import planAPI from "../../api/plans";
 import {normalize} from "normalizr";
 import {arrayOfCids} from "../../schemas";
+import {GET_QUOTATION, SAVE_ADDRESS_GET_QUOTATION, GET_QUOTATION_REQUESTING} from "../reducers/address/getQuotation";
+import {GET_GEOLOCATION_REQUESTING, GET_GEOLOCATION_SUCCESS} from "../reducers/address/getGeolocation";
+import {SAVE_ADDRESS_REQUESTING} from "../reducers/address/saveAddress";
 
 
 function *purchase({pmId}) {
@@ -49,12 +52,14 @@ function *createPaymentIntent(){
   }
 }
 
-function* fetchCids(){
+function *fetchCids(){
   const readyStatus = yield select(state => state.cartItemDetail.readyStatus);
   const cartItemIds = yield select( state => state.cartItems);
 
   if(cartItemIds.length === 0) return;
-  if(readyStatus === FETCH_CIDS_SUCCESS) return;
+  if([FETCH_CIDS_SUCCESS, FETCH_CIDS_REQUESTING].includes(readyStatus)) return;
+
+  yield put({type: FETCH_CIDS_REQUESTING});
   try {
     const json = yield call(cartAPI.list, { data: cartItemIds} );
     const normalizedData = yield call (normalize,json.data.data, arrayOfCids);
@@ -67,6 +72,10 @@ function* fetchCids(){
     yield put({type: FETCH_CIDS_FAILURE, err: err})
   }
 }
+
+
+
+
 
 export default [
   takeEvery(PURCHASE, purchase),

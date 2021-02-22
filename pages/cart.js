@@ -4,8 +4,11 @@ import Nav from "@components/Nav";
 import appSt from './home.module.scss';
 import st from './checkout.module.scss';
 import CartSection from '../components/CartSection';
+import AddressForm from "@components/addressForm";
 
 function Cart(){
+
+
   return (
     <div>
       <style jsx global>{`
@@ -20,6 +23,8 @@ function Cart(){
         <div className={appSt.navPadding}>
           <div className={st.container}>
             <CartSection/>
+            <AddressForm/>
+            <button onClick=""> Checkout </button>
           </div>
         </div>
       </main>

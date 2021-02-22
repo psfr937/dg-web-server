@@ -9,6 +9,7 @@ import plts from "./plts";
 import plan from "./plan";
 import pms from './pms';
 import profile from "./account/profile";
+import quotation from "./quotation";
 
 
 export default function* rootSaga() {
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     ...profile,
     ...plan,
     ...plts,
-    ...pms
+    ...pms,
+    ...quotation
   ])
 }
