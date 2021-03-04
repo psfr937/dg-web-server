@@ -61,3 +61,24 @@ export const cidSchema = new schema.Entity(
 );
 
 export const arrayOfCids = new schema.Array(cidSchema);
+
+
+export const addressSchema = new schema.Entity(
+  'addresses',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfAddresses = new schema.Array(addressSchema);
+
+export const btSchema = new schema.Entity(
+  'bts',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfBts = new schema.Array(btSchema);

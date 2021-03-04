@@ -1,9 +1,9 @@
 import React from 'react';
 import st from './login.module.scss'
 
-function EmailSignUp(email, setEmail,
+function EmailSignUp({email, setEmail,
                      password, setPassword,
-                     username, setUsername){
+                     username, setUsername}){
 
   return (
       <div className={st.loginFormBox}>

@@ -3,13 +3,15 @@ import { POST, GET } from "./methods"
 
 export default {
   purchase: data => {
-    return apiEngine(POST,'/api/cart/purchase', { data })
+    return apiEngine(POST,'/cart/purchase', { data })
   },
   list: data => {
-    return apiEngine(POST, '/api/cart', { data })
+    return apiEngine(POST, '/cart', { data })
   },
   createPaymentIntent: data => {
-    return apiEngine(POST, '/api/payment/create-payment-intent', { data })
+    return apiEngine(POST, '/payment/create-payment-intent', { data })
+  },
+  createSetupIntent: data => {
+    return apiEngine(POST, '/payment/create-setup-intent')
   }
-
 };

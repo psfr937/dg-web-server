@@ -60,6 +60,11 @@ $white: #eee;
   }
 }
 
+$dark-green: #266150;
+$green: #1a8050;
+$light-green: #2ace81;
+$dark: #3c3a41;
+
 @keyframes color {
   100%,
   0% {
@@ -94,11 +99,19 @@ $white: #eee;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  background-color: #6772e5;
+  background-color: $green;
   text-decoration: none;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   margin-top: 10px;
+
+  &:hover{
+    background: $light-green;
+    color: #fff;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  }
 
   &:disabled{
     pointer-events: none;

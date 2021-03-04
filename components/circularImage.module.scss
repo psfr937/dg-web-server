@@ -1,3 +1,6 @@
+$dark-green: #266150;
+$light-green: #65807C;
+
 .profileIconWrapper{
   display: flex;
   align-content: center;
@@ -5,9 +8,9 @@
   border-radius: 50%;
 
   .profileIcon{
-    height: 28px;
-    width: 28px;
-    border: 2px solid black;
+    height: 22px;
+    width: 22px;
+    border: 1px solid $light-green;
     border-radius: 50%;
   }
 

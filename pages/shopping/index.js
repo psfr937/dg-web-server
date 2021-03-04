@@ -26,7 +26,10 @@ class Shop extends PureComponent{
         <Head/>
         <main className={appSt.app}>
           <Nav/>
-          <div className={appSt.navPadding}>
+          <div className={st.navPadding}>
+            <div className={st.paginationBar}>
+              <h6> Total </h6>
+            </div>
             <div className={st.catalogPage}>
               <FilterMenu/>
               <CatalogList/>

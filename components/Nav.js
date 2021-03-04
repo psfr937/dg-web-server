@@ -6,10 +6,10 @@ import Link from "next/link"
 import { useSelector } from 'react-redux'
 import CircleImage from "@components/circularImage";
 
-function Nav() {
+export default function Nav() {
   let [burgerOpened, setBurgerOpened] = useState(false);
 
-  const readyStatus = useSelector(state => state.auth.info)
+  const readyStatus = useSelector(state => state.auth.info);
 
   let toggleBurger = () => {
     setBurgerOpened(!burgerOpened)
@@ -23,31 +23,51 @@ function Nav() {
               <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
         </div>
-        <img className={st.appNavImg} src="/dress_green_logo.png"/>
+        <Link href="/shopping">
+          <img className={st.appNavImg} src="/dress_green_logo.png"/>
+        </Link>
       </div>
       <div>
         <div className={st.appNavRow}>
-          <Link href={"/cart"}>
+
+          <Link href={"/recycle"}>
+            <div className={st.sellButton}>
+              <svg viewBox="0 0 24 24">
+                <path  d="M7.17 7.91L8.9 8.91L12.08 3.42L14.33 7.31L11.73 8.81L17.19 10.27L18.66 4.81L16.06 6.31L13.81 2.41C13.26 1.45 12.03 1.12 11.08 1.68C10.81 1.83 10.58 2.05 10.41 2.31M10 20V18L3.66 18L5.9 14.1L8.5 15.6L7.04 10.14L1.57 11.6L4.17 13.1L1.92 17C1.37 17.96 1.7 19.18 2.65 19.73C2.92 19.89 3.22 19.97 3.54 20M19.06 11.5L17.32 12.5L20.5 18H16V15L12 19L16 23V20H20.5C21.61 20 22.5 19.11 22.5 18C22.5 17.69 22.42 17.38 22.28 17.11Z" />
+              </svg>
+              <h4> Sell </h4>
+            </div>
+          </Link>
+          <Link href={"/favorite"}>
             <svg viewBox="0 0 24 24">
-              <path fill="currentColor" d="M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M1,2H4.27L5.21,4H20A1,1 0 0,1 21,5C21,5.17 20.95,5.34 20.88,5.5L17.3,11.97C16.96,12.58 16.3,13 15.55,13H8.1L7.2,14.63L7.17,14.75A0.25,0.25 0 0,0 7.42,15H19V17H7C5.89,17 5,16.1 5,15C5,14.65 5.09,14.32 5.24,14.04L6.6,11.59L3,4H1V2M7,18A2,2 0 0,1 9,20A2,2 0 0,1 7,22C5.89,22 5,21.1 5,20C5,18.89 5.89,18 7,18M16,11L18.78,6H6.14L8.5,11H16Z" />
+              <path d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
             </svg>
           </Link>
-          <Link href={"/register"}>
-            <CircleImage/>
+          <Link href={"/cart"}>
+            <svg viewBox="0 0 24 24">
+              <path d="M22 9H17.21L12.83 2.44C12.64 2.16 12.32 2 12 2S11.36 2.16 11.17 2.45L6.79 9H2C1.45 9 1 9.45 1 10C1 10.09 1 10.18 1.04 10.27L3.58 19.54C3.81 20.38 4.58 21 5.5 21H18.5C19.42 21 20.19 20.38 20.43 19.54L22.97 10.27L23 10C23 9.45 22.55 9 22 9M12 4.8L14.8 9H9.2L12 4.8M18.5 19L5.5 19L3.31 11H20.7L18.5 19M12 13C10.9 13 10 13.9 10 15S10.9 17 12 17 14 16.1 14 15 13.1 13 12 13Z" /> </svg>
           </Link>
 
+          <Link href={"/register"}>
+            <div className={st.myAccountButton}>
+              <svg viewBox="0 0 24 24">
+                <path d="M7,10L12,15L17,10H7Z" />
+              </svg>
+              <h4>My Account</h4>
+
+              <CircleImage/>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
     <div className={burgerOpened ? st.burgerNav : classnames(st.burgerNav, st.hidden)}>
       <Fade delay={50} duration={300} top when={burgerOpened === true}>
-        <a href={"/console"} className={st.burgerNavTitle}>Console</a>
+        <a href={"/shopping"} className={st.burgerNavTitle}>Shopping</a>
       </Fade>
       <Fade delay={150} duration={300} top when={burgerOpened === true}>
-        <a href={"/blog"} className={st.burgerNavTitle}>Docs</a>
+        <a href={"/recycle"} className={st.burgerNavTitle}>Recycle</a>
       </Fade>
     </div>
   </React.Fragment>
 }
-
-export default Nav

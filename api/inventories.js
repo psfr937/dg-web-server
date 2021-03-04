@@ -1,25 +1,25 @@
-import { GET } from './methods'
+import { GET, POST } from './methods'
 import apiEngine from './apiEngine'
 
 
 export default {
-  list: () => {
-    return apiEngine(GET, `/api/inventories`)
+  list: ({ data }) => {
+    return apiEngine(POST, `/inventories/list`, { data })
   },
   get: (pid) => {
-     return apiEngine(GET, `/api/inventories/${pid}`)
+     return apiEngine(GET, `/inventories/${pid}`)
    },
   serverGet: (pid, ctx) => {
 
-    return apiEngine(GET, `/api/inventories/${pid}`, { ctx })
+    return apiEngine(GET, `/inventories/${pid}`, { ctx })
   }
 }
 
 // export default apiEngine => ({
 //   list: () => {
-//     return apiEngine(GET, `/api/inventories`)
+//     return apiEngine(GET, `/inventories`)
 //   },
 //   get: pid => {
-//     return apiEngine(GET, `/api/inventories/${pid}`)
+//     return apiEngine(GET, `/inventories/${pid}`)
 //   }
 // });

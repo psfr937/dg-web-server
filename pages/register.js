@@ -4,8 +4,8 @@ import loginSt from '../components/authBox/login.module.scss'
 import React from "react";
 import LoginNav from "@components/LoginNav"
 
-import Register from "@components/authBox/register";
-import Login from "@components/authBox/login";
+import RegisterForm from "@components/authBox/register";
+import LoginForm from "@components/authBox/login";
 import {motion} from "framer-motion";
 import classNames from 'classnames'
 
@@ -32,7 +32,7 @@ export default function Register() {
               animate={{opacity: 0, scale: 1.1, top: -50}}
               transition={{duration:0.4}}
             >
-              <Login/>
+              <LoginForm/>
             </motion.div>
           </div>
           <div>
@@ -44,7 +44,7 @@ export default function Register() {
               transition={{duration:0.4, delay: 0.2, ease: [0.175, 0.885, 0.32, 1.275]}}
 
             >
-              <Register/>
+              <RegisterForm/>
             </motion.div>
           </div>
         </section>

@@ -31,7 +31,7 @@ function CatalogList(){
                 <div className={st.item}>
                   <img src={i.picture_url}/>
                   <div className={st.itemTitle}>{i.title}</div>
-                  <div className={st.itemPrice}>{`$${i.price}`}</div>
+                  <div className={st.itemPrice}>{`HK$${i.price/100}`}</div>
                 </div>
               </div>
             </Link>

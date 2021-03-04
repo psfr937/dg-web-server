@@ -3,9 +3,9 @@ import { GET, POST } from "./methods";
 
 export default {
   list: () => {
-    return apiEngine(GET, `/api/pms`)
+    return apiEngine(GET, `/pms`)
   },
   addPaymentMethod: data => {
-    return apiEngine(POST, '/api/pms/add', { data })
+    return apiEngine(POST, '/pms/add', { data })
   },
 };

@@ -1,17 +1,13 @@
 import Head from '@components/Head'
-import { fetchEntries } from '../helpers/contentfulPosts'
-import safeJsonStringify from 'safe-json-stringify';
-import Footer from '@components/Footer'
-
 import st from './home.module.scss'
 import React from "react";
 import LoginNav from "@components/LoginNav"
 import loginSt from '../components/authBox/login.module.scss'
-import Login from "@components/authBox/login";
+import LoginForm from "@components/authBox/login";
 import {motion} from "framer-motion";
-import Register from "@components/authBox/register";
+import RegisterForm from "@components/authBox/register";
 import classNames from "classnames";
-//import LoginVideo from "@components/authBox/loginVideo";
+
 
 
 export default function Login() {
@@ -41,7 +37,7 @@ export default function Login() {
                 animate={{opacity: 1, scale: 1,top: 0}}
                 transition={{duration:0.4, delay: 0.2, ease: [0.175, 0.885, 0.32, 1.275]}}
               >
-                <Login/>
+                <LoginForm/>
               </motion.div>
             </div>
             <div>
@@ -52,7 +48,7 @@ export default function Login() {
                 animate={{opacity: 0, scale: 1.1,top: -50}}
                 transition={{duration:0.4}}
               >
-                <Register/>
+                <RegisterForm/>
               </motion.div>
             </div>
 

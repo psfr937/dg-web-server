@@ -43,7 +43,7 @@ export default function Product(){
             <div className={st.itemDetail}>
               <h1> { ready ? inventoryDetail.name: 'loading'}</h1>
               { ready ?  <img src={inventoryDetail.picture_url}/> : null}
-              <h2> { ready ? inventoryDetail.price: 'loading'}</h2>
+              <h2> { ready ? `HK$${inventoryDetail.price/100}`: 'loading'}</h2>
               <button onClick={() => addCartItem(inventoryDetail.id)}> Add To Cart </button>
             </div>
         </div>

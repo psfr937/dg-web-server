@@ -1,13 +1,36 @@
+
+$dark-green: #266150;
+$green: #1a8050;
+$light-green: #2ace81;
+$dark: #3c3a41;
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 .kitForm{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   flex-basis: 50%;
+  width: 80%;
+  margin: 3rem 0 0 3rem;
 
 
-  h3, h4{
-    font-size: 1rem;
+  h3{
+    margin: 0.2rem 0;
+  }
+  h4{
+    margin: 0.2rem 0;
+    font-size: 0.8rem;
+    font-weight: 400;
   }
 }
 
@@ -18,29 +41,99 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
+  margin : 1rem 0;
 }
 
+.buttonStyle{
+  @extend .noselect;
 
-.kitFormOption{
+  cursor: pointer;
+
+  &.selected{
+    border: 2px solid $green;
+    background: $green;
+    h5, h6{
+      color: white;
+    }
+  }
+}
+
+.kitFormOptionRow{
   display: flex;
   flex-direction: row;
-  border-radius: 8px;
-  border: 2px solid black;
-  width: 400px;
+  margin: 1rem 0;
+  width: 600px;
+  justify-content: flex-start;
 
 
   & > div {
+
+    @extend .buttonStyle;
+
+    margin-right: 1rem;
     display: flex;
-    flex-direction: row;
-    flex-basis: 50%;
+    flex-direction: column;
+    flex-basis: auto;
+    height: 120px;
+    width: 140px;
     justify-content: space-between;
     padding: 0 1rem;
-    h4 {
+    border: 1px solid $dark-green;
+    border-radius: 8px;
+
+    h5 {
+      color: $dark-green;
+    }
+
+    h6{
+      font-weight: 300;
+    }
+  }
+}
+
+.kitFormOptionColumn{
+  display: flex;
+  flex-direction: column;
+
+  width: 600px;
+  margin-top: 1rem;
+
+
+
+  & > div {
+
+    @extend .buttonStyle;
+
+    border: 1px solid $dark-green;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    width: 300px;
+    height: min-content;
+
+    padding: 1rem;
+
+    h5, h6{
+
+    }
+
+    h5 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1rem;
+      color: $dark-green;
+    }
+
+    h6 {
+      margin: 0.5rem 0 0 0;
+      font-weight: 300;
       font-size: 1rem;
     }
   }
-
 }
+
 
 .clothingTypeOption{
   height: 120px;

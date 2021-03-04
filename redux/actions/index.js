@@ -10,11 +10,15 @@ import plan from "./plan";
 import pms from './pms';
 import profile from "./account/profile";
 import quotation from "./quotation";
-
+import stripe from "./stripe";
+import transaction from "./transaction";
+import addresses from "./addresses";
+import bts from "./bts";
 
 export default function* rootSaga() {
   yield all([
     ...account,
+    ...addresses,
     ...inventories,
     ...cart,
     ...auth,
@@ -22,6 +26,9 @@ export default function* rootSaga() {
     ...plan,
     ...plts,
     ...pms,
-    ...quotation
+    ...quotation,
+    ...stripe,
+    ...transaction,
+    ...bts
   ])
 }

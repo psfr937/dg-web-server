@@ -23,7 +23,7 @@ function *fetchInventories(){
   yield put({type: FETCH_INVENTORIES_REQUESTING});
 
   try {
-    const json = yield call(inventoryAPI.list);
+    const json = yield call(inventoryAPI.list, { data: { filter: {} }});
     const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
     let data = normalizedData.entities.inventories;
     if(typeof data === 'undefined') data = {};

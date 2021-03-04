@@ -1,45 +1,29 @@
-import React, { PureComponent } from 'react'
-import {connect} from "react-redux";
-import { authenticate } from "../redux/actions/account/auth";
+import React, { useEffect } from 'react'
+import { useDispatch } from "react-redux";
+
 import Router from 'next/router'
 import nextCookie from "next-cookies";
 import App from './index'
-class Authenticator extends PureComponent{
-  constructor(props){
-    super(props)
-  }
+import {AUTHENTICATE} from "../redux/reducers/account/auth";
 
-  componentDidMount() {
-    const { next, token, info } = this.props;
-    console.log('hello pony')
-    this.props.authenticate(token, info);
+function Authenticator({ next, token, info }){
+  const dispatch = useDispatch()
+  useEffect(() => {
+
+    dispatch({type: AUTHENTICATE, token, info});
     Router.replace('/')
-  }
+  }, []);
 
-  render(){
-    return <App/>
-  }
+  return <App/>
+
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  authenticate: (token, info) => dispatch(authenticate({token, info}))
-});
-
-const connector = connect(
-  null,
-  mapDispatchToProps
-);
-
-const HOCAuthenticator = connector(Authenticator)
 
 
-
-const Oauth = ({query, token}) => {
+function Oauth({query, token}){
   const { next, user } = query;
-  console.log(query)
-  // let avatar_url = ''
-  // let display_name = ''
-  let info = null
+
+  let info = null;
 
   if(typeof user !== 'undefined') {
     info = JSON.parse(user)
@@ -47,7 +31,7 @@ const Oauth = ({query, token}) => {
   console.log(token);
   console.log(info);
   return (
-    <HOCAuthenticator
+    <Authenticator
       next = {next}
       token = {token}
       info = {info}
@@ -56,7 +40,7 @@ const Oauth = ({query, token}) => {
 }
 
 Oauth.getInitialProps = (ctx) => {
-  const cookie = nextCookie(ctx)
+  const cookie = nextCookie(ctx);
   return {query: ctx.query, token: cookie.token}
 }
 

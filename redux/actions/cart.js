@@ -1,56 +1,16 @@
 
 
 import cartAPI from '../../api/carts'
-import { PURCHASE_FAILURE, PURCHASE_INVALID, PURCHASE_REQUESTING, PURCHASE } from "../reducers/cart/purchase";
-import router from 'next/router'
-import {
-  CREATE_PAYMENT_INTENT_FAILURE,
-  CREATE_PAYMENT_INTENT_INVALID,
-  CREATE_PAYMENT_INTENT_REQUESTING, CREATE_PAYMENT_INTENT_SUCCESS,
-  CREATE_PAYMENT_INTENT
-} from "../reducers/cart/createPaymentIntent";
-import { FETCH_CIDS, FETCH_CIDS_SUCCESS, FETCH_CIDS_FAILURE, FETCH_CIDS_REQUESTING} from "../reducers/cart/cartItemDetail";
-import { select, put, call, takeEvery } from "redux-saga/effects"
+import { FETCH_CIDS_SUCCESS, FETCH_CIDS_FAILURE, FETCH_CIDS_REQUESTING} from "../reducers/cart/cartItemDetail";
+import { select, put, all, call, takeEvery } from "redux-saga/effects"
 import planAPI from "../../api/plans";
 import {normalize} from "normalizr";
 import {arrayOfCids} from "../../schemas";
-import {GET_QUOTATION, SAVE_ADDRESS_GET_QUOTATION, GET_QUOTATION_REQUESTING} from "../reducers/address/getQuotation";
-import {GET_GEOLOCATION_REQUESTING, GET_GEOLOCATION_SUCCESS} from "../reducers/address/getGeolocation";
-import {SAVE_ADDRESS_REQUESTING} from "../reducers/address/saveAddress";
+import {REMOVE_CART_ITEM} from "../reducers/cart/cartItems";
+export const FETCH_CIDS = "FETCH_CIDS";
+export const REMOVE_CART_ITEM_SAGA = "REMOVE_CART_ITEM_SAGA";
 
 
-function *purchase({pmId}) {
-  const cartItems = yield select(state => state.cartItems);
-  const readyStatus = yield select(state => state.purchase.readyStatus);
-  if (readyStatus !== PURCHASE_INVALID &&
-    readyStatus !== PURCHASE_FAILURE
-  ) return
-
-  yield put({type: PURCHASE_REQUESTING});
-  const json = yield call(cartAPI.purchase, {pmId, cartItems});
-
-  router.push('/checkout/success')
-}
-
-function *createPaymentIntent(){
-  const cartItems =  yield select(state => state.cartItems);
-  const readyStatus = yield select(state => state.createPaymentIntent.readyStatus);
-  console.log(readyStatus)
-  if (readyStatus !== CREATE_PAYMENT_INTENT_INVALID &&
-    readyStatus !== CREATE_PAYMENT_INTENT_FAILURE
-  ) return
-
-  yield put({type: CREATE_PAYMENT_INTENT_REQUESTING});
-  let json
-  try {
-    json = yield call(cartAPI.createPaymentIntent,{cartItems});
-    console.log(json)
-    yield put({type: CREATE_PAYMENT_INTENT_SUCCESS, data: json.data.result});
-  }
-  catch(err){
-    yield put({type: CREATE_PAYMENT_INTENT_FAILURE, err});
-  }
-}
 
 function *fetchCids(){
   const readyStatus = yield select(state => state.cartItemDetail.readyStatus);
@@ -65,7 +25,7 @@ function *fetchCids(){
     const normalizedData = yield call (normalize,json.data.data, arrayOfCids);
     console.log(normalizedData);
     let cids = normalizedData.entities.cids;
-    if(typeof cids === 'undefined') cids = {}
+    if(typeof cids === 'undefined') cids = {};
 
     yield put({type: FETCH_CIDS_SUCCESS, data: cids})
   } catch (err) {
@@ -73,12 +33,27 @@ function *fetchCids(){
   }
 }
 
+function *removeCartItemSaga({ id }){
 
+  const cids = yield select(state => state.cartItemDetail);
 
+  let newData;
+  newData = cids.data;
+  console.log(id)
+  console.log(id in newData)
+  console.log(`${id}` in newData)
+  if(cids.readyStatus === FETCH_CIDS_SUCCESS && `${id}` in newData){
+    delete newData[id]
+  }
+  console.log(newData)
+  yield all([
+      put({type: FETCH_CIDS_SUCCESS, data: newData}),
+      put({type: REMOVE_CART_ITEM, id: id})
+    ])
 
+}
 
 export default [
-  takeEvery(PURCHASE, purchase),
-  takeEvery(CREATE_PAYMENT_INTENT, createPaymentIntent),
-  takeEvery(FETCH_CIDS, fetchCids)
+  takeEvery(FETCH_CIDS, fetchCids),
+  takeEvery(REMOVE_CART_ITEM_SAGA, removeCartItemSaga)
 ]

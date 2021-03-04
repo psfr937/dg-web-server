@@ -10,7 +10,7 @@ $light-green: #65807C;
   align-items: center;
   height: 60px;
   padding: 0 1rem;
-  position: absolute;
+  position: fixed;
   background: #fff;
   color: black;
   z-index: 10;
@@ -34,7 +34,10 @@ $light-green: #65807C;
 .appNavImg{
 
   height: 20px;
-  margin-left: 1rem;
+  
+  &:hover{
+    cursor: pointer;;
+  }
 }
 
 .appNavHead{
@@ -50,11 +53,7 @@ $light-green: #65807C;
   }
 
 
-  & > div{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+
 
 
 
@@ -74,8 +73,19 @@ $light-green: #65807C;
   align-items: center;
   cursor: pointer;
   fill: white;
+  margin-right: 1rem;
   span{
     line-height: 30px;
+  }
+
+
+  .burgerIcon{
+    fill: black;
+  }
+
+
+  @media screen and (min-width: 400px){
+    display: none;
   }
 
 }
@@ -87,15 +97,53 @@ $light-green: #65807C;
   flex-direction: row;
   align-items: center;
 
-  & > *{
-    margin: 0 1rem;
+  .myAccountButton{
 
-    fill: $dark-green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    cursor: pointer;
+    border-left: 1px solid $light-green;
+    padding-left: 0.5rem;
+
+    h4{
+      font-size: 14px;
+      font-weight: 400;
+      color: $light-green;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .sellButton{
+    border-right: 1px solid $light-green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 1rem;
+    height: 20px;
+    cursor: pointer;
+
+
+    h4{
+      font-size: 14px;
+      font-weight: 400;
+      color: $light-green;
+      margin: 0 0.5rem;
+    }
+  }
+
+
+  & > *{
+    margin: 0 0.5rem;
+
+
   }
 
   svg{
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
+    fill: $dark-green;
   }
 
   img{
@@ -161,10 +209,6 @@ $light-green: #65807C;
   a{
     text-decoration: none;
   }
-}
-
-.burgerIcon{
-  fill: black;
 }
 
 

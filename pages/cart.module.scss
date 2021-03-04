@@ -1,0 +1,183 @@
+.checkoutNavBar{
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+$dark-green: #266150;
+$light-green: #65807C;
+$vivid-green: #3c3a41;
+
+
+.addressFormContainer{
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > div{
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+  }
+
+  &.hidden{
+    display: none;
+  }
+}
+
+
+.sectionTitle{
+  width: 100%;
+  background: $vivid-green;
+  color: white;
+  padding: 1rem 0;
+  margin: 0;
+  height: 30px;
+}
+.conclusion{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: center;
+  padding: 0;
+  .h4 {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    border-bottom: 1px solid #777;
+    h4 {
+      line-height:  100%;
+      padding-left: 3rem;
+      font-weight: 300;
+      width: 100%;
+      display: flex;
+      justify-self: center;
+      align-self: center;
+      text-align: left;
+
+    }
+  }
+}
+
+.topSection{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: max-content;
+  width: 1100px;
+  border: 1px solid #3c3a41;
+
+  & > div{
+    flex-shrink: 0;
+    justify-self: center;
+    margin: 0 auto;
+
+  }
+}
+
+
+.subSection, .bottomSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+  margin: 0;
+  align-items: stretch;
+
+  & > div{
+    justify-content: stretch;
+    flex: 1 0 50%;
+    justify-self: center;
+    margin: 0 auto;
+
+  }
+}
+
+.bottomRightSection form{
+  margin: 0 auto;
+}
+
+.bottomLeftSection{
+  width: 50%;
+  flex-direction: column;
+  justify-content: stretch;
+  overflow: hidden;
+
+  .bottomLeftSectionContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    border: none;
+    & > *{
+      flex-grow: 1;
+    }
+  }
+
+  .grassImageContainer{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-grow: 1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+  .grassImage{
+    background: #3c3a41; //url("../public/grass.jpeg") repeat center;
+
+    height: 100%;
+    width: 100%;
+  }
+
+}
+
+.app {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+  Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow: auto;
+  height: 100vh;
+
+  h2{
+    font-size: 2rem;
+  }
+  h4{
+    font-size: 1.5rem;
+  }
+
+
+}
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 60px);
+  width: 100%;
+  justify-content: stretch;
+  align-items: center;
+  flex: 1 1;
+  margin-bottom: 4rem;
+
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+    height: auto;
+  }
+
+  & > div {
+    flex: 0 1 auto;
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+  }
+}

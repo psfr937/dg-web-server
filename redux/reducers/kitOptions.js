@@ -1,15 +1,11 @@
-export const FETCH_PLTS_INVALID = 'FETCH_PLTS_INVALID'
-export const FETCH_PLTS_REQUESTING = 'FETCH_PLTS_REQUESTING'
-export const FETCH_PLTS_SUCCESS = 'FETCH_PLTS_SUCCESS'
-export const FETCH_PLTS_FAILURE = 'FETCH_PLTS_FAILURE'
+export const SELECT_BAG = 'SELECT_BAG';
+export const SELECT_RECYCLE_POLICY = 'SELECT_RECYCLE_POLICY';
 
 
 const initialState = {
-  mailLabel: true,
-  recycleUnused: false,
-  packList: []
+  bagTypeId: null,
+  recycleUnused: true
 };
-
 
 export default (state, action) => {
   if(typeof state === 'undefined'){
@@ -17,22 +13,16 @@ export default (state, action) => {
   }
 
   switch (action.type) {
-    case FETCH_PLTS_REQUESTING:
+    case SELECT_BAG:
       return {
-        readyStatus:  FETCH_PLTS_REQUESTING,
-        err: null
-      }
-    case FETCH_PLTS_FAILURE:
+        ...state,
+        bagTypeId: action.data
+      };
+    case SELECT_RECYCLE_POLICY:
       return {
-        readyStatus:  FETCH_PLTS_FAILURE,
-        err: action.err
-      }
-    case FETCH_PLTS_SUCCESS:
-      return {
-        readyStatus:  FETCH_PLTS_SUCCESS,
-        data: action.data
-      }
-
+        ...state,
+        recycleUnused: action.data
+      };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { FETCH_PMS_INVALID } from "../redux/reducers/pms/pms";
+import { FETCH_PMS_INVALID } from "../redux/reducers/pms";
 import {selectPm, fetchPms} from "../redux/actions/pms";
 import st from './pmSelection.module.scss'
 import StripeAddPmContainer from '../components/stripe/StripeAddPmContainer'

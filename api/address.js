@@ -2,6 +2,6 @@ import apiEngine from "./apiEngine";
 import {GET, POST} from "./methods";
 
 export default {
-  list: ({page}) => apiEngine(GET, '/api/address'),
-  add: ({data}) => apiEngine(POST, '/api/address', { data })
+  list: () => apiEngine(GET, '/addresses'),
+  add: ({data}) => apiEngine(POST, '/address', { data })
 }

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
+    "postbuild": "next-on-netlify",
     "start": "cross-env NODE_ENV=production next start",
     "export": "next export"
   },
@@ -20,10 +21,10 @@
     "framer-motion": "^3.3.0",
     "google-map-react": "^2.1.9",
     "js-cookie": "^2.2.1",
-    "netlify-identity-widget": "^1.9.1",
     "next": "9.5.0",
     "next-cookies": "^2.0.3",
     "next-fonts": "^1.5.1",
+    "next-on-netlify": "^2.8.7",
     "next-redux-wrapper": "^6.0.2",
     "next-transpile-modules": "^6.2.0",
     "normalizr": "^3.6.1",

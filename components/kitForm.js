@@ -1,89 +1,64 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
 import st from './kitForm.module.scss'
-import { FETCH_PLTS } from "../redux/reducers/plts";
+import {useDispatch, useSelector} from "react-redux";
+import {FETCH_BTS} from "../redux/actions/bts";
+import {FETCH_BTS_SUCCESS} from "../redux/reducers/bts";
+import {SELECT_BAG, SELECT_RECYCLE_POLICY} from "../redux/reducers/kitOptions";
 
-class KitForm extends PureComponent{
+export default function KitForm(){
 
-  constructor(props){
-    super(props)
+  const dispatch= useDispatch();
+
+  useEffect(() => {
+    dispatch({type: FETCH_BTS })
+  }, []);
+
+  const selectBag = (id) => {
+    dispatch({ type: SELECT_BAG, data: id })
   }
 
-  componentDidMount() {
-    this.props.fetchPlts()
+  const selectRecyclePolicy = (bool) => {
+    dispatch({ type: SELECT_RECYCLE_POLICY, data: bool })
   }
 
+  const bts = useSelector(state => state.bts.readyStatus !== FETCH_BTS_SUCCESS
+   ? [] : Object.keys(state.bts.data).map(k => state.bts.data[k]));
+  const kitOptions = useSelector(state => state.kitOptions);
 
-  render(){
-    return (
-      <div className={st.kitForm}>
-        <h2> Review Kit Settings</h2>
-        <div className={st.kitFormQuestion}>
-          <h3> Label or Bag </h3>
-          <h4> Bags may take up to 2 weeks. Our eco-friendly shipping labels can be printed and used on any box. </h4>
-          <div className={st.kitFormOption}>
-            <div>
-              <h4> Email a Label</h4>
-              <h4> Free</h4>
-
-            </div>
-            <div>
-              <h4> Mail a Bag</h4>
-              <h4> Free</h4>
-            </div>
-          </div>
-        </div>
-        <div className={st.kitFormQuestion}>
-          <h3> Item We Don't Accept </h3>
-          <h4> Only 40% of items in the average kit meet our quality standards. </h4>
-          <div className={st.kitFormOption}>
-            <div>
-              <h4> Recycle My Items</h4>
-              <h4> Free</h4>
-            </div>
-            <div>
-              <h4> Return my Items</h4>
-              <h4> $10.99</h4>
-            </div>
-          </div>
-        </div>
-        <div className={st.kitFormQuestion}>
-          <h3> How Many Clothes do you have? </h3>
-          <h4> This helps us know the delivery cost </h4>
+  return (
+    <div className={st.kitForm}>
+      <div className={st.kitFormQuestion}>
+        <h3> A few? Or a lot? Choose your bag!  </h3>
+        <h4> We will borrow you a bag to let you store all your clothes you want to sell. </h4>
+        <div className={st.kitFormOptionRow}>
           {
-            this.props.plts.map(plt => (<div className={st.clothingTypeOption}>
-                plt
-                <button> + </button>
-                <button> {this.props.packList[plt]} </button>
-              </div>)
+            bts.map(b =>
+              <div className={kitOptions.bagTypeId === b.id ? st.selected: null}
+                   onClick={() => selectBag(b.id)}>
+                <h5> { b.name }</h5>
+                <h6> {`${b.length}cm(l) x ${b.width}cm(w) x ${b.height}cm(h)`} </h6>
+              </div>
             )
           }
         </div>
-
       </div>
-    )
-  }
+      <div className={st.kitFormQuestion}>
+        <h3> What to do if your items are not accepted? </h3>
+        <h4> In order to protect our users, on average only 40% of items we received from sellers meet our quality test. </h4>
+        <div className={st.kitFormOptionColumn}>
+          <div className={kitOptions.recycleUnused === true ? st.selected: null}
+               onClick={() => selectRecyclePolicy(true)}>
+            <h5> Recycle My Items</h5>
+            <h6> Giving is Happiness </h6>
+          </div>
+          <div className={kitOptions.recycleUnused === false ? st.selected: null}
+               onClick={() => selectRecyclePolicy(false)}>
+            <h5> Return my Items</h5>
+            <h6> You will need to pay the delivery fee required for delivering the items
+              back to your home.</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
-
-const mapStateToProps = ({cartItems, packList, plts}) => {
-  return {
-    cartItems,
-    packList,
-    plts: plts.readyStatus === 'FETCH_PLTS_SUCCESS' ?
-      (Object.keys(plts).map(k => plts[k])) : []
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchPlts: () => dispatch({ type: FETCH_PLTS })
-  };
-};
-
-
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-
-export default connector(KitForm)

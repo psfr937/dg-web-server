@@ -1,82 +1,79 @@
 import React, { useState } from 'react'
 import st from './addressForm.module.scss'
-import GoogleMapReact from 'google-map-react';
-import config from '../config/index'
 import {useDispatch, useSelector} from "react-redux";
-import { GET_QUOTATION } from "../redux/reducers/address/getQuotation";
+import {GET_BUY_QUOTATION, GET_SELL_QUOTATION} from "../redux/actions/quotation";
+import {TOGGLE_ADDRESS_BOX} from "../redux/reducers/ux";
 
-function MapMarker() {
-    return <svg viewBox="0 0 24 24">
-      <path
-        d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/>
-    </svg>
-}
-
-export default function AddressForm({ zoom= 19 }){
-
-    const center = useSelector(state => state.address);
-
-    const [ lineOne, setLineOne ] = useState('');
+export default function AddressForm({
+  formPurpose = 'BUY'
+}){
+  const [ lineOne, setLineOne ] = useState('');
   const [ lineTwo, setLineTwo ] = useState('');
   const [ city, setCity ] = useState('');
   const [ zip, setZip ] = useState('');
   const [ province, setProvince ] = useState('');
   const [ country, setCountry ] = useState('');
+  const [ name, setName ] = useState('');
+  const [ phone, setPhone ] = useState('');
 
   const dispatch = useDispatch();
-  const submitAddress = dispatch({
-    type: GET_QUOTATION, data: {
-      lineOne, lineTwo, city, zip, province, country
-    }
-  });
+  const closeForm = () => dispatch({type: TOGGLE_ADDRESS_BOX, data: false});
+
+
+  const submitAddress = e => {
+    e.preventDefault();
+    dispatch({
+      type: formPurpose === 'BUY' ? GET_BUY_QUOTATION : GET_SELL_QUOTATION,
+      newAddress: {
+        lineOne, lineTwo, city, zip, province, country, recipientName: name,
+        recipientPhone: phone
+      }
+    });
+  };
+
     return (
       <div className={st.addressForm}>
         <form onSubmit={submitAddress}>
             <label>
-              <h4> Delivery Address </h4>
               <div className={st.addressFormField}>
                 <label>Address Line 1</label>
-                <input onChange={setLineOne} type="address" className="FormBase"/>
+                <input onChange={e => setLineOne(e.target.value)} type="address" className="FormBase"/>
               </div>
               <div className={st.addressFormField}>
                 <label>Address Line 2</label>
-                <input onChange={setLineTwo} type="address" className="FormBase"/>
+                <input onChange={e => setLineTwo(e.target.value)} type="address" className="FormBase"/>
               </div>
               <div className={st.addressFormField}>
                 <label>City</label>
-                <input onChange={setCity} type="address" className="FormBase"/>
+                <input onChange={e => setCity(e.target.value)} type="address" className="FormBase"/>
               </div>
               <div className={st.addressFormField}>
                 <label>State/Province</label>
-                <input onChange={setProvince} type="address" className="FormBase"/>
+                <input onChange={e => setProvince(e.target.value)} type="address" className="FormBase"/>
               </div>
               <div className={st.addressFormField}>
                 <label>Zip/Postal Code</label>
-                <input onChange={setZip} type="address" className="FormBase"/>
+                <input onChange={e => setZip(e.target.value)} type="address" className="FormBase"/>
               </div>
               <div className={st.addressFormField}>
                 <label>Country</label>
-                <input onChange={setCountry} type="address" className="FormBase"/>
+                <input onChange={e => setCountry(e.target.value)} type="address" className="FormBase"/>
+              </div>
+              <div className={st.addressFormField}>
+                <label>Recipient Name</label>
+                <input onChange={e => setName(e.target.value)} type="text" className="FormBase"/>
+              </div>
+              <div className={st.addressFormField}>
+                <label>Recipient Phone</label>
+                <input onChange={e => setPhone(e.target.value)} type="text" className="FormBase"/>
               </div>
             </label>
-            <button type="submit"> Use Address </button>
+            <div>
+              <button type="button" onClick={closeForm}> Cancel </button>
+              <button type="submit"> Confirm </button>
+            </div>
         </form>
-        <div style={{ height: '200px', width: '300px' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: config.googleApiKey /* YOUR KEY HERE */ }}
-            defaultCenter={center}
-            defaultZoom={zoom}
-          >
-            <MapMarker
-              lat={this.props.lat}
-              lng={this.props.lng}
-              text="Your Location"
-            />
-          </GoogleMapReact>
-        </div>
       </div>
-
-
     )
 }
 
