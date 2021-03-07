@@ -1,9 +1,9 @@
 # Next-on-Netlify Redirects
 /  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/qnAyG6-HBYGxznukYrqTn/aeea.json  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/qnAyG6-HBYGxznukYrqTn/index.json  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
+/_next/data/hAtRRRcF3VNEGziiX7Ck8/aeea.json  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
+/_next/data/hAtRRRcF3VNEGziiX7Ck8/index.json  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
 /aeea  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
 /oauth  /.netlify/functions/next_oauth  200
-/_next/data/qnAyG6-HBYGxznukYrqTn/shopping/:name/p/:pid.json  /.netlify/functions/next_shopping_name_p_pid  200
+/_next/data/hAtRRRcF3VNEGziiX7Ck8/shopping/:name/p/:pid.json  /.netlify/functions/next_shopping_name_p_pid  200
 /_next/image*  url=:url w=:width q=:quality  /.netlify/functions/next_image?url=:url&w=:width&q=:quality  200
 /shopping/:name/p/:pid  /.netlify/functions/next_shopping_name_p_pid  200

@@ -148,7 +148,7 @@ export default function Home({ posts }){
 
             </div>
             <Link href="/shopping">
-              <button className={st.actionButton}>
+              <button className={"actionButton"}>
                 Shop now
               </button>
             </Link>

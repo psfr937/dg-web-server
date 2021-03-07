@@ -1,0 +1,14 @@
+$dark-green: #266150;
+$light-green: #65807C;
+
+.actionButton{
+  border: none;
+  background: $dark-green;
+  color: #fff;
+  padding: 1rem;
+  width: 150px;
+  &:hover{
+    background: lighten($dark-green, 10%);
+    cursor: pointer;
+  }
+}

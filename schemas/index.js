@@ -82,3 +82,66 @@ export const btSchema = new schema.Entity(
 );
 
 export const arrayOfBts = new schema.Array(btSchema);
+
+
+
+export const clientSchema = new schema.Entity(
+  'clients',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfClient = new schema.Array(clientSchema)
+
+export const visitSchema = new schema.Entity(
+  'visits',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfVisit = new schema.Array(visitSchema)
+
+export const serviceSchema = new schema.Entity(
+  'services',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfService = new schema.Array(serviceSchema);
+
+export const productSchema = new schema.Entity(
+  'products',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfProduct = new schema.Array(productSchema);
+
+export const staffSchema = new schema.Entity(
+  'staffs',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfStaff = new schema.Array(staffSchema);
+
+export const ownVisitsSchema = new schema.Entity(
+  'ownVisits',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfOwnVisits = new schema.Array(ownVisitsSchema);
+

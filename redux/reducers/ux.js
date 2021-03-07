@@ -2,6 +2,7 @@ import fp from 'lodash/fp';
 
 
 export const TOGGLE_ADDRESS_BOX='TOGGLE_ADDRESS_BOX';
+export const SET_READ_ONLY='SET_READ_ONLY';
 
 import pageNames from '../../constants/PageNames'
 
@@ -33,7 +34,13 @@ export default (state = initialState, action)=> {
   // console.log(state)
   switch (action.type) {
     case TOGGLE_ADDRESS_BOX:
-      return { ...state, addressBoxActive: action.data }
+      return { ...state, addressBoxActive: action.data };
+    case SET_READ_ONLY:
+      return {...state,
+        readOnly: {...state.readOnly,
+          [action.listName]: action.value
+        }
+      }
     default:
       return state;
   }

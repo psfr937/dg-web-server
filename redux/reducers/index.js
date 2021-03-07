@@ -23,6 +23,19 @@ import sell from "./transaction/sell"
 import pms from './pms'
 import pickupTime from "./pickupTime";
 import bts from './bts'
+import editProduct from "./productReducer/editProduct";
+import products from "./productReducer/products";
+import saveProducts from "./productReducer/saveProducts";
+import editService from "./serviceReducer/editService";
+import saveServices from "./serviceReducer/saveServices";
+import services from "./serviceReducer/services";
+import editStaff from "./staffReducer/editStaff";
+import saveStaffs from "./staffReducer/saveStaffs";
+import staffs from "./staffReducer/staffs";
+import addVisit from "./visitReducer/addVisit";
+import editVisit from "./visitReducer/editVisit";
+import saveVisits from "./visitReducer/saveVisits";
+import visits from "./visitReducer/visits";
 
 import { combineReducers } from 'redux'
 
@@ -50,7 +63,20 @@ const reducer = {
   getSellQuotation,
   saveAddress,
   pickupTime,
-  bts
+  bts,
+  editProduct,
+  products,
+  saveProducts,
+  editService,
+  saveServices,
+  services,
+  editStaff,
+  saveStaffs,
+  staffs,
+  addVisit,
+  editVisit,
+  saveVisits,
+  visits
 };
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import "react-vis/dist/style.css";
 import "../styles/checkout.css"
+import "../styles/global.scss"
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import {wrapper} from '../redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
