@@ -49,8 +49,10 @@ function *fetchOneInventory({ pid }){
 
   try {
     const json = yield call(inventoryAPI.get, pid);
-    yield put({type: FETCH_ONE_INVENTORY_SUCCESS, data: json.data.data});
-    yield put({type: CLONE_INVENTORY, pid: pid, data: json.data.data});
+    yield all([
+      put({type: CLONE_INVENTORY, pid: pid, data: json.data.data}),
+      put({type: FETCH_ONE_INVENTORY_SUCCESS, data: json.data.data}),
+    ]);
   } catch (err) {
     yield put({type: FETCH_ONE_INVENTORY_FAILURE, err: err})
   }

@@ -107,9 +107,9 @@ export default function TextEditor({ onChange, placeholder = '', defaultValue = 
               [{ list: 'ordered' }, { list: 'bullet' }],
               ['link', 'image']
             ],
-            handlers: {
-              image: imageHandler
-            },
+            // handlers: {
+            //   image: imageHandler
+            // },
             imageResize
           }
         }}

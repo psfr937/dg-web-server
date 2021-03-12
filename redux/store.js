@@ -32,7 +32,7 @@ const makeStore = (context) => {
 
     const persistConfig = {
       key: 'nextjs',
-      whitelist: ['cartItems'], // make sure it does not clash with server keys
+      whitelist: ['cartItems', 'auth'], // make sure it does not clash with server keys
       storage
     };
 

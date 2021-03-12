@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {connect, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import PostImageHolder from './postImageHolder'
 import st from './addInventory.module.scss'
+import {SET_ATTACHMENT} from "../../../redux/reducers/cms/editInventory";
 const ERROR = {
   NOT_SUPPORTED_EXTENSION: 'NOT_SUPPORTED_EXTENSION',
   FILESIZE_TOO_LARGE: 'FILESIZE_TOO_LARGE'
 };
 
 export default function ImageUploader({
-   className= '',
    fileContainerStyle= {},
-   buttonClassName= "",
    buttonStyles= {},
-   withPreview= false,
    accept= "image/*",
    name= "",
-   withIcon= true,
    buttonText= "Choose images",
    buttonType= "button",
    withLabel= true,
@@ -30,30 +27,25 @@ export default function ImageUploader({
    style= {},
    errorStyle= {},
    singleImage= false,
-   onChange= () => {},
-    defaultImages= [],
-    setAttachment
  }){
 
   let inputElement = '';
 
-  const { pictures, files } = useSelector(state => state.editInventory.attachment);
-  const [ selectedPicture, setSelectedPicture ] = useState(null)
+  const [ selectedPicture, setSelectedPicture ] = useState(null);
 
-  const removeImage = (picture) => {
-    const removeIndex = pictures.findIndex(e => e === picture);
-    const filteredPictures = pictures.filter((e, index) => index !== removeIndex);
-    const filteredFiles = files.filter((e, index) => index !== removeIndex);
-    setAttachment( {pictures: filteredPictures, files: filteredFiles})
-    setSelectedPicture(null);
-  }
 
-  const attachment = useSelector(state => state.editInventory.attachment);
+
+  const [ fileErrors, setFileErrors ] = useState([]);
+
+  const images = useSelector(state => 'images' in state.editInventory ?
+    state.editInventory.images : []);
 
   const hasExtension = (fileName) => {
     const pattern = '(' + imgExtension.join('|').replace(/\./g, '\\.') + ')$';
     return new RegExp(pattern, 'i').test(fileName);
   }
+
+  const dispatch = useDispatch();
 
   const onDropFile = (e) => {
     const files = e.target.files;
@@ -65,7 +57,6 @@ export default function ImageUploader({
       let fileError = {
         name: file.name,
       };
-      // Check for file extension
       if (!hasExtension(file.name)) {
         fileError = Object.assign(fileError, {
           type: ERROR.NOT_SUPPORTED_EXTENSION
@@ -73,7 +64,6 @@ export default function ImageUploader({
         fe.push(fileError);
         continue;
       }
-      // Check for file size
       if(file.size > maxFileSize) {
         fileError = Object.assign(fileError, {
           type: ERROR.FILESIZE_TOO_LARGE
@@ -85,23 +75,18 @@ export default function ImageUploader({
       allFilePromises.push(readFile(file));
     }
 
-    // setFileErrors({
-    //   fe
-    // });
-    setAttachment( { fileErrors: fe });
+    setFileErrors(fe);
 
     Promise.all(allFilePromises).then(newFilesData => {
-      const dataURLs = attachment.pictures.slice();
-      const files = attachment.files.slice();
 
-      newFilesData.forEach(newFileData => {
-        dataURLs.push(newFileData.dataURL);
-        files.push(newFileData.file);
+      const newData = newFilesData.map(newFileData => {
+        return {
+          url: newFileData.dataURL,
+          file: newFileData.file
+        };
       });
-      // setPictures(dataURLs);
-      // setFiles(files);
-      setAttachment( {pictures: dataURLs, files: files})
-      setSelectedPicture(dataURLs)
+      dispatch({ type: SET_ATTACHMENT, data: newData});
+      setSelectedPicture(newData[newData.length - 1].url);
     });
   }
 
@@ -123,7 +108,6 @@ export default function ImageUploader({
   };
 
   const renderErrors = () => {
-    const { fileErrors } = attachment;
     return fileErrors.map((fileError, index) => {
       return (
         <div className={'errorMessage ' + errorClass} key={index} style={errorStyle}>
@@ -133,6 +117,11 @@ export default function ImageUploader({
     });
   };
 
+
+  useEffect(() => {
+    setSelectedPicture( images.length > 0 ? images[images.length - 1].url : null)
+  }, [images]);
+
   const renderLabel = () => {
     if (withLabel) {
       return <p className={labelClass} style={labelStyles}>{label}</p>
@@ -141,14 +130,7 @@ export default function ImageUploader({
 
   const triggerFileUpload = () => {
     inputElement.click();
-  }
-
-  const clearPictures = () => {
-    this.setState({pictures: []});
-    setAttachment( {pictures: [] });
   };
-
-
 
   return (
     <div className={st.gallery}>
@@ -164,16 +146,10 @@ export default function ImageUploader({
           onClick={onUploadClick}
           accept={accept}
         />
-        <PostImageHolder
-          pictures={pictures}
-          files={files}
-          setAttachment={setAttachment}
-          setSelectedPicture={setSelectedPicture}
-          removeImage={removeImage}
-        />
+        <PostImageHolder setSelectedPicture={setSelectedPicture}/>
       </div>
       {
-        attachment.pictures.length > 0 ? (
+        images.length > 0 ? (
           <div className={st.addImageButton} onClick={triggerFileUpload}>
             <svg viewBox="0 0 24 24">
               <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
@@ -184,9 +160,9 @@ export default function ImageUploader({
         </div>
       </div>
       <div className={st.bigImage} >
-        {attachment.pictures.length > 0 ? <img src={ selectedPicture }/> : null}
+        {selectedPicture !== null ? <img src={ selectedPicture }/> : null}
         {
-          attachment.pictures.length === 0 ? (
+          images.length === 0 ? (
             <div className={st.uploadImageHintContainer}>
               <div className={st.errorsContainer}>
                 {renderErrors()}

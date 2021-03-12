@@ -36,7 +36,7 @@ function *login({data}){
     const { info, token } = result;
     yield put({type: LOGIN_SUCCESS});
 
-    yield put({type: AUTHENTICATE, info, token})
+    yield put({type: AUTHENTICATE, info, token});
 
    yield call(Router.push,`/`)
 
