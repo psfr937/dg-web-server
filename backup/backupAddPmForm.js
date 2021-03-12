@@ -7,9 +7,9 @@ import {
   ElementsConsumer
 } from "@stripe/react-stripe-js";
 import {connect} from "react-redux";
-import { addPm } from "../redux/actions/pms";
+import { addPm } from "../redux/actions/ecommerce/pms";
 
-import st from '@components/stripe/checkout.module.scss'
+import st from '@components/ecommerce/stripe/checkout.module.scss'
 
 class AddPmForm extends React.PureComponent{
 

@@ -7,7 +7,7 @@ import st from './login.module.scss'
 import Link from 'next/link';
 import EmailSignUp from "@components/authBox/EmailSignUp";
 import SocialAuthButtonList from "@components/authBox/SocialAuthButtonList";
-import StyledLink from "@components/styledLink";
+import StyledLink from "@components/ecommerce/styledLink";
 
 function RegisterForm (){
 

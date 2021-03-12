@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { EDIT_VISIT_ROW } from "../../../redux/reducers/visitReducer/editVisit";
+import { EDIT_VISIT_ROW } from "../../../redux/reducers/booking/visitReducer/editVisit";
 import {connect} from "react-redux";
-import { fetchStaffs } from '../../../redux/actions/staffAction/staffs'
+import { fetchStaffs } from '../../../redux/actions/booking/staffAction/staffs'
 
 
 class StaffMenu extends PureComponent {

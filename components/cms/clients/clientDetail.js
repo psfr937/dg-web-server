@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
-import {fetchVisits, resetEditVisits} from '../../../redux/actions/visitAction/visits'
-import {saveVisits, addEditVisitRow } from "../../../redux/actions/visitAction/saveVisits";
+import {fetchVisits, resetEditVisits} from '../../../redux/actions/booking/visitAction/visits'
+import {saveVisits, addEditVisitRow } from "../../../redux/actions/booking/visitAction/saveVisits";
 import {connect} from "react-redux";
 import {FETCH_VISITS_INVALID,
-FETCH_VISITS_SUCCESS} from "../../../redux/reducers/visitReducer/visits";
+FETCH_VISITS_SUCCESS} from "../../../redux/reducers/booking/visitReducer/visits";
 import moment from 'moment'
 import VisitDetailSectionTextbox from "./visitDetailSectionTextbox";
 import EditTableButton from "../table/editTableButton";
 import SaveTableButton from "../table/saveTableButton";
-import {ADD_EDIT_VISIT_ROW, EDIT_VISIT_ROW} from "../../../redux/reducers/visitReducer/editVisit";
+import {ADD_EDIT_VISIT_ROW, EDIT_VISIT_ROW} from "../../../redux/reducers/booking/visitReducer/editVisit";
 import classnames from "classnames";
 var ReactDOMServer = require('react-dom/server');
 var HtmlToReactParser = require('html-to-react').Parser;

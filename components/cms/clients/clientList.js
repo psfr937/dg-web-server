@@ -1,22 +1,22 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchClients } from "../../../redux/actions/clientAction/clients"
+import { fetchClients } from "../../../redux/actions/booking/clientAction/clients"
 import classnames from 'classnames'
 import CircleImage from "../circleImage";
 import ResizableBox from "../table/resizableBox";
 import HOCTableInput from "../table/tableInput";
 import EditTableButton from '../table/editTableButton'
-import { ADD_EDIT_CLIENT_ROW } from "../../../redux/reducers/clientReducer/editClient";
+import { ADD_EDIT_CLIENT_ROW } from "../../../redux/reducers/booking/clientReducer/editClient";
 import AddTableRowButton from "../table/addTableRowButton";
 import SaveTableButton from '../table/saveTableButton'
-import {saveClients} from "../../../redux/actions/clientAction/saveClients";
+import {saveClients} from "../../../redux/actions/booking/clientAction/saveClients";
 import ClientDetail from "./clientDetail";
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import {FETCH_CLIENTS_INVALID, } from "../../../redux/reducers/clientReducer/clients";
+import {FETCH_CLIENTS_INVALID, } from "../../../redux/reducers/booking/clientReducer/clients";
 import MoreDetailButton from "../table/moreDetailButton";
-import {fetchVisits} from "../../../redux/actions/visitAction/visits";
-import { SET_READ_ONLY} from "../../../redux/reducers/ux"
-import { resetEditClients } from "../../../redux/actions/clientAction/clients";
+import {fetchVisits} from "../../../redux/actions/booking/visitAction/visits";
+import { SET_READ_ONLY} from "../../../redux/reducers/ecommerce/ux"
+import { resetEditClients } from "../../../redux/actions/booking/clientAction/clients";
 import HOCRemoveRowButton from '../table/removeRowButton'
 import HOCUndoRemoveRow from '../table/undoRemoveRow'
 import HOCTableDatePicker from '../table/tableDatePicker'
@@ -25,7 +25,7 @@ const TableInput = HOCTableInput('CLIENT')
 const RemoveRowButton = HOCRemoveRowButton('CLIENT')
 const UndoRemoveRow = HOCUndoRemoveRow('CLIENT')
 const TableDatePicker = HOCTableDatePicker('CLIENT')
-import { fetchServices } from '../../../redux/actions/serviceAction/services'
+import { fetchServices } from '../../../redux/actions/booking/serviceAction/services'
 
 class ClientList extends PureComponent{
 

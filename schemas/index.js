@@ -145,3 +145,25 @@ export const ownVisitsSchema = new schema.Entity(
 
 export const arrayOfOwnVisits = new schema.Array(ownVisitsSchema);
 
+
+export const tagSchema = new schema.Entity(
+  'tags',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfTags = new schema.Array(tagSchema);
+
+
+export const sizeSchema = new schema.Entity(
+  'sizes',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfSizes = new schema.Array(sizeSchema);
+

@@ -1,4 +1,4 @@
-import Head from '@components/Head';
+import Head from '@components/ecommerce/Head';
 import { fetchEntries } from '../helpers/contentfulPosts';
 import safeJsonStringify from 'safe-json-stringify';
 import Footer from '@components/Footer';

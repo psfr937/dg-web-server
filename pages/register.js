@@ -1,4 +1,4 @@
-import Head from '@components/Head'
+import Head from '@components/ecommerce/Head'
 import st from './home.module.scss'
 import loginSt from '../components/authBox/login.module.scss'
 import React from "react";

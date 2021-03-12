@@ -1,21 +1,21 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchProducts } from "../../../redux/actions/productAction/products"
+import { fetchProducts } from "../../../redux/actions/booking/productAction/products"
 import classnames from 'classnames'
 import ResizableBox from "../table/resizableBox";
 import TableInput from "../table/tableInput";
 import EditProductButton from '../table/editTableButton'
 import { ADD_EDIT_PRODUCT_ROW,
-EDIT_PRODUCT_ROW} from "../../../redux/reducers/productReducer/editProduct";
+EDIT_PRODUCT_ROW} from "../../../redux/reducers/booking/productReducer/editProduct";
 import AddProductRowButton from "../table/addTableRowButton";
 import SaveProductsButton from '../table/saveTableButton'
-import {saveProducts} from "../../../redux/actions/productAction/saveProducts";
+import {saveProducts} from "../../../redux/actions/booking/productAction/saveProducts";
 import ProductDetail from "./productDetail";
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import {FETCH_PRODUCTS_INVALID} from "../../../redux/reducers/productReducer/products";
+import {FETCH_PRODUCTS_INVALID} from "../../../redux/reducers/booking/productReducer/products";
 import MoreDetailButton from "../table/moreDetailButton";
-import {fetchVisits} from "../../../redux/actions/visitAction/visits";
-import {SET_READ_ONLY} from "../../../redux/reducers/ux";
+import {fetchVisits} from "../../../redux/actions/booking/visitAction/visits";
+import {SET_READ_ONLY} from "../../../redux/reducers/ecommerce/ux";
 import HOCRemoveRowButton from "../table/removeRowButton";
 import HOCUndoRemoveRow from "../table/undoRemoveRow";
 import PicturePreviewPopup from '../picturePreviewPopup'

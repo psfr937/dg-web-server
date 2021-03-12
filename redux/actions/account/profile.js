@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from "redux-saga/effects";
 
-import userAPI from "../../../api/user";
+import userAPI from "../../../api/ecommerce/user";
 
 import {
   FETCH_DETAIL_INFO_FAILURE,

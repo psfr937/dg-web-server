@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import Fade from 'react-reveal/Fade'
 import Link from "next/link"
 import { useSelector } from 'react-redux'
-import CircleImage from "@components/circularImage";
+import CircleImage from "@components/ecommerce/circularImage";
 
 export default function Nav() {
   let [burgerOpened, setBurgerOpened] = useState(false);

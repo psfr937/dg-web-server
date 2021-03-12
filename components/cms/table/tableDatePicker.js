@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { EDIT_CLIENT_ROW } from "../../../redux/reducers/clientReducer/editClient";
-import { FETCH_CLIENTS_INVALID } from "../../../redux/reducers/clientReducer/clients";
+import { EDIT_CLIENT_ROW } from "../../../redux/reducers/booking/clientReducer/editClient";
+import { FETCH_CLIENTS_INVALID } from "../../../redux/reducers/booking/clientReducer/clients";
 import classnames from 'classnames'
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 

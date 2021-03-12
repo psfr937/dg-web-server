@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import {fetchMyVisits} from '../../../redux/actions/account/ownVisits'
-import {saveVisits, addEditVisitRow } from "../../../redux/actions/visitAction/saveVisits";
+import {saveVisits, addEditVisitRow } from "../../../redux/actions/booking/visitAction/saveVisits";
 import {connect} from "react-redux";
 import {FETCH_OWN_VISITS_INVALID,
   FETCH_OWN_VISITS_SUCCESS} from "../../../redux/reducers/account/ownVisits";
 import VisitDetailSectionTextbox from "./visitDetailSectionTextbox";
-import {ADD_EDIT_VISIT_ROW, EDIT_VISIT_ROW} from "../../../redux/reducers/visitReducer/editVisit";
+import {ADD_EDIT_VISIT_ROW, EDIT_VISIT_ROW} from "../../../redux/reducers/booking/visitReducer/editVisit";
 var HtmlToReactParser = require('html-to-react').Parser;
 var htmlToReactParser = new HtmlToReactParser();
 import moment from 'moment'

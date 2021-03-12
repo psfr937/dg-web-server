@@ -4,6 +4,15 @@
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
  */
+
+.ql-editor{
+    min-height: 100px !important;
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
 .ql-container {
     box-sizing: border-box;
     font-family: Helvetica, Arial, sans-serif;

@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import Head from "@components/Head";
+import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from './home.module.scss'
 import dynamic from 'next/dynamic'
 import st from './checkout-success.module.scss'
-import MiniCartSection from '@components/CartMini'
-import ShipmentDetail from "@components/ShipmentDetail";
+import MiniCartSection from '@components/ecommerce/CartMini'
+import ShipmentDetail from "@components/ecommerce/ShipmentDetail";
 
 export default function CheckoutSuccess(){
   return (

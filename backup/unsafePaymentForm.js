@@ -8,12 +8,12 @@ import {
 } from "@stripe/react-stripe-js";
 import router from 'next/router'
 import {connect, useDispatch, useSelector} from "react-redux";
-import { CREATE_PAYMENT_INTENT_SUCCESS} from "../redux/reducers/cart/createPaymentIntent";
-import { CREATE_SETUP_INTENT } from "../redux/actions/stripe";
-import { CREATE_PAYMENT_INTENT } from "../redux/actions/stripe";
-import { numberOptions, cvcOptions, expiryOptions } from "@components/stripe/stripeElementsOptions";
-import loaderSt from '@components/stripe/loader.module.scss';
-import Spinner from "@components/spinner";
+import { CREATE_PAYMENT_INTENT_SUCCESS} from "../redux/reducers/ecommerce/cart/createPaymentIntent";
+import { CREATE_SETUP_INTENT } from "../redux/actions/ecommerce/stripe";
+import { CREATE_PAYMENT_INTENT } from "../redux/actions/ecommerce/stripe";
+import { numberOptions, cvcOptions, expiryOptions } from "@components/ecommerce/stripe/stripeElementsOptions";
+import loaderSt from '@components/ecommerce/stripe/loader.module.scss';
+import Spinner from "@components/ecommerce/spinner";
 import {loadStripe} from "@stripe/stripe-js";
 
 const stripeTestPromise = loadStripe('pk_test_F4EG4MqVhoWyuxSs8jIO2xIr');

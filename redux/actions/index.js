@@ -1,19 +1,22 @@
 // index.js
 import { all } from "redux-saga/effects"
 
-import inventories from './inventories';
-import cart from './cart';
+import inventories from './ecommerce/inventories';
+import cart from './ecommerce/cart';
 import account from "./account/account";
 import auth from "./account/auth";
-import plts from "./plts";
-import plan from "./plan";
-import pms from './pms';
+import plts from "./ecommerce/plts";
+import plan from "./ecommerce/plan";
+import pms from './ecommerce/pms';
 import profile from "./account/profile";
-import quotation from "./quotation";
-import stripe from "./stripe";
-import transaction from "./transaction";
-import addresses from "./addresses";
-import bts from "./bts";
+import quotation from "./ecommerce/quotation";
+import stripe from "./ecommerce/stripe";
+import transaction from "./ecommerce/transaction";
+import addresses from "./ecommerce/addresses";
+import bts from "./ecommerce/bts";
+import editInventory from "./cms/editInventory";
+import tags from "./ecommerce/tags";
+import sizes from "./ecommerce/sizes";
 
 export default function* rootSaga() {
   yield all([
@@ -29,6 +32,9 @@ export default function* rootSaga() {
     ...quotation,
     ...stripe,
     ...transaction,
-    ...bts
+    ...bts,
+    ...editInventory,
+    ...tags,
+    ...sizes
   ])
 }

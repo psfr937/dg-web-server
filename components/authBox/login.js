@@ -3,7 +3,7 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 import st from './login.module.scss'
 import { LOGIN, LOGIN_REQUESTING } from "../../redux/reducers/account/login";
 import Link from "next/link";
-import Spinner from "../spinner"
+import Spinner from "../ecommerce/spinner"
 import EmailSignIn from "@components/authBox/EmailSignIn";
 import SocialAuthButtonList from "@components/authBox/SocialAuthButtonList";
 

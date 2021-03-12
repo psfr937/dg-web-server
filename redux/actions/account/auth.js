@@ -3,7 +3,7 @@ import {SAVE_COOKIE, REMOVE_COOKIE, DEAUTHENTICATE,
 AUTHENTICATE, LOGOUT, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE,
  VERIFY_EMAIL,
 } from '../../reducers/account/auth';
-import userAPI from '../../../api/user';
+import userAPI from '../../../api/ecommerce/user';
 import {LOGIN_INVALID} from "../../reducers/account/login";
 import { put, call, takeEvery } from "redux-saga/effects"
 

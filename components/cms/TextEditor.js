@@ -1,16 +1,13 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-//import {Quill} from 'react-quill'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-//const {Quill} = dynamic(() => import('react-quill'), { ssr: false })
 const ResizeModule = dynamic(() => import('quill-image-resize-module'), { ssr: false })
 //import '../node_modules/react-quill/dist/quill.snow.css';
 //import '../styles/react-draft-wysiwg.css'
-import ApiEngine from "../../api/apiEngine";
-import imageAPI from "../../api/images";
+import imageAPI from "../../api/ecommerce/images";
 import dataURIToBlob from "../../helpers/dataURIToBlob";
 //import { ImageResize } from 'quill-image-resize-module';
-const imageResize = ResizeModule.ImageResize
+const imageResize = ResizeModule.ImageResize;
 //ReactQuill.Quill.register('modules/imageResize', imageResize);
 
 //  const reader = new window.FileReader();
@@ -21,23 +18,21 @@ const toBase64 = file => new Promise((resolve, reject) => {
   reader.onerror = error => reject(error);
 });
 
-class TextEditor extends React.Component {
-  constructor(props) {
-    super(props);
-   // this.state = { editorHtml: '' };
-    this.handleChange = this.handleChange.bind(this);
-  }
+export default function TextEditor({ onChange, placeholder = '', defaultValue = '' }){
 
-  handleChange(html) {
+
+  let quill = null;
+
+  const handleChange = (html) => {
   // this.setState({ editorHtml: html });
-    this.props.onChange(html)
-  }
+    onChange(html)
+  };
 
-  apiPostNewsImage() {
+  const apiPostNewsImage = () => {
     // API post, returns image location as string e.g. 'http://www.example.com/images/foo.png'
-  }
+  };
 
-  imageHandler() {
+  const imageHandler = () => {
     const input = document.createElement('input');
 
     input.setAttribute('type', 'file');
@@ -53,11 +48,11 @@ class TextEditor extends React.Component {
 
      // formData.append('image', file);
 
-      console.log(input.files)
+      console.log(input.files);
 
-      const mimeString = file.type
+      const mimeString = file.type;
 
-      const byteString = await toBase64(file)
+      const byteString = await toBase64(file);
       console.log(byteString)
       // var ia = new Uint8Array(byteString.length);
       // for (var i = 0; i < byteString.length; i++) {
@@ -70,8 +65,8 @@ class TextEditor extends React.Component {
       // const fileBlob = new File([blob], `${Date.now()}.${ext}`, {type: mimeString})
       // console.log(fileBlob );
 
-      let mediaFiles = {}
-      mediaFiles['image_1'] = dataURIToBlob(byteString)
+      let mediaFiles = {};
+      mediaFiles['image_1'] = dataURIToBlob(byteString);
       // Save current cursor state
       const range = this.quill.getSelection(true);
 
@@ -90,40 +85,36 @@ class TextEditor extends React.Component {
       // Insert uploaded image
       // this.quill.insertEmbed(range.index, 'image', res.body.image);
       this.quill.insertEmbed(range.index, 'image', res);
-
-
     };
   }
 
-  render() {
-    return (
-      <div className="text-editor">
-        <ReactQuill
-          ref={el => {
-            this.quill = el;
-          }}
-          onChange={this.handleChange}
-          placeholder={this.props.placeholder}
-          value={this.props.defaultValue}
-          modules={{
-            toolbar: {
-              container: [
-                [{ font: [] }],
-                [{ size: [] }],
-                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                ['link', 'image']
-              ],
-              handlers: {
-                image: this.imageHandler
-              },
-              imageResize
-            }
-          }}
-        />
-      </div>
-    );
-  }
+
+  return (
+    <div className="text-editor">
+      <ReactQuill
+        ref={el => {
+          quill = el;
+        }}
+        onChange={handleChange}
+        placeholder={placeholder}
+        value={defaultValue}
+        modules={{
+          toolbar: {
+            container: [
+              [{ font: [] }],
+              [{ size: [] }],
+              ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              ['link', 'image']
+            ],
+            handlers: {
+              image: imageHandler
+            },
+            imageResize
+          }
+        }}
+      />
+    </div>
+  );
 }
 
-export default TextEditor;

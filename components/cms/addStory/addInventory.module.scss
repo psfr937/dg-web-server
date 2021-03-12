@@ -1,0 +1,360 @@
+.addStoryForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addStoryFormField{
+  margin: 1rem 2rem;
+  border-radius: 4px;
+  background: white;
+  font-size: 1rem;
+
+}
+
+.my-react-select .Select-control:before {
+  color: #aaa;
+  content: 'Flavors';
+  line-height: 34px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: absolute;
+}
+
+
+.titleField {
+  input{
+    height: 100%;
+    max-height: 30px;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0 4px 4px 0;
+  }
+
+  @extend .tagField;
+}
+
+.tagField{
+  display: flex;
+  flex-direction:row;
+  height: 30px;
+  align-items: center;
+  border: 1px solid transparent;
+
+  &:hover, &:focus-within{
+    border-color: #888;
+  }
+
+  .prefix{
+    height: 100%;
+    flex-basis: 3rem;
+    flex-shrink: 0;
+    padding: 0 1rem;
+    color: #888;
+    background: white;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .tagMenu{
+    max-height: 100%;
+    width: 100%;
+  }
+
+  @extend .addStoryFormField;
+}
+
+.bodyField{
+  height: 350px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  @extend .addStoryFormField;
+}
+
+.bodyFieldTextareaContainer{
+  width: 100%;
+  border-top: 1px solid #ccc;
+  min-height: 0;
+  flex-grow: 1;
+}
+
+.bodyFieldTextarea{
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.05);
+  position: relative;
+  border-radius: 10px;
+  padding: 20px 1rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 0.5rem auto;
+  flex-direction: row;
+  transition: all 0.3s ease-in;
+  overflow-x: auto;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: #555;
+
+  &::placeholder {
+    color: #ccc;
+    font-size: 1.5rem;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+.addStoryPageHeader{
+  height: 50px;
+  background : #1c1c1c;
+  color: #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  span{
+    margin-left: 2rem;
+    white-space: nowrap;
+  }
+
+}
+
+.addStoryFormSubmitButton{
+  cursor: pointer;
+  height: 2rem;
+  margin-right: 2rem;
+  width: 10rem;
+  border-radius: 4px;
+  background: #447cff;
+  color: white;
+  border: none;
+  white-space: nowrap;
+}
+
+.addStoryPageHeaderTitle{
+  flex-grow: 1;
+}
+.fileUploader {
+  width: 100%;
+  position: relative;
+  min-height: 0;
+}
+
+.fileContainer {
+  background: #fff;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+  transition: all 0.3s ease-in;
+
+}
+
+.fileContainer input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileContainer p {
+  font-size: 12px;
+  margin: 8px 0 4px;
+}
+
+.fileContainer .errorsContainer {
+  max-width: 300px;
+  font-size: 12px;
+  color: red;
+  text-align: left;
+}
+
+.uploadImageHintContainer{
+  position: absolute;
+  width: 100%;
+  top: 200px;
+  color: white;
+}
+
+.chooseFileButton {
+  padding: 6px 23px;
+  background: #3f4257;
+  border-radius: 30px;
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.chooseFileButton:hover {
+  background: #545972;
+}
+
+.uploadFilesButton {
+  padding: 5px 43px;
+  background: transparent;
+  border-radius: 30px;
+  color: #3f4257;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #3f4257;
+}
+
+.uploadFilesButton:hover {
+  background: #3f4257;
+  color: #fff;
+}
+
+
+
+.uploadIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.fileContainer .uploadPicturesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.uploadPictureContainer {
+ // height: 200px;
+ // padding: 10px;
+  background: #edf2f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d0dbe4;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.uploadPictureContainer img{
+  height: 80px;
+  width: 60px;
+}
+
+.uploadPictureContainer img.uploadPicture {
+  height:80px;
+  width: 60px;
+  cursor: pointer;
+}
+
+.deleteImage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: none;
+  h6{
+    margin: 0;
+    width: 100%;
+    background-color: transparent !important;
+  }
+  color: black;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 20px;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+
+  &:hover{
+    background: purple;
+    color: white;
+  }
+}
+
+.flipMove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+.addImageButton{
+
+  background: white;
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  svg{
+    width: 48px;
+    height: 48px;
+    overflow: visible;
+  }
+
+  path{
+    fill: #3f4257;
+  }
+}
+
+.gallery{
+  display: flex;
+  flex-direction: row;
+
+  .thumbnailList{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+  }
+
+  .smallImage{
+    height: 80px;
+    width: 60px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  .bigImage{
+    border: 1px solid #ccc;
+    height: 500px;
+    width: 400px;
+    background: black;
+    overflow: hidden;
+
+    position: relative;
+
+    img{
+      height: 100%; width: auto;
+    }
+  }
+}

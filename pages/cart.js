@@ -1,20 +1,20 @@
 import React from 'react'
-import Head from "@components/Head";
+import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from './home.module.scss';
 import st from './cart.module.scss';
-import CartSection from '../components/CartSection';
-import AddressForm from "@components/addressForm";
-import AddressList from "@components/addressList"
-import Map from "@components/map";
+import CartSection from '@components/ecommerce/CartSection';
+import AddressForm from "@components/ecommerce/addressForm";
+import AddressList from "@components/ecommerce/addressList"
+import Map from "@components/ecommerce/map";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import { deliveryRoutes, itemPropertySources } from '../constants/delivery'
 import {useSelector} from "react-redux";
-import {FETCH_CIDS_SUCCESS} from "../redux/reducers/cart/cartItemDetail";
-import { GET_BUY_QUOTATION_SUCCESS } from "../redux/reducers/address/getBuyQuotation";
+import {FETCH_CIDS_SUCCESS} from "../redux/reducers/ecommerce/cart/cartItemDetail";
+import { GET_BUY_QUOTATION_SUCCESS } from "../redux/reducers/ecommerce/address/getBuyQuotation";
 import classnames from 'classnames'
 const PaymentForm = dynamic(() =>
-  import("../components/stripe/PaymentForm"), { ssr: false });
+  import("../components/ecommerce/stripe/PaymentForm"), { ssr: false });
 
 export default function Cart(){
 

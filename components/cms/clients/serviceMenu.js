@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { ADD_SERVICE, REMOVE_SERVICE } from "../../../redux/reducers/visitReducer/editVisit";
+import { ADD_SERVICE, REMOVE_SERVICE } from "../../../redux/reducers/booking/visitReducer/editVisit";
 import {connect} from "react-redux";
-import { fetchServices } from '../../../redux/actions/serviceAction/services'
+import { fetchServices } from '../../../redux/actions/booking/serviceAction/services'
 
 
 class ServiceMenu extends PureComponent {

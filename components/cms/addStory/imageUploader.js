@@ -1,119 +1,118 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import FlipMove from 'react-flip-move';
-import UploadIcon from '../../static/UploadIcon.svg';
-// import {addStory, setAttachment } from "../../redux/actions/clientAction/addClient";
-import {connect} from "react-redux";
+import React, { useEffect, useState } from 'react';
+import {connect, useSelector} from "react-redux";
 import PostImageHolder from './postImageHolder'
-
-const styles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexWrap: "wrap",
-  width: "100%"
-};
-
+import st from './addInventory.module.scss'
 const ERROR = {
   NOT_SUPPORTED_EXTENSION: 'NOT_SUPPORTED_EXTENSION',
   FILESIZE_TOO_LARGE: 'FILESIZE_TOO_LARGE'
-}
+};
 
-class ReactImageUploadComponent extends React.Component {
-  constructor(props) {
-    super(props);
+export default function ImageUploader({
+   className= '',
+   fileContainerStyle= {},
+   buttonClassName= "",
+   buttonStyles= {},
+   withPreview= false,
+   accept= "image/*",
+   name= "",
+   withIcon= true,
+   buttonText= "Choose images",
+   buttonType= "button",
+   withLabel= true,
+   label= "Max file size= 5mb, accepted= jpg|gif|png",
+   labelStyles= {},
+   labelClass= "",
+   imgExtension= ['.jpg', '.jpeg', '.gif', '.png'],
+   maxFileSize= 5242880,
+   fileSizeError= " file size is too big",
+   fileTypeError= " is not a supported file extension",
+   errorClass= "",
+   style= {},
+   errorStyle= {},
+   singleImage= false,
+   onChange= () => {},
+    defaultImages= [],
+    setAttachment
+ }){
 
-    this.inputElement = '';
-    this.onDropFile = this.onDropFile.bind(this);
-    this.onUploadClick = this.onUploadClick.bind(this);
-    this.triggerFileUpload = this.triggerFileUpload.bind(this);
+  let inputElement = '';
+
+  const { pictures, files } = useSelector(state => state.editInventory.attachment);
+  const [ selectedPicture, setSelectedPicture ] = useState(null)
+
+  const removeImage = (picture) => {
+    const removeIndex = pictures.findIndex(e => e === picture);
+    const filteredPictures = pictures.filter((e, index) => index !== removeIndex);
+    const filteredFiles = files.filter((e, index) => index !== removeIndex);
+    setAttachment( {pictures: filteredPictures, files: filteredFiles})
+    setSelectedPicture(null);
   }
 
-  /*
-   Load image at the beggining if defaultImage prop exists
-   */
-  componentWillReceiveProps(nextProps){
-    if(nextProps.defaultImages !== this.props.defaultImages){
-      this.props.setAttachment( {pictures: nextProps.defaultImages} )
-    }
-  }
+  const attachment = useSelector(state => state.editInventory.attachment);
 
-  /*
-	 Check file extension (onDropFile)
-	 */
-  hasExtension(fileName) {
-    const pattern = '(' + this.props.imgExtension.join('|').replace(/\./g, '\\.') + ')$';
+  const hasExtension = (fileName) => {
+    const pattern = '(' + imgExtension.join('|').replace(/\./g, '\\.') + ')$';
     return new RegExp(pattern, 'i').test(fileName);
   }
 
-  /*
-   Handle file validation
-   */
-  onDropFile(e) {
+  const onDropFile = (e) => {
     const files = e.target.files;
     const allFilePromises = [];
-    const fileErrors = [];
+    const fe = [];
 
-    // Iterate over all uploaded files
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
       let fileError = {
         name: file.name,
       };
       // Check for file extension
-      if (!this.hasExtension(file.name)) {
+      if (!hasExtension(file.name)) {
         fileError = Object.assign(fileError, {
           type: ERROR.NOT_SUPPORTED_EXTENSION
         });
-        fileErrors.push(fileError);
+        fe.push(fileError);
         continue;
       }
       // Check for file size
-      if(file.size > this.props.maxFileSize) {
+      if(file.size > maxFileSize) {
         fileError = Object.assign(fileError, {
           type: ERROR.FILESIZE_TOO_LARGE
         });
-        fileErrors.push(fileError);
+        fe.push(fileError);
         continue;
       }
 
-      allFilePromises.push(this.readFile(file));
+      allFilePromises.push(readFile(file));
     }
 
-    this.setState({
-      fileErrors
-    });
-    this.props.setAttachment( fileErrors )
+    // setFileErrors({
+    //   fe
+    // });
+    setAttachment( { fileErrors: fe });
 
-      Promise.all(allFilePromises).then(newFilesData => {
-      const dataURLs = this.props.attachment.pictures.slice();
-      const files = this.props.attachment.files.slice();
+    Promise.all(allFilePromises).then(newFilesData => {
+      const dataURLs = attachment.pictures.slice();
+      const files = attachment.files.slice();
 
       newFilesData.forEach(newFileData => {
         dataURLs.push(newFileData.dataURL);
         files.push(newFileData.file);
       });
-
-      this.setState({pictures: dataURLs, files: files})
-      this.props.setAttachment( {pictures: dataURLs, files: files})
+      // setPictures(dataURLs);
+      // setFiles(files);
+      setAttachment( {pictures: dataURLs, files: files})
+      setSelectedPicture(dataURLs)
     });
   }
 
-  onUploadClick(e) {
-    // Fixes https://github.com/JakeHartnell/react-images-upload/issues/55
+  const onUploadClick = (e) => {
     e.target.value = null;
   }
 
-  /*
-     Read a file and return a promise that when resolved gives the file itself and the data URL
-   */
-  readFile(file) {
+  const readFile = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-
-      // Read the image via FileReader API and save image result in state.
       reader.onload = function (e) {
-        // Add the file name to the data URL
         let dataURL = e.target.result;
         dataURL = dataURL.replace(";base64", `;name=${file.name};base64`);
         resolve({file, dataURL});
@@ -121,148 +120,90 @@ class ReactImageUploadComponent extends React.Component {
 
       reader.readAsDataURL(file);
     });
-  }
+  };
 
-  /*
-   Check if any errors && render
-   */
-  renderErrors() {
-    const { fileErrors } = this.props.attachment;
+  const renderErrors = () => {
+    const { fileErrors } = attachment;
     return fileErrors.map((fileError, index) => {
       return (
-        <div className={'errorMessage ' + this.props.errorClass} key={index} style={this.props.errorStyle}>
-          * {fileError.name} {fileError.type === ERROR.FILESIZE_TOO_LARGE ? this.props.fileSizeError: this.props.fileTypeError}
+        <div className={'errorMessage ' + errorClass} key={index} style={errorStyle}>
+          * {fileError.name} {fileError.type === ERROR.FILESIZE_TOO_LARGE ? fileSizeError: fileTypeError}
         </div>
       );
     });
-  }
+  };
 
-  /*
-   Render the upload icon
-   */
-  renderIcon() {
-    if (this.props.withIcon) {
-      return <img src={UploadIcon} className="uploadIcon"	alt="Upload Icon" />;
+  const renderLabel = () => {
+    if (withLabel) {
+      return <p className={labelClass} style={labelStyles}>{label}</p>
     }
+  };
+
+  const triggerFileUpload = () => {
+    inputElement.click();
   }
 
-  /*
-   Render label
-   */
-  renderLabel() {
-    if (this.props.withLabel) {
-      return <p className={this.props.labelClass} style={this.props.labelStyles}>{this.props.label}</p>
-    }
-  }
+  const clearPictures = () => {
+    this.setState({pictures: []});
+    setAttachment( {pictures: [] });
+  };
 
-  /*
-   On button click, trigger input file to open
-   */
-  triggerFileUpload() {
-    this.inputElement.click();
-  }
 
-  clearPictures() {
-    this.setState({pictures: []})
-    this.props.setAttachment( {pictures: [] })
-  }
 
-  render() {
-    return (
-      <div className={"fileUploader " + this.props.className} style={this.props.style}>
-        <div className="fileContainer" style={this.props.fileContainerStyle}>
-
-          {
-            this.props.attachment.pictures.length === 0 ? (
-              <div className="uploadImageHintContainer">
-                {this.renderIcon()}
-                {this.renderLabel()}
-                <div className="errorsContainer">
-                {this.renderErrors()}
-                </div>
-                {/*<div className="addImageButton" onClick={this.triggerFileUpload}>*/}
-                {/*  <svg viewBox="0 0 24 24">*/}
-                {/*    <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />*/}
-                {/*  </svg>*/}
-                {/*</div>*/}
-                <button
-                  type={this.props.buttonType}
-                  className={"chooseFileButton " + this.props.buttonClassName}
-                  style={this.props.buttonStyles}
-                  onClick={this.triggerFileUpload}
-                >
-                  {this.props.buttonText}
-                </button>
-              </div>
-            ) : null
-          }
-          <input
-            type="file"
-            ref={input => this.inputElement = input}
-            name={this.props.name}
-            multiple={!this.props.singleImage}
-            onChange={this.onDropFile}
-            onClick={this.onUploadClick}
-            accept={this.props.accept}
-          />
-          <PostImageHolder/>
+  return (
+    <div className={st.gallery}>
+      <div className={st.thumbnailList}>
+    <div className={st.fileUploader} style={style}>
+      <div className={st.fileContainer} style={fileContainerStyle}>
+        <input
+          type="file"
+          ref={input => inputElement = input}
+          name={name}
+          multiple={!singleImage}
+          onChange={onDropFile}
+          onClick={onUploadClick}
+          accept={accept}
+        />
+        <PostImageHolder
+          pictures={pictures}
+          files={files}
+          setAttachment={setAttachment}
+          setSelectedPicture={setSelectedPicture}
+          removeImage={removeImage}
+        />
+      </div>
+      {
+        attachment.pictures.length > 0 ? (
+          <div className={st.addImageButton} onClick={triggerFileUpload}>
+            <svg viewBox="0 0 24 24">
+              <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+            </svg>
+          </div>
+        ) : null
+      }
         </div>
+      </div>
+      <div className={st.bigImage} >
+        {attachment.pictures.length > 0 ? <img src={ selectedPicture }/> : null}
         {
-          this.props.attachment.pictures.length > 0 ? (
-            <div className="addImageButton" onClick={this.triggerFileUpload}>
-              <svg viewBox="0 0 24 24">
-                <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-              </svg>
+          attachment.pictures.length === 0 ? (
+            <div className={st.uploadImageHintContainer}>
+              <div className={st.errorsContainer}>
+                {renderErrors()}
+              </div>
+              <button
+                className={st.chooseFileButton}
+                type={buttonType}
+                style={buttonStyles}
+                onClick={triggerFileUpload}
+              >
+                {buttonText}
+              </button>
+              {renderLabel()}
             </div>
           ) : null
         }
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  setAttachment: (value) => dispatch(setAttachment(value)),
-});
-
-const mapStateToProps = ({ addStoryForm }) => {
-  const attachment = addStoryForm.attachment
-  return {
-    attachment
-  };
-};
-
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-
-
-export default connector(ReactImageUploadComponent)
-
-ReactImageUploadComponent.defaultProps = {
-  className: '',
-  fileContainerStyle: {},
-  buttonClassName: "",
-  buttonStyles: {},
-  withPreview: false,
-  accept: "image/*",
-  name: "",
-  withIcon: true,
-  buttonText: "Choose images",
-  buttonType: "button",
-  withLabel: true,
-  label: "Max file size: 5mb, accepted: jpg|gif|png",
-  labelStyles: {},
-  labelClass: "",
-  imgExtension: ['.jpg', '.jpeg', '.gif', '.png'],
-  maxFileSize: 5242880,
-  fileSizeError: " file size is too big",
-  fileTypeError: " is not a supported file extension",
-  errorClass: "",
-  style: {},
-  errorStyle: {},
-  singleImage: false,
-  onChange: () => {},
-  defaultImages: []
-};

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { ADD_PRODUCT, REMOVE_PRODUCT } from "../../../redux/reducers/visitReducer/editVisit";
+import { ADD_PRODUCT, REMOVE_PRODUCT } from "../../../redux/reducers/booking/visitReducer/editVisit";
 import {connect} from "react-redux";
-import { fetchProducts } from '../../../redux/actions/productAction/products'
+import { fetchProducts } from '../../../redux/actions/booking/productAction/products'
 
 
 class ProductMenu extends PureComponent {

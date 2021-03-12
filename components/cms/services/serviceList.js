@@ -2,23 +2,23 @@ import React, { PureComponent } from 'react'
 import {withAuthSync} from "../../../utils/auth"
 import withRedux from "../../../lib/withRedux"
 import { connect } from 'react-redux'
-import { fetchServices } from "../../../redux/actions/serviceAction/services"
+import { fetchServices } from "../../../redux/actions/booking/serviceAction/services"
 import classnames from 'classnames'
 import CircleImage from "../circleImage";
 import ResizableBox from "../table/resizableBox";
 import TableInput from "../table/tableInput";
 import EditServiceButton from '../table/editTableButton'
 import { ADD_EDIT_SERVICE_ROW,
-EDIT_SERVICE_ROW} from "../../../redux/reducers/serviceReducer/editService";
+EDIT_SERVICE_ROW} from "../../../redux/reducers/booking/serviceReducer/editService";
 import AddServiceRowButton from "../table/addTableRowButton";
 import SaveServicesButton from '../table/saveTableButton'
-import {saveServices} from "../../../redux/actions/serviceAction/saveServices";
+import {saveServices} from "../../../redux/actions/booking/serviceAction/saveServices";
 import ServiceDetail from "./serviceDetail";
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import {FETCH_SERVICES_INVALID} from "../../../redux/reducers/serviceReducer/services";
+import {FETCH_SERVICES_INVALID} from "../../../redux/reducers/booking/serviceReducer/services";
 import MoreDetailButton from "../table/moreDetailButton";
-import {fetchVisits} from "../../../redux/actions/visitAction/visits";
-import {SET_READ_ONLY} from "../../../redux/reducers/ux";
+import {fetchVisits} from "../../../redux/actions/booking/visitAction/visits";
+import {SET_READ_ONLY} from "../../../redux/reducers/ecommerce/ux";
 import HOCRemoveRowButton from "../table/removeRowButton";
 import HOCUndoRemoveRow from "../table/undoRemoveRow";
 import PicturePreviewPopup from '../picturePreviewPopup'

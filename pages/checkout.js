@@ -1,11 +1,11 @@
 import React from 'react'
-import Head from "@components/Head";
+import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from './home.module.scss'
 import dynamic from 'next/dynamic'
 import st from './checkout.module.scss'
-import CartSection from '../components/CartSection'
-const PaymentForm = dynamic(() => import("../components/stripe/PaymentForm"), { ssr: false });
+import CartSection from '@components/ecommerce/CartSection'
+const PaymentForm = dynamic(() => import("../components/ecommerce/stripe/PaymentForm"), { ssr: false });
 
 export default function Checkout(){
   return (

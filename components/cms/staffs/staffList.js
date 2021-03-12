@@ -1,21 +1,21 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchStaffs } from "../../../redux/actions/staffAction/staffs"
+import { fetchStaffs } from "../../../redux/actions/booking/staffAction/staffs"
 import classnames from 'classnames'
 import CircleImage from "../circleImage";
 import ResizableBox from "../table/resizableBox";
 import HOCTableInput from "../table/tableInput";
 import EditStaffButton from '../table/editTableButton'
-import { ADD_EDIT_STAFF_ROW } from "../../../redux/reducers/staffReducer/editStaff";
+import { ADD_EDIT_STAFF_ROW } from "../../../redux/reducers/booking/staffReducer/editStaff";
 import AddStaffRowButton from "../table/addTableRowButton";
 import SaveStaffsButton from '../table/saveTableButton'
-import {saveStaffs} from "../../../redux/actions/staffAction/saveStaffs";
+import {saveStaffs} from "../../../redux/actions/booking/staffAction/saveStaffs";
 import StaffDetail from "./staffDetail";
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import {FETCH_STAFFS_INVALID} from "../../../redux/reducers/staffReducer/staffs";
+import {FETCH_STAFFS_INVALID} from "../../../redux/reducers/booking/staffReducer/staffs";
 import MoreDetailButton from "../table/moreDetailButton";
-import {fetchVisits} from "../../../redux/actions/visitAction/visits";
-import {SET_READ_ONLY} from "../../../redux/reducers/ux";
+import {fetchVisits} from "../../../redux/actions/booking/visitAction/visits";
+import {SET_READ_ONLY} from "../../../redux/reducers/ecommerce/ux";
 import HOCRemoveRowButton from "../table/removeRowButton";
 import HOCUndoRemoveRow from "../table/undoRemoveRow";
 import HOCTableDatePicker from "../table/tableDatePicker";

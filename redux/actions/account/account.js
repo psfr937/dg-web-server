@@ -1,4 +1,4 @@
-import userAPI from '../../../api/user'
+import userAPI from '../../../api/ecommerce/user'
 
 import {
   LOGIN_INVALID,

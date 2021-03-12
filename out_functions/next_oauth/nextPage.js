@@ -30863,7 +30863,7 @@ var redux_saga_core_npm_proxy_cjs_default = /*#__PURE__*/__webpack_require__.n(r
 // EXTERNAL MODULE: ./node_modules/next-redux-wrapper/lib/index.js
 var lib = __webpack_require__("tMwu");
 
-// EXTERNAL MODULE: ./redux/reducers/inventories.js
+// EXTERNAL MODULE: ./redux/reducers/index.js
 var inventories = __webpack_require__("Hhvl");
 
 // EXTERNAL MODULE: ./redux/reducers/oneInventory.js
@@ -31149,7 +31149,7 @@ var methods = __webpack_require__("YwnL");
 // EXTERNAL MODULE: ./api/apiEngine.js + 1 modules
 var apiEngine = __webpack_require__("taz7");
 
-// CONCATENATED MODULE: ./api/inventories.js
+// CONCATENATED MODULE: ./api/index.js
 
 
 /* harmony default export */ var api_inventories = ({
@@ -31182,7 +31182,7 @@ var normalizr = __webpack_require__("L144");
 // EXTERNAL MODULE: ./schemas/index.js
 var schemas = __webpack_require__("MspN");
 
-// CONCATENATED MODULE: ./redux/actions/inventories.js
+// CONCATENATED MODULE: ./redux/actions/index.js
 
 
 
