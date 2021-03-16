@@ -77,12 +77,16 @@ export default function ImageUploader({
 
     setFileErrors(fe);
 
+    let currentOrder = images.length;
+
     Promise.all(allFilePromises).then(newFilesData => {
 
       const newData = newFilesData.map(newFileData => {
+        currentOrder = currentOrder + 1;
         return {
           url: newFileData.dataURL,
-          file: newFileData.file
+          file: newFileData.file,
+          order: currentOrder
         };
       });
       dispatch({ type: SET_ATTACHMENT, data: newData});

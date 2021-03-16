@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import st from '../../pages/cms/[name]/p/[pid]/itemDetail.module.scss'
+import st from '../../pages/cms/itemDetail.module.scss'
 export default function SizeMenu({measurements}) {
 
   console.log(measurements)

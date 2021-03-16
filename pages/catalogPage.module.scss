@@ -1,11 +1,4 @@
-.catalogPage{
-  display: flex;
-  flex-direction: row;
-  height: calc(100vh - 80px);
-  max-width: 100%;
 
-
-}
 
 .navPadding{
   padding-top: 80px;
@@ -31,5 +24,14 @@
     font-size: 0.8rem;
     font-weight: 200;
   }
+}
+
+.catalogPage{
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 80px);
+  max-width: 100%;
+
+
 }
 

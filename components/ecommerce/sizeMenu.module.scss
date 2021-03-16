@@ -1,0 +1,29 @@
+.measurementMenu{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .measurementMenuTitle{
+    h4{
+      font-size: 1rem;
+    }
+  }
+
+  .sizeList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.sizeItem{
+  margin: 2px;
+  background: none;
+  border: 1px solid #aaa;
+  color: #777;
+
+  &.selected{
+    background: #222;
+    color: #ccc;
+  }
+}

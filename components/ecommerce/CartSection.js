@@ -18,7 +18,7 @@ function CartItemMenu(){
 }
 
 
-export default function CartSection(){
+export default function CartSection({editable = true}){
 
   const dispatch = useDispatch();
   const cids = useSelector(state => state.cartItemDetail);
@@ -53,8 +53,9 @@ export default function CartSection(){
           <h4>Name</h4>
           <h4>Size</h4>
           <h4>Unit Price</h4>
+          { editable ?
           <div className={st.openCartItemOptionsMenuButtonContainer}>
-              </div>
+              </div> : null }
         </div>
         {
           items.map(k =>
@@ -66,6 +67,7 @@ export default function CartSection(){
               <h4>{k.name}</h4>
               <h4>{k.size}</h4>
               <h4>{`HK$${k.price / 100}`}</h4>
+              { editable ?
               <div className={st.openCartItemOptionsMenuButtonContainer}>
 
                 <div className={k.id === activeOptionMenuId ? st.selected : null}>
@@ -88,7 +90,7 @@ export default function CartSection(){
                   </div>
                 </div>
               </div>
-
+              : null}
 
               </div>
           )
@@ -98,8 +100,9 @@ export default function CartSection(){
           <h4></h4>
           <h4>Total Price</h4>
           <h4>{productCostText}</h4>
+          {editable ?
           <div className={st.openCartItemOptionsMenuButtonContainer}>
-               </div>
+               </div> : null}
         </div>
       </div>
     </div>

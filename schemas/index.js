@@ -167,3 +167,14 @@ export const sizeSchema = new schema.Entity(
 
 export const arrayOfSizes = new schema.Array(sizeSchema);
 
+export const userSchema = new schema.Entity(
+  'users',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfUsers = new schema.Array(userSchema);
+
+

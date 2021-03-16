@@ -1,6 +1,7 @@
+@import "../styles/global.scss";
 
-$dark-green: #266150;
-$light-green: #65807C;
+$dark-green: #555;
+$light-green: #555;
 
 .appNav{
   font-size: 18px;
@@ -97,6 +98,46 @@ $light-green: #65807C;
   flex-direction: row;
   align-items: center;
 
+  @extend .no-select;
+
+  .signInUpButton{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    cursor: pointer;
+    border-left: 1px solid $light-green;
+    padding-left: 0.5rem;
+    margin-right: 0;
+
+    h4{
+      font-size: 14px;
+      font-weight: 400;
+      white-space: nowrap;
+      width: min-content;
+      color: $light-green;
+      margin: 0;
+    }
+  }
+
+  .cmsButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    border-right: 1px solid $light-green;
+    padding-right: 0.5rem;
+    h4{
+      font-size: 14px;
+      font-weight: 600;
+      color: $dark-green;
+      margin-right: 0.5rem;
+    }
+  }
+
   .myAccountButton{
 
     display: flex;
@@ -120,7 +161,7 @@ $light-green: #65807C;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
     height: 20px;
     cursor: pointer;
 

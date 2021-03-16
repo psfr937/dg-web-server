@@ -5,9 +5,10 @@ import userAPI from "../../../api/ecommerce/user";
 import {
   FETCH_DETAIL_INFO_FAILURE,
   FETCH_DETAIL_INFO_SUCCESS,
-  FETCH_DETAIL_INFO_REQUESTING,
-  FETCH_DETAIL_INFO
+  FETCH_DETAIL_INFO_REQUESTING
 } from '../../reducers/account/profile'
+
+export const FETCH_DETAIL_INFO='FETCH_DETAIL_INFO';
 
 function *fetchUser(){
   yield put({ type: FETCH_DETAIL_INFO_REQUESTING });

@@ -16,10 +16,11 @@ import {
   REGISTER
 } from '../../reducers/account/register'
 import Router from 'next/router'
-import {select, put, call, takeEvery} from "redux-saga/effects"
+import {select, put, all, call, takeEvery} from "redux-saga/effects"
 import {
   AUTHENTICATE, DEAUTHENTICATE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE, LOGOUT, VERIFY_EMAIL,
 } from "../../reducers/account/auth";
+import { RESET_PROFILE } from '../../reducers/account/profile'
 
 function *login({data}){
 
@@ -116,7 +117,10 @@ function *loginWithGoogle({nextLocation}){
 function *logoutUser(){
   try {
     yield call(userAPI.logout);
-    yield put({type: DEAUTHENTICATE})
+    yield all([
+      put({type: DEAUTHENTICATE}),
+      put( {type: RESET_PROFILE})
+    ])
   } catch (err) {
     alert('Logout user fail');
     throw err;

@@ -40,6 +40,8 @@ import saveInventory from "./cms/editInventory";
 import editInventory from "./cms/editInventory";
 import sizes from "./ecommerce/sizes";
 import tags from './ecommerce/tags'
+import profile from './account/profile'
+import users from './cms/users'
 
 import { combineReducers } from 'redux'
 
@@ -83,7 +85,9 @@ const reducer = {
   visits,
   saveInventory,
   editInventory,
+  profile,
   sizes,
+  users,
   tags
 };
 

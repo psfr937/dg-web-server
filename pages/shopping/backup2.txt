@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
 import qs from 'qs';
@@ -30,57 +30,37 @@ const DEFAULT_PROPS = {
   indexName: 'dev_dg',
 };
 
-class Page extends React.Component {
-  static propTypes = {
-    router: PropTypes.object.isRequired,
-    resultsState: PropTypes.object,
-    searchState: PropTypes.object,
-  };
+export default function Page(props){
+  // static propTypes = {
+  //   router: PropTypes.object.isRequired,
+  //   resultsState: PropTypes.object,
+  //   searchState: PropTypes.object,
+  // };
 
-  state = {
-    searchState: this.props.searchState,
-    lastRouter: this.props.router,
-  };
+  const [searchState, setSearchState ] = useState(props.searchState);
+  const [ lastRouter, setLastRouter ] = useState(props.router);
 
-  static async getInitialProps({ asPath }) {
-    const searchState = pathToSearchState(asPath);
-    const resultsState = await findResultsState(Shop, {
-      ...DEFAULT_PROPS,
-      searchState,
-    });
 
-    return {
-      resultsState,
-      searchState,
-    };
-  }
+  useEffect(() => {
+      setSearchState(pathToSearchState(props.router.asPath));
+      setLastRouter(props.router);
+  }, [props.router]);
 
-  static getDerivedStateFromProps(props, state) {
-    if (!isEqual(state.lastRouter, props.router)) {
-      return {
-        searchState: pathToSearchState(props.router.asPath),
-        lastRouter: props.router,
-      };
-    }
-
-    return null;
-  }
-
-  onSearchStateChange = searchState => {
+  const onSearchStateChange = searchStateValue => {
     clearTimeout(this.debouncedSetState);
 
     this.debouncedSetState = setTimeout(() => {
-      const href = searchStateToURL(searchState);
+      const href = searchStateToURL(searchStateValue);
 
-      this.props.router.push(href, href, {
+      props.router.push(href, href, {
         shallow: true,
       });
     }, updateAfter);
 
-    this.setState({ searchState });
+    setSearchState(searchStateValue)
   };
 
-  render() {
+
     return (
       <div>
         <style jsx global>{`
@@ -95,16 +75,28 @@ class Page extends React.Component {
           <div className={st.navPadding}>
             <Shop
               {...DEFAULT_PROPS}
-              searchState={this.state.searchState}
-              resultsState={this.props.resultsState}
-              onSearchStateChange={this.onSearchStateChange}
+              searchState={searchState}
+              resultsState={props.resultsState}
+              onSearchStateChange={onSearchStateChange}
               createURL={createURL}
             />
           </div>
         </main>
       </div>
     );
-  }
+
 }
 
-export default withRouter(Page);
+
+Page.getInitialProps = async ({ asPath }) => {
+  const searchState = pathToSearchState(asPath);
+  const resultsState = await findResultsState(Shop, {
+    ...DEFAULT_PROPS,
+    searchState,
+  });
+
+  return {
+    resultsState: resultsState,
+    searchState,
+  };
+}

@@ -7,6 +7,10 @@ export const REMOVE_ATTACHMENT = 'REMOVE_ATTACHMENT';
 export const SET_PRICE = 'SET_PRICE';
 export const SET_TEXT = 'SET_TEXT';
 export const SET_BRAND = 'SET_BRAND';
+export const SET_SELLER = 'SET_SELLER';
+export const ADD_TAG = 'ADD_TAG';
+export const REMOVE_TAG = 'REMOVE_TAG';
+
 const initState = {
 };
 
@@ -19,7 +23,7 @@ export default (state = initState, action) => {
       const language = state.text[languageIdx]= {
         ...state.text[languageIdx],
         [action.key]: action.value
-      }
+      };
       const text = state.text.slice(0, languageIdx).concat(language, ...state.text.slice(languageIdx + 1));
 
       return {
@@ -31,10 +35,28 @@ export default (state = initState, action) => {
         ...state,
         brand: action.value
       };
+    case SET_SELLER:
+      return {
+        ...state,
+        seller: action.value
+      };
     case SET_PRICE:
       return {
         ...state,
         price: action.value
+      };
+    case ADD_TAG:
+      return {
+        ...state,
+        tags: [...state.tags, action.add]
+      };
+    case REMOVE_TAG:
+      const idx = state.tags.findIndex(t => t.id === action.id);
+      return {
+        ...state,
+        tags: state.tags
+          .slice(0, idx)
+          .concat(state.tags.slice( idx + 1))
       };
     case CLONE_INVENTORY:
       console.log(action.data);
@@ -49,10 +71,12 @@ export default (state = initState, action) => {
       };
     case REMOVE_ATTACHMENT:
       if(!('images' in state)) return state;
-      console.log(state.images)
+      console.log(state.images);
       console.log(action.idx);
-      const newImages = state.images.slice(0, action.idx).concat(state.images.slice( action.idx + 1));
-      console.log(newImages)
+      const newImages = state.images
+        .slice(0, action.idx)
+        .concat(state.images.slice( action.idx + 1));
+      console.log(newImages);
       return {
         ...state,
         images: newImages

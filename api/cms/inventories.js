@@ -7,7 +7,7 @@ export default {
     return apiEngine(POST, '/inventories/add', { files: files})
   },
   updateInventory: (files, id) => {
-    return apiEngine(POST, `/inventories/${id}`, { files: files})
+    return apiEngine(POST, `/inventories/update-info/${id}`, { files: files})
   },
   removeInventory: (id) => {
     return apiEngine(POST, `/inventories/${id}`)

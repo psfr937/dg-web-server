@@ -1,0 +1,397 @@
+@import './global.scss';
+
+.ais-SearchBox {
+  margin: 1em 0;
+}
+
+.ais-Pagination {
+  margin-top: 1em;
+}
+
+.left-panel {
+  float: left;
+  width: 250px;
+}
+
+
+$dark-green: #266150;
+$light-green: #65807C;
+
+.filterMenu{
+  flex-basis: 250px;
+  background: white;
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 1px solid rgba(116, 112, 128, 0.41);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  .filterMenuBottomSection{
+    padding: 0 1rem;
+    overflow-y: auto;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .searchBarContainer{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid #777;
+    padding: 0.2rem;
+
+    &:focus-within{
+      border-bottom: 4px solid $light-green;
+    }
+
+    svg{
+      height: 20px;
+      width: 20px;
+      fill: #777;
+    }
+
+    input{
+      border: none;
+      flex-grow: 1;
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+  }
+
+  h4{
+    font-weight: 200;
+  }
+
+  .filterSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    border-bottom: 1px solid #3c3a41;
+    margin: 0;
+    padding: 0.5rem 0;
+    h4{
+      margin: 0.5rem 0 0 0;
+    }
+  }
+
+  .filterTitleContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .filterByText{
+    font-weight: 200;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 30px;
+
+    box-sizing: border-box;
+    margin: 0;
+    h4 {
+      position: relative;
+      z-index: 2;
+      font-size: 1rem;
+      display: flex;
+      flex-direction: row;
+    }
+    h4:before, h4:after{
+      content: "";
+      flex: 1 1;
+      border-bottom: 1px solid;
+      margin: auto;
+    }
+
+    h4:before {
+      margin-right: 10px
+    }
+    h4:after {
+      margin-left: 10px
+    }
+  }
+}
+
+@mixin max-width($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+.right-panel {
+  overflow-y: auto;
+}
+
+.ais-InstantSearch {
+  max-width: 2000px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.right-panel ul {
+  height: 100%;
+  max-width: 2000px;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  overflow-y: auto;
+  list-style-type: none;
+}
+.right-panel li  {
+  box-sizing: border-box;
+  padding: 4rem 0.5rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@include max-width(992px) {
+  .right-panel li  {
+    flex-basis: 25%;
+
+  }
+
+  .placeHolder2{
+    display: none;
+  }
+
+}
+
+@include max-width(640px) {
+  .right-panel li {
+    flex-basis: 50%;
+  }
+  .placeHolder1, .placeHolder2{
+    display: none;
+  }
+}
+
+.ais-Hits-item {
+  margin-bottom: 1em;
+  margin-right: 3rem;
+}
+
+
+
+.ais-Hits-item img {
+  margin-right: 1em;
+}
+
+.hit-name {
+  margin-bottom: 0.5em;
+}
+
+.hit-description {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 0.5em;
+}
+
+.ais-RefinementList{
+  width: 100%;
+}
+.ais-RefinementList-list{
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  width: 100%;
+}
+
+.ais-RefinementList-label{
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.ais-RefinementList-labelText{
+  font-size: 1.2rem;
+}
+
+.ais-RefinementList-item{
+  margin: 0.2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+}
+.filterSection{
+  @extend .no-select;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  border-bottom: 1px solid #3c3a41;
+  margin: 0;
+  padding: 0.5rem 0;
+  h4{
+    margin: 0.5rem 0 0 0;
+  }
+
+  .ais-SearchBox-submitIcon{
+    display: none;
+  }
+
+}
+
+
+
+
+.ais-RefinementList-count{
+  display: none;
+}
+
+.ais-SearchBox-form{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid #777;
+
+  input{
+    border: none;
+
+    &:focus{
+      outline: none;
+    }
+
+
+  }
+
+  /* clears the 'X' from Internet Explorer */
+  input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+  input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+  /* clears the 'X' from Chrome */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+  button{
+    border: none;
+    background: none;
+  }
+}
+
+.ais-SearchBox{
+  margin: 0;
+}
+
+.ais-Pagination{
+  @extend .no-select;
+  height: 100%;
+  margin: 1px;
+  a, a:link, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+    height: 100%;
+
+  }
+
+  .ais-Pagination-item{
+    background: #555;
+    width: 30px;
+    color: white;
+    height: 100%;
+
+    &:hover{
+      background: #777;
+    }
+
+    .ais-Pagination-link{
+      height: 100%;
+      line-height: 20px;
+      font-size: 12px;
+      display: inline-block;
+      width: 100%;
+    }
+    vertical-align: middle;
+  }
+
+  .ais-Pagination-item--selected{
+    background: green;
+
+    &:hover{
+      background: green;
+    }
+  }
+
+}
+
+.ais-Pagination-list{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  height: 100%;
+  background: #555;
+  justify-content: space-around;
+  padding: 0 2rem 0 0;
+  margin: 0;
+}
+.ais-ClearRefinements{
+  width: 100%;
+}
+.ais-ClearRefinements-button{
+  background: none;
+  padding: 0;
+  border: none;
+  color: #ccc;
+  float: right;
+  text-align: right;
+  font-weight: 200;
+}
+
+.searchContainer {
+  max-height: 50px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  background: #222;
+  margin: 0;
+  width: 100%;
+
+  .ais-SearchBox{
+    color: white;
+    padding: 0 2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ais-SearchBox-form{
+    width: 100%;
+    color: white;
+    border-bottom: 1px solid #fff;
+
+  }
+  input{
+    color: white;
+    background: #222;
+
+    &::placeholder{
+      color: white;
+    }
+  }
+
+  svg{
+    fill: white;
+  }
+}

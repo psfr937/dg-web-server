@@ -1,11 +1,13 @@
 import React from 'react'
 import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
-import appSt from '../home.module.scss'
-import st from './recycle-history.module.scss'
-import ProfileMenu from "@components/profile/profileMenu";
+import appSt from './home.module.scss'
+import CatalogList from "@components/ecommerce/catelogList"
+import FilterMenu from "@components/ecommerce/filterMenu"
+import st from "./catalogPage.module.scss"
 
-export default function RecycleHistory(){
+export default function Shop(){
+
   return (
     <div>
       <style jsx global>{`
@@ -22,7 +24,8 @@ export default function RecycleHistory(){
             <h6> Total </h6>
           </div>
           <div className={st.catalogPage}>
-            <ProfileMenu/>
+            <FilterMenu/>
+            <CatalogList/>
           </div>
         </div>
       </main>

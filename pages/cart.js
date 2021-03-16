@@ -13,8 +13,7 @@ import {useSelector} from "react-redux";
 import {FETCH_CIDS_SUCCESS} from "../redux/reducers/ecommerce/cart/cartItemDetail";
 import { GET_BUY_QUOTATION_SUCCESS } from "../redux/reducers/ecommerce/address/getBuyQuotation";
 import classnames from 'classnames'
-const PaymentForm = dynamic(() =>
-  import("../components/ecommerce/stripe/PaymentForm"), { ssr: false });
+import Link from 'next/link'
 
 export default function Cart(){
 
@@ -105,14 +104,16 @@ export default function Cart(){
                       <h4>{deliveryCostText}</h4></div>
                       <div className={st.h4}>
                         <h4>Total Cost</h4><h4>{totalCostText} </h4></div>
+                  </div>
+                  <Link href={'/checkout'}>
+                    <h4 className={st.checkoutSectionTitle}>Checkout </h4>
+                  </Link>
                 </div>
-                <h4 className={st.sectionTitle}>Checkout </h4>
-                <PaymentForm/>
               </div>
             </div>
 
           </div>
-          </div>
+
         </div>
       </main>
     </div>

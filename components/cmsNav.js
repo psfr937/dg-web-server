@@ -7,7 +7,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import CircleImage from "@components/ecommerce/circularImage";
 import { FETCH_DETAIL_INFO_SUCCESS } from "../redux/reducers/account/profile";
 import {FETCH_DETAIL_INFO} from "../redux/actions/account/profile";
-
+import cmsSt from '../pages/cms/itemDetail.module.scss'
+import {UPDATE_INVENTORY} from "../redux/actions/cms/editInventory";
 export default function Nav() {
   let [burgerOpened, setBurgerOpened] = useState(false);
 
@@ -33,13 +34,13 @@ export default function Nav() {
     <div className={st.appNav}>
       <div className={st.appNavHead}>
         <div onClick={toggleBurger} className={st.burgerMenuButton}>
-            <svg className={st.burgerIcon} viewBox="0 0 24 24">
-              <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+          <svg className={st.burgerIcon} viewBox="0 0 24 24">
+            <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
         </div>
-        <a href="/shopping">
-          <img className={st.appNavImg} src="/dress_green_logo.png"/>
-        </a>
+        <button onClick={() => dispatch({type: UPDATE_INVENTORY})} className={cmsSt.saveButton}>
+          Save
+        </button>
       </div>
       <div>
         <div className={st.appNavRow}>
@@ -49,7 +50,7 @@ export default function Nav() {
                 <div className={st.cmsButton}>
                   <h4> CMS </h4>
                 </div>
-            </Link>
+              </Link>
             ) : null
           }
           <Link href={"/recycle"}>
@@ -72,7 +73,7 @@ export default function Nav() {
           {userReady ? null :
             <Link href={"/login"}>
               <div className={st.signInUpButton}>
-              <h4> Sign In </h4>
+                <h4> Sign In </h4>
               </div>
             </Link>
           }

@@ -2,40 +2,36 @@
 
 import React, { useEffect } from 'react'
 import Head from "@components/ecommerce/Head";
-import Nav from "@components/Nav";
+import Nav from "@components/cmsNav";
 import appSt from '../../../../home.module.scss'
-import st from "./itemDetail.module.scss"
+import st from "../../../itemDetail.module.scss"
 import {FETCH_ONE_INVENTORY, FETCH_ONE_INVENTORY_SUCCESS} from "../../../../../redux/reducers/ecommerce/oneInventory";
 import {END} from 'redux-saga';
 import { wrapper } from "../../../../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import ImageUploader from "@components/cms/addStory/imageUploader";
-import { SET_INVENTORY_VALUE } from "../../../../../redux/reducers/cms/editInventory"
 import {FETCH_TAGS} from "../../../../../redux/actions/ecommerce/tags";
 import {FETCH_SIZES} from "../../../../../redux/actions/ecommerce/sizes";
 import {FETCH_TAGS_SUCCESS} from "../../../../../redux/reducers/ecommerce/tags";
 import TagMenu from '@components/cms/tagMenu';
 import {FETCH_SIZES_SUCCESS} from "../../../../../redux/reducers/ecommerce/sizes";
 import SizeMenu from "@components/cms/SizeMenu";
-import editInventory from "../../../../../redux/actions/cms/editInventory";
 import { SET_PRICE, SET_TEXT, SET_BRAND } from "../../../../../redux/reducers/cms/editInventory";
 import DescriptionTextEditor from "@components/descriptionTextEditor";
-export default function Product(){
+import SellerMenu from "@components/cms/sellerMenu";
+import { FETCH_USERS } from "../../../../../redux/actions/cms/users";
 
-  
+export default function Product(){
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({type: FETCH_USERS})
     dispatch({type: FETCH_TAGS});
     dispatch({type: FETCH_SIZES})
   }, []);
-
-
   
-  const language = useSelector(state => state.ux.language)
-
-
+  const language = useSelector(state => state.ux.language);
   const aspects = useSelector(state => state.tags.readyStatus !== FETCH_TAGS_SUCCESS
     ? [] : Object.keys(state.tags.data).map(k => state.tags.data[k]));
   const measurements = useSelector(state => state.sizes.readyStatus !== FETCH_SIZES_SUCCESS
@@ -67,7 +63,7 @@ export default function Product(){
       <Head/>
       <main className={appSt.app}>
         <Nav/>
-        <div className={appSt.navPadding}>
+        <div className={st.navPadding}>
           <div className={st.productDetailPage}>
             <div className={st.productDetail}>
 
@@ -92,6 +88,12 @@ export default function Product(){
                         onChange={e => dispatch({type: SET_BRAND, value: e.target.value})}
                       />
                     </div>
+                  </div>
+                  <div  className={st.inventoryFieldItem}>
+                    <h4>
+                      Seller:
+                    </h4>
+                    <SellerMenu/>
                   </div>
                   <div  className={st.inventoryFieldItem}>
                     <h4>
@@ -146,28 +148,45 @@ export default function Product(){
 
               </div>
             <div className={st.bottomSection}>
-              <div  className={st.descriptionField}>
-                <h4>
-                  Tags:
-                </h4>
-                {
-                  aspects.map(i => <div>
-                      <h4> {i.name} </h4>
-                      <TagMenu options={i.tags.map(t => {
-                        return {
-                          value: t.id,
-                          label: t.name
-                        }
-                      })}/>
-                    </div>
-                  )
-                }
+              <div  className={st.leftDescriptionFieldContainer}>
+                <div  className={st.descriptionField}>
+                  <h4>
+                    Tags:
+                  </h4>
+                  {
+                    aspects
+                      .filter(i => ['physique', 'brand', 'segment']
+                        .indexOf(i.name) < 0)
+                      .map(i => <div>
+                        <h4> {i.name} </h4>
+                        <TagMenu
+                          defaultValue={inventoryDetail.tags.filter(t => t.aspect === i.name)
+                            .map(t => {
+                              return {
+                                value: t.id,
+                                label: t.name
+                              }
+                          })}
+                          options={i.tags.map(t => {
+                          return {
+                            value: t.id,
+                            label: t.name
+                            }
+                          })}
+                          aspect={i.name}
+                        />
+                      </div>
+                    )
+                  }
+                </div>
               </div>
-              <div  className={st.descriptionField}>
-                <h4>
-                  Sizing:
-                </h4>
-                <SizeMenu measurements={measurements}/>
+              <div  className={st.rightDescriptionFieldContainer}>
+                <div  className={st.descriptionField}>
+                  <h4>
+                    Sizing:
+                  </h4>
+                  <SizeMenu measurements={measurements}/>
+                </div>
               </div>
             </div>
 
