@@ -1,13 +1,5 @@
 @import './global.scss';
 
-.ais-SearchBox {
-  margin: 1em 0;
-}
-
-.ais-Pagination {
-  margin-top: 1em;
-}
-
 .left-panel {
   float: left;
   width: 250px;
@@ -131,31 +123,34 @@ $light-green: #65807C;
 
 .right-panel {
   overflow-y: auto;
+  width: 100%;
 }
 
-.ais-InstantSearch {
-  max-width: 2000px;
-  overflow: hidden;
-  margin: 0 auto;
-}
 
 .right-panel ul {
   height: 100%;
   max-width: 2000px;
   position: relative;
   display: flex;
+  margin-left: 2rem;
   flex-flow: row wrap;
-  overflow-y: auto;
   list-style-type: none;
+   align-items: flex-start;
+   margin-bottom: 150px;
 }
 .right-panel li  {
   box-sizing: border-box;
-  padding: 4rem 0.5rem;
+  padding: 4rem 0;
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-grow: 0;
+  margin-bottom: 1em;
+  margin-left: 2.5rem;
+ // justify-content: center;
 }
+
+
 
 
 @include max-width(992px) {
@@ -179,16 +174,6 @@ $light-green: #65807C;
   }
 }
 
-.ais-Hits-item {
-  margin-bottom: 1em;
-  margin-right: 3rem;
-}
-
-
-
-.ais-Hits-item img {
-  margin-right: 1em;
-}
 
 .hit-name {
   margin-bottom: 0.5em;
@@ -198,6 +183,42 @@ $light-green: #65807C;
   color: #888;
   font-size: 14px;
   margin-bottom: 0.5em;
+}
+
+
+.filterSection{
+  @extend .no-select;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  border-bottom: 1px solid #3c3a41;
+  margin: 0;
+  padding: 0.5rem 0;
+  h4{
+    margin: 0.5rem 0 0 0;
+  }
+
+  .ais-SearchBox-submitIcon{
+    display: none;
+  }
+
+}
+
+
+.ais-SearchBox {
+  margin: 1em 0;
+}
+
+.ais-Pagination {
+  margin-top: 1em;
+}
+
+.ais-InstantSearch {
+  max-width: 2000px;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
 .ais-RefinementList{
@@ -230,27 +251,6 @@ $light-green: #65807C;
   flex-direction: row;
 
 }
-.filterSection{
-  @extend .no-select;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  border-bottom: 1px solid #3c3a41;
-  margin: 0;
-  padding: 0.5rem 0;
-  h4{
-    margin: 0.5rem 0 0 0;
-  }
-
-  .ais-SearchBox-submitIcon{
-    display: none;
-  }
-
-}
-
-
 
 
 .ais-RefinementList-count{

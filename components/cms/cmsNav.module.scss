@@ -1,4 +1,4 @@
-@import "../styles/global.scss";
+@import "../../styles/global.scss";
 
 $dark-green: #555;
 $light-green: #555;
@@ -35,7 +35,7 @@ $light-green: #555;
 .appNavImg{
 
   height: 20px;
-  
+
   &:hover{
     cursor: pointer;;
   }
@@ -128,8 +128,6 @@ $light-green: #555;
     height: 20px;
     cursor: pointer;
     padding-left: 0.5rem;
-    border-right: 1px solid $light-green;
-    padding-right: 0.5rem;
     h4{
       font-size: 14px;
       font-weight: 400;

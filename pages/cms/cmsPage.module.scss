@@ -1,0 +1,15 @@
+.addButton{
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  background: #3b5998;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  z-index: 2;
+  cursor: pointer;
+  &:hover{
+    background: rgb(23, 42, 124);
+  }
+}

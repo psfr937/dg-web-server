@@ -14,7 +14,7 @@ import {
 
 import { all, select, put, call, fork, takeEvery } from "redux-saga/effects"
 import {CLONE_INVENTORY} from "../../reducers/cms/editInventory";
-
+export const EMPTY_INVENTORY = 'EMPTY_INVENTORY';
 
 function *fetchInventories(){
   const status = select( state => state.inventories.readyStatus);
@@ -36,7 +36,6 @@ function *fetchInventories(){
 }
 
 function *fetchOneInventory({ pid }){
-  console.log('lolololololololol')
   let oneInventory = select(state => state.oneInventory);
 
   if(pid in oneInventory &&
@@ -58,7 +57,18 @@ function *fetchOneInventory({ pid }){
   }
 }
 
+function *emptyInventory({ data }){
+
+    yield all([
+      put({type: CLONE_INVENTORY,  data: data}),
+      put({type: FETCH_ONE_INVENTORY_SUCCESS, data: data}),
+    ]);
+
+}
+
+
 export default [
   takeEvery(FETCH_INVENTORIES, fetchInventories),
-  takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory)
+  takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory),
+  takeEvery(EMPTY_INVENTORY, emptyInventory)
 ]

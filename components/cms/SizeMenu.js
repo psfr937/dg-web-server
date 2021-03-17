@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import st from '../../pages/cms/itemDetail.module.scss'
 import {INV_ADD_SIZE, INV_REMOVE_SIZE, INV_SET_SIZE
@@ -11,10 +11,13 @@ export default function SizeMenu({measurements, defaultValue, idx }) {
       value: m.id, label: `${m.physique} - ${m.name}`
     }
   });
-  const [ measurement, setMeasurement ] = useState(defaultValue.measurement_id);
-  const measurementIdx = measurements.findIndex(i => i.id === measurement);
 
-  let sizeOptions = measurementIdx >= 0
+  const [ measurement, setMeasurement ] = useState(defaultValue.measurement_id);
+  let measurementIdx = measurements.findIndex(i => i.id === measurement);
+
+  if(typeof measurementIdx < 0 ||  typeof measurements[measurementIdx] === 'undefined') return null
+
+    let sizeOptions = measurementIdx >= 0
   && 'sizes' in measurements[measurementIdx] ?
     measurements[measurementIdx].sizes.map(s => {
      return {
@@ -38,10 +41,9 @@ export default function SizeMenu({measurements, defaultValue, idx }) {
     } });
   };
 
-  if(typeof measurementIdx < 0) return null
   const def = {
     value: defaultValue.measurement_id,
-    label: typeof measurementOptions[measurementIdx] === 'undefined' ?
+    label: typeof measurementOptions[measurementIdx] !== 'undefined' ?
       measurementOptions[measurementIdx].label : 'haha'
   }
   return (

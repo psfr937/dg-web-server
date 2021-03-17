@@ -61,28 +61,31 @@ const PriceSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
   };
 
   return (
-    <Rheostat
-      className={"rheostat"}
-      min={min}
-      max={max}
-      algorithm={algorithm}
-      values={[currentRefinement.min, currentRefinement.max]}
-      onChange={onChange}
-      onValuesUpdated={onValuesUpdated}
-    >
-      <div
-        className="rheostat-marker rheostat-marker--large"
-        style={{ left: 0 }}
+    <div className="rheostat-container">
+      <Rheostat
+        min={min}
+        max={max}
+        algorithm={algorithm}
+        values={[currentRefinement.min, currentRefinement.max]}
+        onChange={onChange}
+        onValuesUpdated={onValuesUpdated}
       >
-        <div className="rheostat-value">HKD${stateMin / 100}</div>
-      </div>
-      <div
-        className="rheostat-marker rheostat-marker--large"
-        style={{ right: 0 }}
-      >
-        <div className="rheostat-value">HKD${stateMax / 100}</div>
-      </div>
-    </Rheostat>
+        <div className="rheostat-marker-row">
+          <div
+            className="rheostat-marker rheostat-marker--large"
+            style={{ left: 0 }}
+          >
+            <div className="rheostat-value">HKD${stateMin / 100}</div>
+          </div>
+          <div
+            className="rheostat-marker rheostat-marker--large"
+            style={{ right: 0 }}
+          >
+            <div className="rheostat-value">HKD${stateMax / 100}</div>
+          </div>
+        </div>
+      </Rheostat>
+    </div>
   );
 };
 

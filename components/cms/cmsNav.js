@@ -1,15 +1,16 @@
-import st from "./nav.module.scss";
+import st from "./cmsNav.module.scss";
 import React, {useEffect, useState} from "react";
 import classnames from 'classnames'
 import Fade from 'react-reveal/Fade'
 import Link from "next/link"
 import {useDispatch, useSelector} from 'react-redux'
 import CircleImage from "@components/ecommerce/circularImage";
-import { FETCH_DETAIL_INFO_SUCCESS } from "../redux/reducers/account/profile";
-import {FETCH_DETAIL_INFO} from "../redux/actions/account/profile";
-import cmsSt from '../pages/cms/itemDetail.module.scss'
-import {UPDATE_INVENTORY} from "../redux/actions/cms/editInventory";
-export default function Nav() {
+import { FETCH_DETAIL_INFO_SUCCESS } from "../../redux/reducers/account/profile";
+import {FETCH_DETAIL_INFO} from "../../redux/actions/account/profile";
+import cmsSt from '../../pages/cms/itemDetail.module.scss'
+import {UPDATE_INVENTORY, ADD_INVENTORY} from "../../redux/actions/cms/editInventory";
+
+export default function Nav({ action }) {
   let [burgerOpened, setBurgerOpened] = useState(false);
 
   const token = useSelector(state => state.auth.token);
@@ -26,6 +27,15 @@ export default function Nav() {
     }
   }, [token]);
 
+  const saveAction = () => {
+    if(action === 'create'){
+      dispatch({type: ADD_INVENTORY})
+    }
+    else{
+      dispatch({type: UPDATE_INVENTORY})
+    }
+  }
+
   let toggleBurger = () => {
     setBurgerOpened(!burgerOpened)
   };
@@ -38,19 +48,24 @@ export default function Nav() {
             <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
         </div>
-        <button onClick={() => dispatch({type: UPDATE_INVENTORY})} className={cmsSt.saveButton}>
+        <button onClick={saveAction} className={cmsSt.saveButton}>
           Save
         </button>
+        <Link href={'/cms'}>
+          <button className={cmsSt.backButton}>
+            Back
+          </button>
+        </Link>
       </div>
       <div>
         <div className={st.appNavRow}>
           {
             userReady && user.data.admin === true ? (
-              <Link href={"/cms"}>
+              <a href={"/shopping"}>
                 <div className={st.cmsButton}>
-                  <h4> CMS </h4>
+                  <h4> Shop </h4>
                 </div>
-              </Link>
+              </a>
             ) : null
           }
           <Link href={"/recycle"}>
@@ -96,10 +111,10 @@ export default function Nav() {
     </div>
     <div className={burgerOpened ? st.burgerNav : classnames(st.burgerNav, st.hidden)}>
       <Fade delay={50} duration={300} top when={burgerOpened === true}>
-        <a href={"/shopping"} className={st.burgerNavTitle}>Shopping</a>
+        <Link href={"/shopping"} className={st.burgerNavTitle}>Shopping</Link>
       </Fade>
       <Fade delay={150} duration={300} top when={burgerOpened === true}>
-        <a href={"/recycle"} className={st.burgerNavTitle}>Recycle</a>
+        <Link href={"/recycle"} className={st.burgerNavTitle}>Recycle</Link>
       </Fade>
     </div>
   </React.Fragment>

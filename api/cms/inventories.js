@@ -1,5 +1,5 @@
 const querystring = require('querystring');
-import { POST, GET } from '../methods'
+import { POST, GET, DEL } from '../methods'
 import apiEngine from "../apiEngine";
 
 export default {
@@ -7,9 +7,9 @@ export default {
     return apiEngine(POST, '/inventories/add', { files: files})
   },
   updateInventory: (files, id) => {
-    return apiEngine(POST, `/inventories/update-sizes/${id}`, { files: files})
+    return apiEngine(POST, `/inventories/${id}`, { files: files})
   },
   removeInventory: (id) => {
-    return apiEngine(POST, `/inventories/${id}`)
+    return apiEngine(DEL, `/inventories/${id}`)
   },
 };

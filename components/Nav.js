@@ -37,9 +37,9 @@ export default function Nav() {
               <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
         </div>
-        <a href="/shopping">
+        <Link href="/shopping">
           <img className={st.appNavImg} src="/dress_green_logo.png"/>
-        </a>
+        </Link>
       </div>
       <div>
         <div className={st.appNavRow}>
@@ -47,7 +47,7 @@ export default function Nav() {
             userReady && user.data.admin === true ? (
               <Link href={"/cms"}>
                 <div className={st.cmsButton}>
-                  <h4> CMS </h4>
+                  <h4> Admin </h4>
                 </div>
             </Link>
             ) : null

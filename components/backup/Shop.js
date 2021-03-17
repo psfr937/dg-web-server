@@ -28,14 +28,16 @@ import SizeMenu from "@components/ecommerce/SizeMenu";
 import {useDispatch} from "react-redux";
 import {FETCH_SIZES} from "../redux/actions/ecommerce/sizes";
 import SegmentMenu from "@components/ecommerce/segmentMenu"
-
-const searchClient = algoliasearch(
-  'XSR6ZP990B', //'B1G2GM9NG0',
-  'e3d7f522186e977cdb3d84474d85f038' //'aadef574be1f9252bb48d4ea09b5cfe5'
-);
-
-
 export default function Shop(props){
+  // static propTypes = {
+  //   searchState: PropTypes.object,
+  //   resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  //   onSearchStateChange: PropTypes.func,
+  //   createURL: PropTypes.func,
+  //   indexName: PropTypes.string,
+  //   searchClient: PropTypes.object,
+  // };
+  //console.log(window)
   if(typeof window !== 'undefined') {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -44,7 +46,16 @@ export default function Shop(props){
   }
 
   return (
-    <InstantSearch indexName="dev_dg" searchClient={searchClient}>
+    <InstantSearch
+      searchClient={props.searchClient}
+      resultsState={props.resultsState}
+      onSearchStateChange={props.onSearchStateChange}
+      searchState={props.searchState}
+      createURL={props.createURL}
+      indexName={props.indexName}
+      onSearchParameters={props.onSearchParameters}
+      {...props}
+    >
       <div className={st.paginationBar}>
         <SegmentMenu
           attribute="segment"
@@ -59,7 +70,7 @@ export default function Shop(props){
         {/*  ]}*/}
         {/*/>*/}
         <Pagination
-        showLast
+          showLast
         />
       </div>
       <div className={st.catalogPage}>
@@ -135,10 +146,10 @@ export default function Shop(props){
         <div className="right-panel">
           {/*<CustomHits data="test" />*/}
 
-            {/*<Hits*/}
-            {/*  hitComponent={Hit}*/}
-            {/*  cms={props.cms}*/}
-            {/*/> : 'haha'*/}
+          {/*<Hits*/}
+          {/*  hitComponent={Hit}*/}
+          {/*  cms={props.cms}*/}
+          {/*/> : 'haha'*/}
           <CustomHits cms={props.cms}/>
         </div>
       </div>
@@ -168,9 +179,9 @@ function Hit({ hit, cms }) {
         <div className={st.item}>
           <img src={typeof firstImage !== 'undefined' ? firstImage.url : null}/>
 
-            <div className={st.itemBrand}>{hit.brand}</div>
-            <div className={st.itemName}>{typeof localText !== 'undefined' ? localText.name : ''}</div>
-            <div className={st.itemPrice}>{`HK$${hit.price/100}`}</div>
+          <div className={st.itemBrand}>{hit.brand}</div>
+          <div className={st.itemName}>{typeof localText !== 'undefined' ? localText.name : ''}</div>
+          <div className={st.itemPrice}>{`HK$${hit.price/100}`}</div>
 
         </div>
       </Link>
@@ -184,7 +195,7 @@ const Hitts = ({ hits, cms }) => (
   <ul>
     {hits.map(hit => (
       <li>
-      <Hit hit={hit} cms={cms}/>
+        <Hit hit={hit} cms={cms}/>
       </li>
     ))}
   </ul>

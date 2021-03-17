@@ -27,8 +27,20 @@
   &:hover{
     background: lighten(#3b5998, 20%);
   }
+  border-radius: 4px;
 
 }
+
+.backButton{
+  @extend .saveButton;
+  margin-left: 2rem;
+  background: #777;
+  &:hover{
+    background: lighten(#777, 20%);
+  }
+  color: #ccc;
+}
+
 .productDetailPage{
   max-width: 1000px;
   margin: 0 auto;
