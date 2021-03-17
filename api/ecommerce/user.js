@@ -2,7 +2,7 @@ import apiEngine from "../apiEngine";
 import { GET, POST, PUT } from "../methods";
 
 export default {
-  list: ({ page }) => apiEngine(GET,'/users', { params: { page } }),
+  list: () => apiEngine(GET,'/users'),
   loginWithGoogle: () => {
     apiEngine.get(
       '/auth/google'

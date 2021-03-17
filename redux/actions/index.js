@@ -17,6 +17,7 @@ import bts from "./ecommerce/bts";
 import editInventory from "./cms/editInventory";
 import tags from "./ecommerce/tags";
 import sizes from "./ecommerce/sizes";
+import users from "./cms/users";
 
 export default function* rootSaga() {
   yield all([
@@ -35,6 +36,7 @@ export default function* rootSaga() {
     ...bts,
     ...editInventory,
     ...tags,
-    ...sizes
+    ...sizes,
+    ...users
   ])
 }

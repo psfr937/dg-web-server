@@ -245,12 +245,16 @@
   width: 500px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   .measurementMenu{
     width: 300px;
     margin-right: 1rem;
   }
   .sizeMenu{
-    width: 200px;
-    overflow-y: auto;
+    width: 150px;
+  }
+
+  .removeButton{
+    height: 30px;
   }
 }

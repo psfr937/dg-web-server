@@ -16,7 +16,8 @@ import {FETCH_TAGS_SUCCESS} from "../../../../../redux/reducers/ecommerce/tags";
 import TagMenu from '@components/cms/tagMenu';
 import {FETCH_SIZES_SUCCESS} from "../../../../../redux/reducers/ecommerce/sizes";
 import SizeMenu from "@components/cms/SizeMenu";
-import { SET_PRICE, SET_TEXT, SET_BRAND } from "../../../../../redux/reducers/cms/editInventory";
+import { SET_PRICE, SET_TEXT, SET_BRAND,
+ INV_ADD_SIZE } from "../../../../../redux/reducers/cms/editInventory";
 import DescriptionTextEditor from "@components/descriptionTextEditor";
 import SellerMenu from "@components/cms/sellerMenu";
 import { FETCH_USERS } from "../../../../../redux/actions/cms/users";
@@ -26,9 +27,9 @@ export default function Product(){
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({type: FETCH_USERS})
+    dispatch({type: FETCH_USERS});
     dispatch({type: FETCH_TAGS});
-    dispatch({type: FETCH_SIZES})
+    dispatch({type: FETCH_SIZES});
   }, []);
   
   const language = useSelector(state => state.ux.language);
@@ -52,6 +53,20 @@ export default function Product(){
     imageUrls[i.order] = i.url
   });
   console.log(aspects)
+  const [, ...arr] = Array(inventoryDetail.sizes.length + 1).keys();
+  console.log(arr)
+
+  const addSize = () => {
+    dispatch({ type: INV_ADD_SIZE, data: {
+        id: measurements[0].sizes[0].id,
+        name: measurements[0].sizes[0].name,
+        measurement_id: measurements[0].id
+      }
+    })
+  };
+
+  console.log(inventoryDetail.sizes)
+
   return (
     <div>
       <style jsx global>{`
@@ -91,9 +106,15 @@ export default function Product(){
                   </div>
                   <div  className={st.inventoryFieldItem}>
                     <h4>
-                      Seller:
+                      Price (in cents) :
                     </h4>
-                    <SellerMenu/>
+                    <div className={st.inventoryFieldInputContainer}>
+                      <input
+                        type="number"
+                        value={ready ? inventoryDetail.price  : 0}
+                        onChange={e => dispatch({type: SET_PRICE, value: e.target.value})}
+                      />
+                    </div>
                   </div>
                   <div  className={st.inventoryFieldItem}>
                     <h4>
@@ -110,18 +131,7 @@ export default function Product(){
                       />
                     </div>
                   </div>
-                  <div  className={st.inventoryFieldItem}>
-                    <h4>
-                      Price (in cents) :
-                    </h4>
-                    <div className={st.inventoryFieldInputContainer}>
-                      <input
-                        type="number"
-                        value={ready ? inventoryDetail.price  : 0}
-                        onChange={e => dispatch({type: SET_PRICE, value: e.target.value})}
-                      />
-                    </div>
-                  </div>
+
                   <h3 className={st.descriptionField}>
                     <h4>
                       Description:
@@ -139,7 +149,21 @@ export default function Product(){
                       }
                     />
                   </h3>
+                  <div  className={st.inventoryFieldItem}>
+                    <h4>
+                      Seller:
+                    </h4>
 
+                      <SellerMenu
+                        defaultValue={
+                          {
+                            value: inventoryDetail.seller.id,
+                            label: inventoryDetail.seller.id
+                          }
+                        }
+                      />
+
+                  </div>
                   </div>
 
 
@@ -180,15 +204,26 @@ export default function Product(){
                   }
                 </div>
               </div>
-              <div  className={st.rightDescriptionFieldContainer}>
-                <div  className={st.descriptionField}>
-                  <h4>
-                    Sizing:
-                  </h4>
-                  <SizeMenu measurements={measurements}/>
-                </div>
-              </div>
-            </div>
+
+                  <div className={st.rightDescriptionFieldContainer}>
+                    <div className={st.descriptionField}>
+                      <h4>
+                        Sizing:
+                      </h4>
+                      {
+                        inventoryDetail.sizes.map((s, i) => (
+                        <SizeMenu
+                          measurements={measurements}
+                          defaultValue={s}
+                          idx={i}
+                        />
+                        ))
+                      }
+                      <button onClick={addSize}> Add a size</button>
+                    </div>
+                    </div>
+                  </div>
+
 
             </div>
 

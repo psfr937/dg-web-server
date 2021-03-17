@@ -6,8 +6,7 @@ export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 const initialState = {
   readyStatus: FETCH_USERS_INVALID,
   err: null,
-  data: {},
-  selectedPltId: null
+  data: {}
 }
 
 
@@ -19,16 +18,19 @@ export default (state, action) => {
   switch (action.type) {
     case FETCH_USERS_REQUESTING:
       return {
+        ...state,
         readyStatus:  FETCH_USERS_REQUESTING,
         err: null
       }
     case FETCH_USERS_FAILURE:
       return {
+        ...state,
         readyStatus:  FETCH_USERS_FAILURE,
         err: action.err
       }
     case FETCH_USERS_SUCCESS:
       return {
+        ...state,
         readyStatus:  FETCH_USERS_SUCCESS,
         data: action.data
       }

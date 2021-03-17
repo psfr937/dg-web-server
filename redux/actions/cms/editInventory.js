@@ -70,6 +70,10 @@ function* updateInventory() {
     originalData.tags.map(i => i.id),
     editInventory.tags.map(i => i.id)
   );
+
+  console.log(originalData.sizes)
+  console.log(editInventory.sizes)
+
   const sizeDiff = compareIds(
     originalData.sizes.map(i => i.id),
     editInventory.sizes.map(i => i.id)
@@ -77,7 +81,7 @@ function* updateInventory() {
   const jsonData = {
     price: editInventory.price,
     brand: editInventory.brand,
-    sellerId: 1, //editInventory.seller.id,
+    sellerId: editInventory.seller.id,
     texts: editInventory.text,
     images: {
       remove: imageDiff.remove //list of item_order

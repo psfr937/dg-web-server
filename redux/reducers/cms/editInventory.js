@@ -10,11 +10,14 @@ export const SET_BRAND = 'SET_BRAND';
 export const SET_SELLER = 'SET_SELLER';
 export const ADD_TAG = 'ADD_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
-
+export const INV_ADD_SIZE = 'INV_ADD_SIZE';
+export const INV_REMOVE_SIZE = 'INV_REMOVE_SIZE';
+export const INV_SET_SIZE = 'INV_SET_SIZE';
 const initState = {
 };
 
 export default (state = initState, action) => {
+  let idx;
   switch(action.type) {
     case HYDRATE:
       return {...state, ...action.payload.editInventory};
@@ -51,7 +54,7 @@ export default (state = initState, action) => {
         tags: [...state.tags, action.add]
       };
     case REMOVE_TAG:
-      const idx = state.tags.findIndex(t => t.id === action.id);
+      idx = state.tags.findIndex(t => t.id === action.id);
       return {
         ...state,
         tags: state.tags
@@ -68,6 +71,29 @@ export default (state = initState, action) => {
         images: [
           ...state.images, ...action.data
         ]
+      };
+    case INV_ADD_SIZE:
+      return {
+        ...state,
+        sizes: [
+          ...state.sizes, action.data
+        ]
+      };
+    case INV_REMOVE_SIZE:
+      console.log(idx)
+      return {
+        ...state,
+        sizes: state.sizes
+          .slice(0, action.idx)
+          .concat(state.sizes.slice( action.idx + 1))
+      };
+    case INV_SET_SIZE:
+      console.log(idx)
+      return {
+        ...state,
+        sizes: state.sizes
+          .slice(0, action.idx)
+          .concat(action.value, state.sizes.slice( action.idx + 1))
       };
     case REMOVE_ATTACHMENT:
       if(!('images' in state)) return state;
