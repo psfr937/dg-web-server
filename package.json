@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
-    "postbuild": "next-on-netlify",
+    "build": "netlify build",
+    "postbuild": "netlify deploy --prod",
     "start": "cross-env NODE_ENV=production next start",
     "export": "next export"
   },
@@ -29,11 +29,10 @@
     "js-cookie": "^2.2.1",
     "jspdf": "^2.3.0",
     "lodash": "^4.17.21",
-    "next": "9.5.0",
+    "next": "9.5.5",
     "next-compose-plugins": "^2.2.1",
     "next-cookies": "^2.0.3",
     "next-fonts": "^1.5.1",
-    "next-on-netlify": "^2.8.7",
     "next-redux-wrapper": "^6.0.2",
     "next-transpile-modules": "^6.2.0",
     "normalizr": "^3.6.1",
@@ -65,5 +64,8 @@
     "rheostat": "^4.1.1",
     "safe-json-stringify": "^1.2.0",
     "sass": "^1.30.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^3.0.3"
   }
 }
