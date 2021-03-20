@@ -30,7 +30,8 @@ export default function ProductPage(){
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({store, query}) => {
   const { pid } = query;
-  store.dispatch({type: FETCH_ONE_INVENTORY, pid });
+  console.log(query)
+  store.dispatch({type: FETCH_ONE_INVENTORY, pid: 52 });
   store.dispatch(END);
   await store.sagaTask.toPromise();
   return {props: {custom: 'custom'}};
