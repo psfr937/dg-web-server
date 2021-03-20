@@ -32,7 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({store, quer
   const { pid } = query;
   console.log('the query')
   console.log(query)
-  store.dispatch({type: FETCH_ONE_INVENTORY, pid: 52 });
+  store.dispatch({type: FETCH_ONE_INVENTORY, pid: pid });
   store.dispatch(END);
   await store.sagaTask.toPromise();
   return {props: {custom: 'custom'}};
