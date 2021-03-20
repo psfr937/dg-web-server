@@ -53,6 +53,7 @@ function *fetchOneInventory({ pid }){
       put({type: FETCH_ONE_INVENTORY_SUCCESS, data: json.data.data}),
     ]);
   } catch (err) {
+    console.log(err);
     yield put({type: FETCH_ONE_INVENTORY_FAILURE, err: err})
   }
 }
