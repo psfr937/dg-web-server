@@ -30,6 +30,7 @@ export default function ProductPage(){
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({store, query}) => {
   const { pid } = query;
+  console.log('the query')
   console.log(query)
   store.dispatch({type: FETCH_ONE_INVENTORY, pid: 52 });
   store.dispatch(END);
