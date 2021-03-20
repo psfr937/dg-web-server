@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--inspect' next dev",
     "dev-prod": "cross-env NODE_ENV=production NODE_OPTIONS='--inspect' next dev",
-    "build": "netlify build",
-    "postbuild": "netlify deploy --prod",
+    "build": "next build",
+    "deploy": "netlify deploy --prod",
     "start": "next build && cross-env NODE_ENV=production next start",
     "export": "next export"
   },

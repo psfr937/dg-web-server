@@ -13,13 +13,18 @@ import {useStore} from "react-redux";
 const WrappedApp = (ctx) => {
     const {Component, pageProps, router} = ctx;
     const store = useStore();
-    return(
-      <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
-         <AnimateSharedLayout>
-            <Component {...pageProps} key={router.route}/>
-          </AnimateSharedLayout>
-      </PersistGate>
+    return (
+      <AnimateSharedLayout>
+        <Component {...pageProps} key={router.route}/>
+      </AnimateSharedLayout>
     )
+    // return(
+    //  <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+    //      <AnimateSharedLayout>
+    //         <Component {...pageProps} key={router.route}/>
+    //       </AnimateSharedLayout>
+    //  </PersistGate>
+    // )
 };
 
 export default wrapper.withRedux(WrappedApp);
