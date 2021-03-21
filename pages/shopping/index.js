@@ -3,7 +3,7 @@ import React from 'react';
 import Shop from '../../components/Shop'
 import Head from '@components/ecommerce/Head'
 import appSt from "../home.module.scss";
-import Nav from "./shoppingNav";
+import Nav from "@components/ecommerce/shoppingNav";
 import st from "../catalogPage.module.scss";
 const searchClient = algoliasearch(
   'XSR6ZP990B', //'B1G2GM9NG0',
