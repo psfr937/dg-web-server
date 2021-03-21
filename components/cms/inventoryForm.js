@@ -58,7 +58,7 @@ export default function ProductForm({ oneInventory }){
     })
   };
 
-  console.log(inventoryDetail.sizes)
+  console.log(inventoryDetail.sizes);
 
   return (
 
@@ -124,7 +124,7 @@ export default function ProductForm({ oneInventory }){
                       key="main_description"
                       name="main_description"
                       readOnly={false}
-                      content={localText.description}
+                      content={typeof localText !== 'undefined' ? localText.description: ''}
                       editFunc={value =>  dispatch({
                         type: SET_TEXT,
                         key: 'description',

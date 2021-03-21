@@ -23,12 +23,27 @@ export default (state = initState, action) => {
       return {...state, ...action.payload.editInventory};
     case SET_TEXT:
       const languageIdx = state.text.findIndex(t => t.language === action.language);
-      const language = state.text[languageIdx]= {
-        ...state.text[languageIdx],
-        [action.key]: action.value
-      };
-      const text = state.text.slice(0, languageIdx).concat(language, ...state.text.slice(languageIdx + 1));
+      let text;
 
+      if(languageIdx >= 0) {
+        const language = {
+          ...state.text[languageIdx],
+          [action.key]: action.value
+        };
+       text = state.text.slice(0, languageIdx).concat(language, ...state.text.slice(languageIdx + 1));
+      }
+      else{
+        let language = {
+          language: action.language,
+          name: '',
+          description: ''
+        };
+       language = {
+          ...language,
+          [action.key]: action.value
+        };
+        text = [...state.text, language]
+      }
       return {
         ...state,
         text

@@ -93,6 +93,7 @@ $light-green: #65807C;
     box-sizing: border-box;
     margin: 0;
     h4 {
+      margin: 0;
       position: relative;
       z-index: 2;
       font-size: 1rem;
@@ -312,6 +313,8 @@ $light-green: #65807C;
     width: 30px;
     color: white;
     height: 100%;
+    display: flex;
+    align-items: center;
 
     &:hover{
       background: #777;
