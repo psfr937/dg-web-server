@@ -1,18 +1,13 @@
-import algoliasearch from 'algoliasearch/lite';
 import React, { useEffect } from 'react';
 import {
-  InstantSearch,
-  Hits,
   SearchBox,
   Pagination,
-  Highlight,
   ClearRefinements,
   RefinementList,
   Configure,
-  HierarchicalMenu,
   Stats,
-  SortBy,
-  connectHits
+  connectHits,
+  SortBy
 } from 'react-instantsearch-dom';
 
 import PropTypes from 'prop-types';
@@ -29,10 +24,6 @@ import {useDispatch} from "react-redux";
 import {FETCH_SIZES} from "../redux/actions/ecommerce/sizes";
 import SegmentMenu from "@components/ecommerce/segmentMenu"
 
-const searchClient = algoliasearch(
-  'XSR6ZP990B', //'B1G2GM9NG0',
-  'e3d7f522186e977cdb3d84474d85f038' //'aadef574be1f9252bb48d4ea09b5cfe5'
-);
 
 
 export default function Shop(props){
@@ -44,12 +35,24 @@ export default function Shop(props){
   }
 
   return (
-    <InstantSearch indexName="dev_dg" searchClient={searchClient}>
+   <React.Fragment>
       <div className={st.paginationBar}>
-        <SegmentMenu
-          attribute="segment"
-        />
-        <Stats/>
+        <div className={st.paginationBarLeft}>
+          <Stats
+            translations={{
+              stats(nbHits, processingTimeMS, nbSortedHits, areHitsSorted) {
+                return areHitsSorted && nbHits !== nbSortedHits
+                  ? `${nbSortedHits.toLocaleString()} relevant results sorted out of ${nbHits.toLocaleString()} found in ${processingTimeMS.toLocaleString()}ms`
+                  : `Total items: ${nbHits.toLocaleString()}`
+              },
+            }}
+          />
+        </div>
+        <div className={st.paginationBarMiddle}>
+          <div className={"searchContainer"}>
+            <SearchBox/>
+          </div>
+        </div>
         {/*<SortBy*/}
         {/*  // ...*/}
         {/*  items={[*/}
@@ -58,15 +61,24 @@ export default function Shop(props){
         {/*    { value: 'instant_search_price_desc', label: 'Price desc.' },*/}
         {/*  ]}*/}
         {/*/>*/}
-        <Pagination
-        showLast
-        />
+        <div className={st.paginationBarRight}>
+          <Pagination
+          showLast={false}
+          showFirst={false}
+          />
+          <SortBy
+            defaultRefinement="dev_dg"
+            items={[
+              { value: 'dev_dg', label: 'Featured' },
+              { value: 'dev_dg_price_asc', label: 'Price asc.' },
+              { value: 'dev_dg_price_desc', label: 'Price desc.' },
+            ]}
+          />
+        </div>
       </div>
       <div className={st.catalogPage}>
         <div className={"filterMenu"}>
-          <div className={"searchContainer"}>
-            <SearchBox/>
-          </div>
+
           <div className={"filterTitleContainer"}>
             <div className={"filterByText"}>
               <h4> Filter By</h4>
@@ -142,7 +154,7 @@ export default function Shop(props){
           <CustomHits cms={props.cms}/>
         </div>
       </div>
-    </InstantSearch>
+   </React.Fragment>
   )
 
 }

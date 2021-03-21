@@ -5,8 +5,6 @@ $light-green: #65807C;
 
 .paginationBar{
   position: fixed;
-  top: 60px;
-  height: 20px;
   width: 100%;
   border-top: 1px solid black;
   z-index: 2;
@@ -16,20 +14,42 @@ $light-green: #65807C;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0.4rem;
+  box-sizing: border-box;
 
   h6{
     margin: 0;
     font-size: 0.8rem;
     font-weight: 200;
   }
+
+  .paginationBarLeft{
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .paginationBarMiddle{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-grow: 1;
+  }
+
+  .paginationBarRight{
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .catalogPage{
   display: flex;
+  position: relative;
   flex-direction: row;
   height: calc(100vh - 80px);
   max-width: 100%;
+  top: 60px;
 
 
 }
@@ -113,19 +133,19 @@ $light-green: #65807C;
   .itemBrand{
     height: 40px;
     margin: 0.2rem 0;
-    font-size: 1.6rem;
+    font-size: 1rem;
   }
   .itemName{
     height: 40px;
     font-weight: 300;
     margin: 0 0;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
   }
 
   .itemPrice{
     height: 40px;
     margin-top: 0.2rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 }
 

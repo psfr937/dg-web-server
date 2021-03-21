@@ -31,7 +31,6 @@ export default function ProductForm({ oneInventory }){
   const measurements = useSelector(state => state.sizes.readyStatus !== FETCH_SIZES_SUCCESS
     ? [] : Object.keys(state.sizes.data).map(k => state.sizes.data[k]));
 
-
   const ready = oneInventory.readyStatus === FETCH_ONE_INVENTORY_SUCCESS;
 
   const inventoryDetail = useSelector(state => state.editInventory);

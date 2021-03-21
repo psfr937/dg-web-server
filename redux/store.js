@@ -16,9 +16,9 @@ const makeStore = (context) => {
 
   const makeConfiguredStore = (reducer) => {
     // 2: Add an extra parameter for applying middleware:
-    const middlewares = process.env.NODE_ENV === 'development'
-      ?  applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware);
-    const store = createStore(reducer, middlewares);
+    // const middlewares = process.env.NODE_ENV === 'development'
+    //   ?  applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware);
+    const store = createStore(reducer, applyMiddleware(sagaMiddleware));
     // 3: Run your sagas on server
     store.sagaTask = sagaMiddleware.run(rootSaga);
     return store

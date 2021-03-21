@@ -1,11 +1,6 @@
 import inventoryAPI from '../../../api/ecommerce/inventories'
-import { normalize, schema } from "normalizr";
-import { arrayOfInventories } from '../../../schemas'
-import {
-  FETCH_INVENTORIES_REQUESTING,
-  FETCH_INVENTORIES_SUCCESS,
-  FETCH_INVENTORIES_FAILURE, FETCH_INVENTORIES
-} from "../../reducers/ecommerce/inventories";
+import handleErrors, {CONNECTION_ERROR, SERVER_ERROR} from "../../../helpers/handleErrors";
+
 import {
   FETCH_ONE_INVENTORY_FAILURE,
   FETCH_ONE_INVENTORY_SUCCESS,
@@ -14,28 +9,10 @@ import {
 
 import { all, select, put, call, fork, takeEvery } from "redux-saga/effects"
 import {CLONE_INVENTORY} from "../../reducers/cms/editInventory";
+import router from 'next/router'
 export const EMPTY_INVENTORY = 'EMPTY_INVENTORY';
 
-function *fetchInventories(){
-  const status = select( state => state.inventories.readyStatus);
-  if(status === FETCH_INVENTORIES_SUCCESS ||
-    status ===  FETCH_INVENTORIES_REQUESTING
-  ) return
-  yield put({type: FETCH_INVENTORIES_REQUESTING});
-
-  try {
-    const json = yield call(inventoryAPI.list, { data: { filter: {} }});
-    const normalizedData = yield call(normalize, json.data.data, arrayOfInventories);
-    let data = normalizedData.entities.inventories;
-    if(typeof data === 'undefined') data = {};
-
-    yield put({type: FETCH_INVENTORIES_SUCCESS, data: data})
-  } catch (err) {
-    yield put({type: FETCH_INVENTORIES_FAILURE, data: data})
-  }
-}
-
-function *fetchOneInventory({ pid }){
+function *fetchOneInventory({ pid, res }){
   let oneInventory = select(state => state.oneInventory);
 
   if(pid in oneInventory &&
@@ -54,7 +31,23 @@ function *fetchOneInventory({ pid }){
     ]);
   } catch (err) {
     console.log(err);
-    yield put({type: FETCH_ONE_INVENTORY_FAILURE, err: err})
+    console.log(typeof err);
+    console.log(JSON.stringify(err));
+    const newErr = handleErrors(err);
+    yield put({type: FETCH_ONE_INVENTORY_FAILURE, err: newErr});
+
+      if(newErr.type === CONNECTION_ERROR){
+        res.writeHead(302, { Location: '/error/disconnected' });
+        res.end();
+
+      }
+      else{
+        if(newErr.type === SERVER_ERROR){
+          res.writeHead(302, { Location: '//error/denied' });
+          res.end();
+        }
+      }
+
   }
 }
 
@@ -69,7 +62,6 @@ function *emptyInventory({ data }){
 
 
 export default [
-  takeEvery(FETCH_INVENTORIES, fetchInventories),
   takeEvery(FETCH_ONE_INVENTORY, fetchOneInventory),
   takeEvery(EMPTY_INVENTORY, emptyInventory)
 ]
