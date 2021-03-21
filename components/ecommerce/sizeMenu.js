@@ -40,10 +40,11 @@ const MySearchBox = ({ currentRefinement, refine }) => {
     return selectedSizes.indexOf(id) >= 0 ? classnames(st.sizeItem, st.selected) : st.sizeItem
   };
 
-  if(typeof window !== 'undefined' ) {
+  // if(typeof window !== 'undefined' ) {
     const sizes = useSelector(state => state.sizes)
     const data = sizes.readyStatus === FETCH_SIZES_SUCCESS ?
       Object.keys(sizes.data).map(k => sizes.data[k]) : []
+  console.log(data)
     return data.filter(d => d.physique === 'women').map(d => (
       <div className={st.measurementMenu}>
         <div className={st.measurementMenuTitle}>
@@ -60,10 +61,10 @@ const MySearchBox = ({ currentRefinement, refine }) => {
       </div>
 
     ))
-  }
-  else{
-    return null
-  }
+  // }
+  // else{
+  //   return null
+  // }
 };
 
 export default connectRefinementList(MySearchBox);

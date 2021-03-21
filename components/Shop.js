@@ -53,14 +53,6 @@ export default function Shop(props){
             <SearchBox/>
           </div>
         </div>
-        {/*<SortBy*/}
-        {/*  // ...*/}
-        {/*  items={[*/}
-        {/*    { value: 'instant_search', label: 'Featured' },*/}
-        {/*    { value: 'instant_search_price_asc', label: 'Price asc.' },*/}
-        {/*    { value: 'instant_search_price_desc', label: 'Price desc.' },*/}
-        {/*  ]}*/}
-        {/*/>*/}
         <div className={st.paginationBarRight}>
           <Pagination
           showLast={false}
