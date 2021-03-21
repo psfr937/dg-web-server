@@ -1,14 +1,14 @@
 # Next-on-Netlify Redirects
 /  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/cVFIuLBzX3oHS9MteBTkk/aeea.json  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/cVFIuLBzX3oHS9MteBTkk/index.json  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/cVFIuLBzX3oHS9MteBTkk/test.json  /.netlify/functions/next_test  200
+/_next/data/KW6i6fHqDecHS8tT67Ted/aeea.json  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
+/_next/data/KW6i6fHqDecHS8tT67Ted/index.json  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data
+/_next/data/KW6i6fHqDecHS8tT67Ted/test.json  /.netlify/functions/next_test  200
 /aeea  /.netlify/functions/next_aeea  200!  Cookie=__prerender_bypass,__next_preview_data
 /backup  /.netlify/functions/next_backup  200
 /oauth  /.netlify/functions/next_oauth  200
 /test  /.netlify/functions/next_test  200
-/_next/data/cVFIuLBzX3oHS9MteBTkk/cms/:name/p/:pid.json  /.netlify/functions/next_cms_name_p_pid  200
-/_next/data/cVFIuLBzX3oHS9MteBTkk/shopping/:name/p/:pid.json  /.netlify/functions/next_shopping_name_p_pid  200
+/_next/data/KW6i6fHqDecHS8tT67Ted/cms/:name/p/:pid.json  /.netlify/functions/next_cms_name_p_pid  200
+/_next/data/KW6i6fHqDecHS8tT67Ted/shopping/:name/p/:pid.json  /.netlify/functions/next_shopping_name_p_pid  200
 /_next/image*  url=:url w=:width q=:quality  /.netlify/functions/next_image?url=:url&w=:width&q=:quality  200
 /cms/:name/p/:pid  /.netlify/functions/next_cms_name_p_pid  200
 /shopping/:name/p/:pid  /.netlify/functions/next_shopping_name_p_pid  200

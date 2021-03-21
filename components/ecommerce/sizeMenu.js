@@ -45,7 +45,7 @@ const MySearchBox = ({ currentRefinement, refine }) => {
     const data = sizes.readyStatus === FETCH_SIZES_SUCCESS ?
       Object.keys(sizes.data).map(k => sizes.data[k]) : []
   console.log(data)
-    return data.filter(d => d.physique === 'women').map(d => (
+    return data.map(d => (
       <div className={st.measurementMenu}>
         <div className={st.measurementMenuTitle}>
           <h4> {d.name}</h4>
