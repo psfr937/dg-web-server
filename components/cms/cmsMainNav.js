@@ -9,6 +9,8 @@ import { FETCH_DETAIL_INFO_SUCCESS } from "../../redux/reducers/account/profile"
 import {FETCH_DETAIL_INFO} from "../../redux/actions/account/profile";
 import cmsSt from '../../pages/cms/itemDetail.module.scss'
 import {UPDATE_INVENTORY, ADD_INVENTORY} from "../../redux/actions/cms/editInventory";
+import router from 'next/router';
+import getCookie from "../../helpers/getCookie";
 
 export default function Nav({ action }) {
   let [burgerOpened, setBurgerOpened] = useState(false);
@@ -22,10 +24,21 @@ export default function Nav({ action }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(token !== null && !userReady){
+    if(getCookie('token') === null) router.push('/login')
+  }, []);
+
+
+  useEffect(() => {
+    if(getCookie('token') !== null && !userReady){
       dispatch({type: FETCH_DETAIL_INFO })
     }
   }, [token]);
+
+  useEffect(() => {
+    if(userReady && user.data.admin === false){
+      router.push('/error/denied')
+    }
+  }, [userReady]);
 
   const saveAction = () => {
     if(action === 'create'){

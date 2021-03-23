@@ -6,7 +6,7 @@ import { TOGGLE_ADDRESS_BOX } from "../../redux/reducers/ecommerce/ux";
 import classnames from 'classnames'
 import { FETCH_ADDRESSES_AND_GET_QUOTATION, FETCH_ADDRESSES } from "../../redux/actions/ecommerce/addresses";
 
-export default function AddressList(){
+export default function AddressList({ data = [], selectedAddressId = null}){
 
   const dispatch = useDispatch();
 
@@ -19,12 +19,7 @@ export default function AddressList(){
 
   const openAddAddressBox = () => dispatch({ type: TOGGLE_ADDRESS_BOX, data: true});
 
-  const addresses = useSelector(state => state.addresses);
-  const selectedAddressId = addresses.selectedAddressId;
 
-  const data = (addresses.readyStatus !== FETCH_ADDRESSES_SUCCESS) ? []
-    : Object.keys(addresses.data).map(k => addresses.data[k]);
-  console.log(data)
 
   const addressCardClass = id => selectedAddressId === id ?
     classnames(st.addressCard, st.selected) : st.addressCard;

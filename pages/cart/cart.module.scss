@@ -1,0 +1,374 @@
+@import '../../styles/theme';
+
+.checkoutNavBar{
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.addressFormContainer{
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > div{
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+  }
+
+  &.hidden{
+    display: none;
+  }
+}
+
+
+
+.sectionTitle{
+  width: 100%;
+  background: $dark-navy;
+  color: white;
+  padding: 1rem 0;
+  margin: 0;
+  height: 30px;
+}
+.conclusion{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: center;
+  padding: 0;
+  height: max-content;
+  .h4 {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    border-bottom: 1px solid #777;
+    h4 {
+      white-space: nowrap;
+      line-height:  100%;
+      padding-left: 3rem;
+      font-weight: 300;
+      width: 100%;
+      display: flex;
+      justify-self: center;
+      align-self: center;
+      text-align: left;
+
+    }
+  }
+}
+
+.show{
+  position: relative;
+}
+.hidden{
+  display: none;
+}
+
+.topSection{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: max-content;
+  width: 1100px;
+
+  & > div{
+    flex-shrink: 0;
+    justify-self: center;
+    margin: 0 auto;
+
+  }
+}
+
+
+.subSection, .bottomSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+  margin: 0;
+  align-items: stretch;
+
+  & > div{
+    justify-content: stretch;
+    flex: 1 0 50%;
+    justify-self: center;
+    margin: 0 auto;
+  }
+}
+
+.bottomRightSection{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.bottomRightSection form{
+  margin: 0 auto;
+}
+
+.bottomLeftSection{
+  width: 50%;
+  flex-direction: column;
+  justify-content: stretch;
+  overflow: hidden;
+
+  .bottomLeftSectionContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    border: none;
+    & > *{
+      flex-grow: 1;
+    }
+  }
+
+  .grassImageContainer{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-grow: 1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+  .grassImage{
+    background: #3c3a41; //url("../public/grass.jpeg") repeat center;
+
+    height: 100%;
+    width: 100%;
+  }
+
+}
+
+.app {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+  Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow: auto;
+  height: 100vh;
+
+
+}
+
+
+
+.checkoutSectionTitle{
+  width: 100%;
+  background: $light-green;
+  color: white;
+  padding: 1rem 0;
+  margin: 0;
+  height: 30px;
+  cursor: pointer;
+
+  &:hover{
+    background: $green;
+  }
+}
+
+$border-color: #323b62;
+$background-color: rgba(109, 157, 188, 0.95);
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 75px);
+  height: 100%;
+  width: 100%;
+  padding: 0 2rem;
+  margin: 0;
+  justify-content: stretch;
+  align-items: flex-start;
+  flex: 1 1;
+  background: linear-gradient(
+                  rgba(100, 100, 100, 0.6),
+                  rgba(0, 0, 0, 0.6)), url("../../public/scenary1.jpg");
+  background-size: cover;
+
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+  }
+
+  & > div{
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+}
+.topSection{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: max-content;
+  width: 1100px;
+  margin: 2rem 0;
+
+
+  & > div{
+    flex-shrink: 0;
+    justify-self: center;
+    margin: 0 auto;
+  }
+}
+
+.subSection{
+  border: 1px solid $border-color;
+  background: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+}
+
+.subSection, .bottomSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  align-items: stretch;
+
+
+  & > div{
+    justify-content: stretch;
+    flex: 1 1 50%;
+    justify-self: center;
+    margin: 0 auto;
+
+  }
+}
+
+.bottomSection{
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: 1px;
+  top: -1px;
+  border: none;
+  background: none;
+}
+
+.bottomRightSection{
+  margin: 0;
+  float: right;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-top: none;
+  max-width: 50%;
+  flex-grow: 1;
+  height: min-content;
+  display: inline-block;
+  top: -1px;
+  background: white;
+  position: relative;
+}
+
+.cornering{
+  position:relative;
+  z-index: 2;
+  top: -1px;
+  width: calc(100% - 16px);
+  min-height:  calc(100% - 16px);
+  max-height: calc(100% - 16px);
+  box-sizing: border-box;
+
+  &>div{
+    width: 100%;
+    height:  calc(100% - 11px);
+    top: 2px;
+    margin-bottom: 11px;
+    box-sizing: border-box;
+    border-top: 1px solid $border-color;
+  }
+}
+
+.corneringLeftContainer{
+  @extend .cornering;
+  right: -1px;
+  background: linear-gradient(225deg,  white, white 2%, transparent 2%);
+  &>div{
+    margin-left: 7px;
+    width: calc(100% - 7px);
+    right: 2px;
+
+    border-right: 1px solid $border-color;
+    border-top-right-radius: 16px;
+  }
+
+}
+
+.corneringRightContainer{
+  @extend .cornering;
+  left: -2px;
+  background: linear-gradient(135deg,   white, white 2%, transparent 2%);
+  &>div{
+    width: calc(100% - 7px);
+    left: 2px;
+    border-left: 1px solid $border-color;
+    border-top-left-radius: 16px;
+  }
+
+}
+
+.checkoutButtonContainer {
+  width: 100%;
+
+  padding: 1rem;
+  display: flex;
+  position: relative;
+  height: 80px;
+  box-sizing: border-box;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+
+  .checkoutButton {
+    border-radius: 16px;
+    background: $green;
+    color: white;
+    width: 100%;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    h4 {
+      line-height: 40px;
+    }
+
+    &.disabled{
+      pointer-events: none;
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background: $light-green;
+    }
+  }
+
+}

@@ -52,7 +52,10 @@ $third-color: blue;
   z-index: 999;
   top: 0;
   left: 0;
-  background: #28303d;
+  background: linear-gradient(
+                  rgba(0, 0, 0, 0.6),
+                  rgba(0, 100, 0, 0.6)), url("../../public/scenary2.jpg");
+  background-size: cover;
   font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
 
   & > div{
@@ -73,6 +76,12 @@ $third-color: blue;
     height: 100%;
     opacity: 1;
   }
+}
+
+.embeddedLoginFormContainer .loginForm.hidden,
+.popupLoginFormContainer .loginForm.hidden
+{
+  display: none;
 }
 
 .loginForm {
@@ -101,7 +110,6 @@ $third-color: blue;
 
   &.hidden{
     z-index: 1;
-
   }
 }
 
@@ -120,7 +128,12 @@ $third-color: blue;
 }
 
 
-
+.popUpLoginFormContainer{
+  @extend .loginFormContainer;
+  background: linear-gradient(
+                  rgba(0, 0, 0, 0.6),
+                  rgba(0, 100, 0, 0.6));
+}
 
 
 .loginFormTitleContainer{

@@ -5,7 +5,8 @@ import {GET_BUY_QUOTATION, GET_SELL_QUOTATION} from "../../redux/actions/ecommer
 import {TOGGLE_ADDRESS_BOX} from "../../redux/reducers/ecommerce/ux";
 
 export default function AddressForm({
-  formPurpose = 'BUY'
+  formPurpose = 'BUY',
+  cancelButton = true
 }){
   const [ lineOne, setLineOne ] = useState('');
   const [ lineTwo, setLineTwo ] = useState('');
@@ -22,6 +23,7 @@ export default function AddressForm({
 
   const submitAddress = e => {
     e.preventDefault();
+    console.log('submitted')
     dispatch({
       type: formPurpose === 'BUY' ? GET_BUY_QUOTATION : GET_SELL_QUOTATION,
       newAddress: {
@@ -68,10 +70,13 @@ export default function AddressForm({
                 <input onChange={e => setPhone(e.target.value)} type="text" className="FormBase"/>
               </div>
             </label>
+          { cancelButton === true ?
             <div>
-              <button type="button" onClick={closeForm}> Cancel </button>
-              <button type="submit"> Confirm </button>
-            </div>
+              <button className={st.normalButton} type="button" onClick={closeForm}> Cancel</button>
+              <button className={st.normalButton} type="submit"> Confirm</button>
+            </div> :
+            <button className={st.bigSubmitButton}  type="submit"> Confirm Address</button>
+          }
         </form>
       </div>
     )

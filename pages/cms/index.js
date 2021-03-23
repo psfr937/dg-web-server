@@ -14,7 +14,6 @@ const searchClient = algoliasearch(
 
 export default function Page(){
 
-
     return (
       <div>
         <style jsx global>{`

@@ -8,12 +8,12 @@ import EmailSignIn from "@components/authBox/EmailSignIn";
 import SocialAuthButtonList from "@components/authBox/SocialAuthButtonList";
 
 
-function LoginForm(){
+function LoginForm({ popUp = false, setForm, prevPath = '/' }){
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('');
 
-  const login = useSelector(state => state.login)
+  const login = useSelector(state => state.login);
   const loginReadyStatus = login.readyStatus;
   const loading = loginReadyStatus === LOGIN_REQUESTING;
 
@@ -22,7 +22,9 @@ function LoginForm(){
     e.preventDefault();
     dispatch({
       type: LOGIN,
-      data: { email: email,  password: password}
+      data: { email: email,  password: password},
+      redirect: popUp === false,
+      redirectPath: prevPath
     });
   };
 
@@ -43,17 +45,23 @@ function LoginForm(){
       <button type="submit" className={st.loginFormSubmitButton}>
         { loading ? <Spinner/> : 'Login' }
       </button>
-      <SocialAuthButtonList
-        prependText='Sign In'
-      />
+      {/*<SocialAuthButtonList*/}
+      {/*  prependText='Sign In'*/}
+      {/*/>*/}
       <div className={st.loginFormFooter}>
           <span className={st.switchFormText}>
          Need an account?
-            <Link href={"/register"} passHref>
-              <u className={st.registerFormLink}>
-                Register
-              </u>
-            </Link>
+            {popUp === true ?
+                <u onClick={() => setForm('register')} className={st.registerFormLink}>
+                  Register
+                </u> :
+
+              <Link href={"/register"} query={ { prevPath: prevPath }} passHref>
+                <u className={st.registerFormLink}>
+                  Register
+                </u>
+              </Link>
+            }
           </span>
       </div>
     </form>

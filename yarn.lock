@@ -3986,6 +3986,10 @@ direction@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/direction/-/direction-1.0.4.tgz#2b86fb686967e987088caf8b89059370d4837442"
 
+document-register-element@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/document-register-element/-/document-register-element-0.5.4.tgz#df6b57fbb8e141123e5f61acf382d6bb78c02bce"
+
 dom-helpers@^5.0.1:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.0.tgz#57fd054c5f8f34c52a3eeffdb7e7e93cd357d95b"
@@ -4784,6 +4788,13 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.2.4
 graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
+
+gremlins@^2.0.0-beta4:
+  version "2.0.0-beta4"
+  resolved "https://registry.yarnpkg.com/gremlins/-/gremlins-2.0.0-beta4.tgz#d580885c98ce5cbbf355cda73e77fe456397589c"
+  dependencies:
+    document-register-element "^0.5.4"
+    object-assign "^4.0.1"
 
 har-schema@^2.0.0:
   version "2.0.0"

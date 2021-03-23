@@ -7,10 +7,12 @@ import LoginForm from "@components/authBox/login";
 import {motion} from "framer-motion";
 import RegisterForm from "@components/authBox/register";
 import classNames from "classnames";
-
+import { useRouter} from "next/router";
 
 
 export default function Login() {
+  const router = useRouter();
+  const prevPath = 'prevPath' in router.query?  router.query.prevPath: '/'
   return (
     <div>
       <style jsx global>{`
@@ -37,7 +39,9 @@ export default function Login() {
                 animate={{opacity: 1, scale: 1,top: 0}}
                 transition={{duration:0.4, delay: 0.2, ease: [0.175, 0.885, 0.32, 1.275]}}
               >
-                <LoginForm/>
+                <LoginForm
+                  prevPath={prevPath}
+                />
               </motion.div>
             </div>
             <div>
@@ -48,7 +52,9 @@ export default function Login() {
                 animate={{opacity: 0, scale: 1.1,top: -50}}
                 transition={{duration:0.4}}
               >
-                <RegisterForm/>
+                <RegisterForm
+                  prevPath={prevPath}
+                />
               </motion.div>
             </div>
 

@@ -3,7 +3,7 @@ import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from '../home.module.scss'
 import st from './error.module.scss'
-
+import Link from 'next/link'
 export default function RecycleHistory(){
   return (
     <div>
@@ -20,12 +20,16 @@ export default function RecycleHistory(){
           <div className={st.errorPage}>
 
             <p>
-              Sorry. We cannot connect you to the server. Come back later.
+              You are not an admin. Therefore, you cannot enter our CMS.
             </p>
             <img src={"/sad.jpeg"} alt={"sad"}/>
             <p>
-              To report this issue, please contact us.
-              Fill out this form and we will contact you directly
+              To go shopping, go to this link
+              <Link href={'/shopping'}>
+                <button className={st.linkButton}>
+                <h4>dressgreen.net/shopping</h4>
+                </button>
+              </Link>
             </p>
 
           </div>

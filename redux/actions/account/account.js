@@ -22,7 +22,7 @@ import {
 } from "../../reducers/account/auth";
 import { RESET_PROFILE } from '../../reducers/account/profile'
 
-function *login({data}){
+function *login({data, redirect = true, redirectPath = '/shopping'}){
 
   const readyStatus = select(state => state.login.readyStatus);
   // if (readyStatus !== LOGIN_INVALID &&
@@ -38,9 +38,9 @@ function *login({data}){
     yield put({type: LOGIN_SUCCESS});
 
     yield put({type: AUTHENTICATE, info, token});
-
-   yield call(Router.push,`/`)
-
+  if(redirect === true) {
+    yield call(Router.push, redirectPath)
+  }
   } catch (err) {
     if (typeof err.response !== 'undefined'
       && typeof err.response.data !== 'undefined'
@@ -58,7 +58,7 @@ function *login({data}){
   }
 }
 
-function *register({data}){
+function *register({data, redirect = true, redirectPath = '/shopping'}){
   const readyStatus = select(state => state.register.readyStatus);
   if (readyStatus !== REGISTER_INVALID && readyStatus !== REGISTER_FAILURE
   ) return;
@@ -71,7 +71,9 @@ function *register({data}){
     const { info, token } = result;
     yield put({type: REGISTER_SUCCESS});
     yield put({type: AUTHENTICATE, info, token});
-    yield call(Router.push,`/`)
+    if(redirect === true) {
+      yield call(Router.push, redirectPath)
+    }
 
   } catch (err) {
     if (typeof err.response !== 'undefined'

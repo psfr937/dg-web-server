@@ -24,6 +24,7 @@
     "cross-env": "^7.0.3",
     "framer-motion": "^3.3.0",
     "google-map-react": "^2.1.9",
+    "gremlins": "^2.0.0-beta4",
     "html-react-parser": "^1.2.4",
     "html-to-react": "^1.4.5",
     "html2canvas": "^1.0.0-rc.7",

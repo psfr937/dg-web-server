@@ -9,7 +9,7 @@ import EmailSignUp from "@components/authBox/EmailSignUp";
 import SocialAuthButtonList from "@components/authBox/SocialAuthButtonList";
 import StyledLink from "@components/ecommerce/styledLink";
 
-function RegisterForm (){
+function RegisterForm ({popUp = false, setForm, prevPath = '/'}){
 
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -21,7 +21,9 @@ function RegisterForm (){
     e.preventDefault();
     dispatch({
       type: REGISTER,
-      data: {email: this.state.email, password: this.state.password}
+      data: {email: this.state.email, password: this.state.password},
+      redirect: popUp === false,
+      redirectPath: prevPath
     })
   };
 
@@ -50,14 +52,17 @@ function RegisterForm (){
             <a href="/privacy" className={st.goToLogin}>Privacy Policy</a>.
           </span>
       </div>
-      <SocialAuthButtonList
-        prependText={'Sign Up'}
-      />
+      {/*<SocialAuthButtonList*/}
+      {/*  prependText={'Sign Up'}*/}
+      {/*/>*/}
       <div className={st.loginFormFooter}>
         <span className={st.switchFormText}>
-          <Link href={"/login"} passHref>
-            <StyledLink>Already have an account?</StyledLink>
-          </Link>
+          { popUp === true ?
+            <StyledLink onClick={() => setForm('login')}>Already have an account?</StyledLink>
+            : <Link href={"/login"} query={ { prevPath: prevPath }} passHref>
+              <StyledLink>Already have an account?</StyledLink>
+            </Link>
+          }
         </span>
       </div>
     </form>

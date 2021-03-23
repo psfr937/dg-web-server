@@ -56,7 +56,7 @@ function *fetchAddressesGetQuotation(){
 
 }
 
-export function *getBuyQuotation( newAddress = null ){
+function *getBuyQuotation( data = {} ){
   const readyStatus = yield select(state => state.getBuyQuotation.readyStatus);
   if([GET_BUY_QUOTATION_REQUESTING, GET_BUY_QUOTATION_SUCCESS].includes(readyStatus)) return;
   yield put({type: GET_BUY_QUOTATION_REQUESTING });
@@ -65,8 +65,8 @@ export function *getBuyQuotation( newAddress = null ){
   const pickupTime = yield select(state => state.pickupTime);
 
   let address;
-  if(newAddress !== null){
-    address = newAddress
+  if('newAddress' in data && data.newAddress !== null){
+    address = data.newAddress
   }
   else{
     let addresses = yield select(state => state.addresses);

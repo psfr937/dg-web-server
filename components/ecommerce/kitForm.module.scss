@@ -21,7 +21,7 @@ $dark: #3c3a41;
   align-items: flex-start;
   flex-basis: 50%;
   width: 80%;
-  margin: 3rem 0 0 3rem;
+  margin: 1rem 0 0 3rem;
 
 
   h3{
@@ -49,6 +49,10 @@ $dark: #3c3a41;
 
   cursor: pointer;
 
+  h5, h6{
+    margin: 0;
+  }
+
   &.selected{
     border: 2px solid $green;
     background: $green;
@@ -69,15 +73,15 @@ $dark: #3c3a41;
   & > div {
 
     @extend .buttonStyle;
-
+    padding: 1rem;
     margin-right: 1rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     flex-basis: auto;
-    height: 120px;
-    width: 140px;
+    height: 140px;
+    width: 180px;
     justify-content: space-between;
-    padding: 0 1rem;
     border: 1px solid $dark-green;
     border-radius: 8px;
 
