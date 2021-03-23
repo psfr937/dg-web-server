@@ -2,17 +2,12 @@ import React from 'react'
 import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from '../home.module.scss';
-import st from './cart.module.scss';
+import st from './checkout.module.scss'
 import CartSection from '@components/ecommerce/CartSection';
-import AddressForm from "@components/ecommerce/addressForm";
-import AddressList from "@components/ecommerce/addressList"
-import Map from "@components/ecommerce/map";
 import dynamic from "next/dist/next-server/lib/dynamic";
-import { deliveryRoutes, itemPropertySources } from '../../constants/delivery'
 import {useSelector} from "react-redux";
 import {FETCH_CIDS_SUCCESS} from "../../redux/reducers/ecommerce/cart/cartItemDetail";
 import { GET_BUY_QUOTATION_SUCCESS } from "../../redux/reducers/ecommerce/address/getBuyQuotation";
-import classnames from 'classnames'
 const PaymentForm = dynamic(() =>
   import("@components/ecommerce/stripe/paymentForm"), { ssr: false });
 
