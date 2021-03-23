@@ -6,26 +6,18 @@ import st from './recycle.module.scss';
 import AddressForm from "@components/ecommerce/addressForm";
 import AddressList from "@components/ecommerce/addressList"
 import Map from "@components/ecommerce/map";
-import dynamic from "next/dist/next-server/lib/dynamic";
 import {useSelector} from "react-redux";
 import {GET_SELL_QUOTATION_SUCCESS} from "../../redux/reducers/ecommerce/address/getSellQuotation";
-import {FETCH_CIDS_SUCCESS} from "../../redux/reducers/ecommerce/cart/cartItemDetail";
 import classnames from 'classnames'
 import KitForm from "@components/ecommerce/kitForm";
 import Link from "next/link";
 import {FETCH_ADDRESSES_SUCCESS} from "../../redux/reducers/ecommerce/address/addresses";
 import {deliveryRoutes, itemPropertySources} from "../../constants/delivery";
 import CartAuth from "@components/authBox/cartAuthForm";
-const PaymentForm = dynamic(() =>
-  import("@components/ecommerce/stripe/paymentForm"), { ssr: false });
 
 export default function Cart(){
 
   const getQuotation = useSelector(state => state.getSellQuotation);
-
-  const cartItemDetail = useSelector(state => state.cartItemDetail);
-
-  const kitOptions = useSelector(state => state.kitOptions);
   const addresses = useSelector(state => state.addresses);
   const selectedAddressId = addresses.selectedAddressId;
 
@@ -33,7 +25,6 @@ export default function Cart(){
     : Object.keys(addresses.data).map(k => addresses.data[k]);
 
   const productCost = 0;
-  const productCostText = `HK$0`;
   const deliveryCost = getQuotation.readyStatus !== GET_SELL_QUOTATION_SUCCESS ? null
     : getQuotation.data.quotation.amount;
 

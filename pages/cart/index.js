@@ -7,7 +7,6 @@ import CartSection from '@components/ecommerce/CartSection';
 import AddressForm from "@components/ecommerce/addressForm";
 import AddressList from "@components/ecommerce/addressList"
 import Map from "@components/ecommerce/map";
-import dynamic from "next/dist/next-server/lib/dynamic";
 import { deliveryRoutes, itemPropertySources } from '../../constants/delivery'
 import {useSelector} from "react-redux";
 import {FETCH_CIDS_SUCCESS} from "../../redux/reducers/ecommerce/cart/cartItemDetail";
