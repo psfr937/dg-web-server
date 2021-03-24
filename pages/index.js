@@ -1,7 +1,7 @@
 import Head from '@components/ecommerce/Head';
 import { fetchEntries } from '../helpers/contentfulPosts';
 import safeJsonStringify from 'safe-json-stringify';
-import Footer from '@components/Footer';
+import Footer from '../components/Footer';
 import st from './home.module.scss';
 import React from "react";
 import Nav from "@components/Nav";

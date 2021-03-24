@@ -3,6 +3,7 @@ import fp from 'lodash/fp';
 
 export const TOGGLE_ADDRESS_BOX='TOGGLE_ADDRESS_BOX';
 export const SET_READ_ONLY='SET_READ_ONLY';
+export const SET_UX_VALUE='SET_UX_VALUE';
 
 import pageNames from '../../../constants/PageNames'
 
@@ -23,6 +24,8 @@ const initialState = {
     productList: true,
     webItem: true
   },
+  selectedSegment: null,
+  selectedPhysique: null,
   addressBoxActive: false,
   selectedWebEditComponent: {
     componentType: null,
@@ -42,6 +45,8 @@ export default (state = initialState, action)=> {
           [action.listName]: action.value
         }
       }
+    case SET_UX_VALUE:
+      return { ...state, [action.key]: action.value };
     default:
       return state;
   }

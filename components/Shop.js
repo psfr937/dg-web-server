@@ -11,18 +11,14 @@ import {
 } from 'react-instantsearch-dom';
 
 import PropTypes from 'prop-types';
-import Head from "@components/ecommerce/Head";
 import Link from "next/dist/client/link";
-import filterMenuSt from "@components/ecommerce/filterMenu.module.scss"
 import CustomPriceSlider from '@components/priceSlider'
-import classnames from 'classnames'
 
 import st from '@components/ecommerce/catalog.module.scss'
 import filterMenu from "@components/ecommerce/filterMenu";
 import SizeMenu from "@components/ecommerce/SizeMenu";
 import {useDispatch} from "react-redux";
 import {FETCH_SIZES} from "../redux/actions/ecommerce/sizes";
-import SegmentMenu from "@components/ecommerce/segmentMenu"
 
 
 
@@ -161,8 +157,6 @@ const createSlug = (localText) => {
 };
 
 function Hit({ hit, cms }) {
-  console.log(hit)
-
   let language = 'en';
   const localText = hit.text.find(t => t.language === language);
   const firstImage = hit.images.find(t => t.order === 1)

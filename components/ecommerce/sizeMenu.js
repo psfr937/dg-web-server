@@ -1,25 +1,23 @@
-import PropTypes from 'prop-types';
 import { connectRefinementList } from 'react-instantsearch-dom'
 import React, { useState } from "react"
 import { useSelector} from "react-redux";
 import { FETCH_SIZES_SUCCESS } from "../../redux/reducers/ecommerce/sizes";
 import st from "./sizeMenu.module.scss"
-const namespace = 'refinementList';
 import classnames from 'classnames'
-
 
 const MySearchBox = ({ currentRefinement, refine }) => {
 
-  const [selectedSizes, setSelectedSizes] = useState([])
-  const [selectedSizeNames, setSelectedSizeNames] = useState([])
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedSizeNames, setSelectedSizeNames] = useState([]);
+  const [physiqueName, setPhysiqueName] = useState(null);
+  const ux = useSelector(state => state.ux);
   const onClick = (d, t) => {
-
-    const name = `${d.physique} > ${d.name} > ${t.name}`
+    const name = `${physiqueName} > ${d.name} > ${t.name}`;
     const idx = selectedSizes.indexOf(t.id);
-    const nameIdx = selectedSizeNames.indexOf(name)
+    const nameIdx = selectedSizeNames.indexOf(name);
 
     if(nameIdx < 0) {
-      setSelectedSizeNames([...selectedSizeNames, name])
+      setSelectedSizeNames([...selectedSizeNames, name]);
       refine( [...selectedSizeNames, name])
     }
     else{
@@ -40,12 +38,23 @@ const MySearchBox = ({ currentRefinement, refine }) => {
     return selectedSizes.indexOf(id) >= 0 ? classnames(st.sizeItem, st.selected) : st.sizeItem
   };
 
-  // if(typeof window !== 'undefined' ) {
-    const sizes = useSelector(state => state.sizes)
-    const data = sizes.readyStatus === FETCH_SIZES_SUCCESS ?
-      Object.keys(sizes.data).map(k => sizes.data[k]) : []
-  console.log(data)
-    return data.map(d => (
+  const sizes = useSelector(state => state.sizes);
+    let measurements = [];
+    console.log(sizes)
+
+    if(sizes.readyStatus === FETCH_SIZES_SUCCESS){
+      let segmentDetail = Object.keys(sizes.data).map(k => sizes.data[k]).find(s => s.id === ux.selectedSegment)
+      console.log(segmentDetail);
+      if(typeof segmentDetail !== 'undefined' && Array.isArray(segmentDetail.physiques)) {
+        let physiqueDetail = segmentDetail.physiques.find(p => p.id === ux.selectedPhysique);
+        if(typeof physiqueDetail !== 'undefined' && Array.isArray(physiqueDetail.measurements)) {
+          if(physiqueName === null) setPhysiqueName(physiqueDetail.name);
+          measurements = physiqueDetail.measurements
+        }
+      }
+    }
+
+    return measurements.map(d => (
       <div className={st.measurementMenu}>
         <div className={st.measurementMenuTitle}>
           <h4> {d.name}</h4>
@@ -57,14 +66,8 @@ const MySearchBox = ({ currentRefinement, refine }) => {
           </button>)
           }
         </div>
-
       </div>
-
     ))
-  // }
-  // else{
-  //   return null
-  // }
 };
 
 export default connectRefinementList(MySearchBox);
