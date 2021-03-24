@@ -31,6 +31,11 @@
 
 }
 
+.metaDataButton{
+  @extend .saveButton;
+  margin-left: 1rem;
+}
+
 .backButton{
   @extend .saveButton;
   margin-left: 2rem;

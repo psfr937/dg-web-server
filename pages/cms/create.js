@@ -3,8 +3,6 @@ import Head from "@components/ecommerce/Head";
 import Nav from "@components/cms/cmsNav";
 import appSt from '../home.module.scss'
 import { EMPTY_INVENTORY } from "../../redux/actions/ecommerce/inventories";
-import {END} from 'redux-saga';
-import { wrapper } from "../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import Product from "@components/cms/inventoryForm";
 

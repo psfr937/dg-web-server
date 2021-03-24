@@ -7,6 +7,7 @@ export const REMOVE_ATTACHMENT = 'REMOVE_ATTACHMENT';
 export const SET_PRICE = 'SET_PRICE';
 export const SET_TEXT = 'SET_TEXT';
 export const SET_BRAND = 'SET_BRAND';
+export const SET_IS_UNIFORM = 'SET_IS_UNIFORM';
 export const SET_SELLER = 'SET_SELLER';
 export const ADD_TAG = 'ADD_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
@@ -52,6 +53,11 @@ export default (state = initState, action) => {
       return {
         ...state,
         brand: action.value
+      };
+    case SET_IS_UNIFORM:
+      return {
+        ...state,
+        uniform: action.value
       };
     case SET_SELLER:
       return {

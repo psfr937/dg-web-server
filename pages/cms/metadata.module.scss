@@ -1,0 +1,35 @@
+.catalogPage{
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 80px);
+  max-width: 100%;
+
+
+}
+
+.navPadding{
+  padding-top: 80px;
+}
+
+.paginationBar{
+  position: fixed;
+  top: 60px;
+  height: 20px;
+  width: 100%;
+  border-top: 1px solid black;
+  z-index: 2;
+  background: white;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  h6{
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 200;
+  }
+}
+

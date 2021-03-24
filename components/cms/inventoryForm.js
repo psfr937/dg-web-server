@@ -9,7 +9,7 @@ import {FETCH_TAGS_SUCCESS} from "../../redux/reducers/ecommerce/tags";
 import TagMenu from '@components/cms/tagMenu';
 import {FETCH_SIZES_SUCCESS} from "../../redux/reducers/ecommerce/sizes";
 import SizeMenu from "@components/cms/SizeMenu";
-import { SET_PRICE, SET_TEXT, SET_BRAND,
+import { SET_PRICE, SET_TEXT, SET_BRAND, SET_IS_UNIFORM,
   INV_ADD_SIZE } from "../../redux/reducers/cms/editInventory";
 import DescriptionTextEditor from "@components/descriptionTextEditor";
 import SellerMenu from "@components/cms/sellerMenu";
@@ -132,6 +132,14 @@ export default function ProductForm({ oneInventory }){
                       }
                     />
                   </h3>
+                  <label>
+                    Is Uniform:
+                    <input
+                      name="isGoing"
+                      type="checkbox"
+                      checked={ready ? inventoryDetail.uniform : false}
+                      onChange={e => dispatch({type: SET_IS_UNIFORM, value: e.target.value})} />
+                  </label>
                   <div  className={st.inventoryFieldItem}>
                     <h4>
                       Seller:

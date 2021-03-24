@@ -82,32 +82,34 @@ export default function Shop(props){
             />
           </div>
           <div className={"filterMenuBottomSection"}>
-            <div className={"filterSection"}>
-              <h4>Category</h4>
-              <RefinementList
-                searchable={"true"}
-                attribute="category"/>
-            </div>
-            <div className={"filterSection"}>
-              <h4>Accent</h4>
-              <RefinementList
-                searchable={"true"}
-                attribute="accent"/>
-            </div>
-            <div className={"filterSection"}>
-              <h4>Brand</h4>
-              <RefinementList
-                searchable={"true"}
-                attribute="brand"
-              />
-            </div>
-            <div className={"filterSection"}>
-              <h4>Color</h4>
-              <RefinementList
-                searchable={"true"}
-                attribute="color"
-              />
-            </div>
+
+              <div className={"filterSection"}>
+                <h4>Category</h4>
+                <RefinementList
+                  searchable={"true"}
+                  attribute="category"/>
+              </div>
+              <div className={"filterSection"}>
+                <h4>Accent</h4>
+                <RefinementList
+                  searchable={"true"}
+                  attribute="accent"/>
+              </div>
+              <div className={"filterSection"}>
+                <h4>Brand</h4>
+                <RefinementList
+                  searchable={"true"}
+                  attribute="brand"
+                />
+              </div>
+              <div className={"filterSection"}>
+                <h4>Color</h4>
+                <RefinementList
+                  searchable={"true"}
+                  attribute="color"
+                />
+              </div>
+
             <div className={"filterSection"}>
               <h4>Size</h4>
               {/*<RefinementList*/}

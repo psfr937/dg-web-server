@@ -24,21 +24,20 @@ export default function Nav({ action }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(getCookie('token') === null) router.push('/login')
-  }, []);
-
-
-  useEffect(() => {
     if(getCookie('token') !== null && !userReady){
       dispatch({type: FETCH_DETAIL_INFO })
     }
   }, [token]);
 
-  useEffect(() => {
-    if(userReady && user.data.admin === false){
-      router.push('/error/denied')
-    }
-  }, [userReady]);
+  // useEffect(() => {
+  //   if(getCookie('token') === null) router.push('/login')
+  // }, []);
+
+  // useEffect(() => {
+  //   if(userReady && user.data.admin === false){
+  //     router.push('/error/denied')
+  //   }
+  // }, [userReady]);
 
   const saveAction = () => {
     if(action === 'create'){
@@ -61,11 +60,16 @@ export default function Nav({ action }) {
             <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
         </div>
-        <a href={'/cms/create'}>
+        <Link href={'/cms/create'}>
           <button className={cmsSt.saveButton}>
             Create Product
           </button>
-        </a>
+        </Link>
+        <Link href={'/cms/metadata'}>
+          <button className={cmsSt.metaDataButton}>
+            Meta Data
+          </button>
+        </Link>
       </div>
       <div>
         <div className={st.appNavRow}>

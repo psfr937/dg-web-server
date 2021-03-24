@@ -25,7 +25,7 @@ function *fetchSizes(){
 
     yield put({type: FETCH_SIZES_SUCCESS, data: data})
   } catch (err) {
-    yield put({type: FETCH_SIZES_FAILURE, data: data})
+    yield put({type: FETCH_SIZES_FAILURE, err: err})
   }
 }
 

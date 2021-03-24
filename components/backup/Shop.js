@@ -166,7 +166,7 @@ const createSlug = (localText) => {
 };
 
 function Hit({ hit, cms }) {
-  console.log(hit)
+  console.log(hit);
 
   let language = 'en';
   const localText = hit.text.find(t => t.language === language);
