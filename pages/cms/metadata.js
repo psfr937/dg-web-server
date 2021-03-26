@@ -6,7 +6,7 @@ import st from './metadata.module.scss'
 import ProfileMenu from "@components/profile/profileMenu";
 import MetadataMenu from "@components/cms/metadata/metadataMenu";
 import MeasurementList from "@components/cms/metadata/measurementList";
-
+import SortList from "@components/sortList";
 export default function RecycleHistory(){
   return (
     <div>
@@ -26,6 +26,7 @@ export default function RecycleHistory(){
           <div className={st.catalogPage}>
             <MetadataMenu/>
             <MeasurementList/>
+            {/*<SortList/>*/}
           </div>
         </div>
       </main>

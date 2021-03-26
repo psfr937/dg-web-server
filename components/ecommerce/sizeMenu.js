@@ -21,7 +21,7 @@ const MySearchBox = ({ currentRefinement, refine }) => {
       refine( [...selectedSizeNames, name])
     }
     else{
-      setSelectedSizeNames(selectedSizeNames.slice(0, idx).concat(...selectedSizeNames.slice(idx + 1)))
+      setSelectedSizeNames(selectedSizeNames.slice(0, idx).concat(...selectedSizeNames.slice(idx + 1)));
       refine(selectedSizeNames.slice(0, idx).concat(...selectedSizeNames.slice(idx + 1)))
     }
 
@@ -40,7 +40,6 @@ const MySearchBox = ({ currentRefinement, refine }) => {
 
   const sizes = useSelector(state => state.sizes);
     let measurements = [];
-    console.log(sizes)
 
     if(sizes.readyStatus === FETCH_SIZES_SUCCESS){
       let segmentDetail = Object.keys(sizes.data).map(k => sizes.data[k]).find(s => s.id === ux.selectedSegment)
