@@ -2,7 +2,7 @@ import React, { useEffect} from 'react'
 import Head from "@components/ecommerce/Head";
 import Nav from "@components/Nav";
 import appSt from '../home.module.scss';
-import st from './cart.module.scss';
+import st from '../recycle/recycle.module.scss';
 import CartSection from '@components/ecommerce/CartSection';
 import AddressForm from "@components/ecommerce/addressForm";
 import AddressList from "@components/ecommerce/addressList"
@@ -15,6 +15,8 @@ import classnames from 'classnames'
 import Link from 'next/link'
 import CartAuth from "@components/authBox/cartAuthForm"
 import {FETCH_ADDRESSES_SUCCESS} from "../../redux/reducers/ecommerce/address/addresses";
+
+
 export default function Cart(){
 
   const getQuotation = useSelector(state => state.getBuyQuotation);
@@ -113,9 +115,6 @@ export default function Cart(){
               </div>
               {token !== null ?
                 <div className={st.bottomSection}>
-                  <div className={st.corneringLeftContainer}>
-                    <div/>
-                  </div>
                   <div className={st.bottomRightSection}>
 
                     <div className={st.conclusion}>
@@ -140,9 +139,6 @@ export default function Cart(){
                       </Link>
                     </div>
 
-                  </div>
-                  <div className={st.corneringRightContainer}>
-                    <div/>
                   </div>
                 </div> : null
               }
