@@ -225,6 +225,20 @@ $light-green: #555;
 
   }
 
+  button{
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem;
+
+    &:hover{
+      cursor: pointer;
+      background: #555;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+  }
+
   svg{
     height: 20px;
     width: 20px;

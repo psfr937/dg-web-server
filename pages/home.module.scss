@@ -613,7 +613,15 @@ $light-green: #65807C;
   background: $dark-green;
   color: #fff;
   padding: 1rem;
-  width: 150px;
+  width: 320px;
+
+  a:visited, a:hover, a:focus, a:active, a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+
   &:hover{
     background: lighten($dark-green, 10%);
     cursor: pointer;
