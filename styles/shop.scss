@@ -1,14 +1,18 @@
 @import './global.scss';
+@import './mixin.scss';
 
 .left-panel {
   float: left;
   width: 250px;
 }
 
+$mobile-max: 620px;
 
 
 $dark-green: #266150;
 $light-green: #65807C;
+
+
 
 .filterMenu{
   flex-basis: 250px;
@@ -21,12 +25,16 @@ $light-green: #65807C;
   border-right: 1px solid rgba(116, 112, 128, 0.41);
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
+  height: calc(100vh - 120px);
+
   .filterMenuBottomSection{
     padding: 0 1rem;
     overflow-y: auto;
     margin: 0;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
+
   }
 
   .searchBarContainer{
@@ -115,13 +123,22 @@ $light-green: #65807C;
       margin-left: 10px
     }
   }
-}
+  @media (max-width: $mobile-max){
+    position: fixed;
+    z-index: 9;
+    width: 100vw;
+    overflow-y: auto;
 
-@mixin max-width($width) {
-  @media screen and (max-width: $width) {
-    @content;
+    &.disabled {
+      display: none;
+    }
   }
 }
+
+
+
+
+
 
 .right-panel {
   overflow-y: auto;
@@ -130,6 +147,7 @@ $light-green: #65807C;
 
 
 .right-panel ul {
+  padding-bottom: 5rem;
   height: 100%;
   max-width: 2000px;
   position: relative;
@@ -139,10 +157,24 @@ $light-green: #65807C;
   list-style-type: none;
    align-items: flex-start;
    margin-bottom: 150px;
+  @include max-width($mobile-max) {
+    margin-left: 0;
+    padding: 0;
+  }
+
 }
 .right-panel li  {
+
+
+  @include max-width($mobile-max) {
+    margin-left: 0;
+  }
+
+  @include max-width(400px) {
+    margin-left: 0;
+  }
+
   box-sizing: border-box;
-  padding: 1.5rem 0;
   flex: 1;
   display: flex;
   align-items: center;
@@ -170,6 +202,7 @@ $light-green: #65807C;
 @include max-width(640px) {
   .right-panel li {
     flex-basis: 50%;
+    max-width: 50%;
   }
   .placeHolder1, .placeHolder2{
     display: none;

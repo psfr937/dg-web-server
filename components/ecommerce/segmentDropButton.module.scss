@@ -1,0 +1,29 @@
+.segmentMenuContainer{
+  position: absolute;
+  background: black;
+  color: white;
+
+
+
+
+  &.disabled{
+
+    display: none;
+  }
+}
+
+.segmentDropMenu{
+  width: 100px;
+  position: relative;
+  margin: 0 0.5rem 0 0;
+  button{
+    cursor: pointer;
+    background: black;
+    color: white;
+    width: 100%;
+    border: none;
+    height: 60px;
+    font-size: 0.8rem;
+
+  }
+}

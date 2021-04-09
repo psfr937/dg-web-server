@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SearchBox,
   Pagination,
@@ -10,6 +10,8 @@ import {
   SortBy
 } from 'react-instantsearch-dom';
 
+import classNames from 'classnames'
+
 import PropTypes from 'prop-types';
 import Link from "next/dist/client/link";
 import CustomPriceSlider from '@components/priceSlider'
@@ -19,6 +21,7 @@ import filterMenu from "@components/ecommerce/filterMenu";
 import SizeMenu from "@components/ecommerce/SizeMenu";
 import {useDispatch} from "react-redux";
 import {FETCH_SIZES} from "../redux/actions/ecommerce/sizes";
+import SegmentDropButton from "@components/ecommerce/segmentDropButton";
 
 
 
@@ -30,19 +33,40 @@ export default function Shop(props){
     }, []);
   }
 
+  const [filterMenuOpened, setFilterMenuOpened] = useState(false);
+
+  const openFilterMenu = () => {
+    setFilterMenuOpened(!filterMenuOpened)
+  };
+
+  const getFilterMenuClass = () => {
+    if(filterMenuOpened === true){
+     return "filterMenu"
+    }
+    else{
+      return classNames("filterMenu", "disabled")
+    }
+  };
+
+
+
   return (
    <React.Fragment>
+     <Configure hitsPerPage={8}/>
       <div className={st.paginationBar}>
         <div className={st.paginationBarLeft}>
-          <Stats
-            translations={{
-              stats(nbHits, processingTimeMS, nbSortedHits, areHitsSorted) {
-                return areHitsSorted && nbHits !== nbSortedHits
-                  ? `${nbSortedHits.toLocaleString()} relevant results sorted out of ${nbHits.toLocaleString()} found in ${processingTimeMS.toLocaleString()}ms`
-                  : `Total items: ${nbHits.toLocaleString()}`
-              },
-            }}
-          />
+          <SegmentDropButton/>
+          <div className={st.statContainer}>
+            <Stats
+              translations={{
+                stats(nbHits, processingTimeMS, nbSortedHits, areHitsSorted) {
+                  return areHitsSorted && nbHits !== nbSortedHits
+                    ? `${nbSortedHits.toLocaleString()} relevant results sorted out of ${nbHits.toLocaleString()} found in ${processingTimeMS.toLocaleString()}ms`
+                    : `Total items: ${nbHits.toLocaleString()}`
+                },
+              }}
+            />
+          </div>
         </div>
         <div className={st.paginationBarMiddle}>
           <div className={"searchContainer"}>
@@ -50,22 +74,29 @@ export default function Shop(props){
           </div>
         </div>
         <div className={st.paginationBarRight}>
-          <Pagination
-          showLast={false}
-          showFirst={false}
-          />
-          <SortBy
-            defaultRefinement="dev_dg"
-            items={[
-              { value: 'dev_dg', label: 'Featured' },
-              { value: 'dev_dg_price_asc', label: 'Price asc.' },
-              { value: 'dev_dg_price_desc', label: 'Price desc.' },
-            ]}
-          />
+          <div className={st.paginationAndSortContainer}>
+            <Pagination
+            showLast={false}
+            showFirst={false}
+            />
+            <SortBy
+              defaultRefinement="dev_dg"
+              items={[
+                { value: 'dev_dg', label: 'Featured' },
+                { value: 'dev_dg_price_asc', label: 'Price asc.' },
+                { value: 'dev_dg_price_desc', label: 'Price desc.' },
+              ]}
+            />
+          </div>
+          <div className={st.openFilterMenuButton} onClick={openFilterMenu}>
+            <svg style={{width:'24px',height:'24px'}} viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6,13H18V11H6M3,6V8H21V6M10,18H14V16H10V18Z" />
+            </svg>
+          </div>
         </div>
       </div>
       <div className={st.catalogPage}>
-        <div className={"filterMenu"}>
+        <div className={getFilterMenuClass()}>
 
           <div className={"filterTitleContainer"}>
             <div className={"filterByText"}>
@@ -131,12 +162,12 @@ export default function Shop(props){
               />
             </div>
           </div>
-
-          <Configure hitsPerPage={8}/>
+          <div className={st.showResultButtonContainer}>
+            <button onClick={() => setFilterMenuOpened(false)}> Show Results </button>
+          </div>
         </div>
         <div className="right-panel">
-          {/*<CustomHits data="test" />*/}
-
+            {/*<CustomHits data="test" />*/}
             {/*<Hits*/}
             {/*  hitComponent={Hit}*/}
             {/*  cms={props.cms}*/}
@@ -165,14 +196,17 @@ function Hit({ hit, cms }) {
   return(
     <div className={st.itemContainer}>
       <Link href={`/${path}/${createSlug(localText)}/p/${hit.id}`}>
-        <div className={st.item}>
-          <img src={typeof firstImage !== 'undefined' ? firstImage.url : null}/>
 
-            <div className={st.itemBrand}>{hit.brand}</div>
-            <div className={st.itemName}>{typeof localText !== 'undefined' ? localText.name : ''}</div>
-            <div className={st.itemPrice}>{`HK$${hit.price/100}`}</div>
+          <div className={st.item}>
 
-        </div>
+                <img src={typeof firstImage !== 'undefined' ? firstImage.url : null}/>
+
+              <div className={st.itemBrand}>{hit.brand}</div>
+              <div className={st.itemName}>{typeof localText !== 'undefined' ? localText.name : ''}</div>
+              <div className={st.itemPrice}>{`HK$${hit.price/100}`}</div>
+
+          </div>
+
       </Link>
     </div>
   )

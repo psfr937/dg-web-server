@@ -9,21 +9,45 @@
     }
   }
 
-  .sizeList{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+}
+
+
+.sizeList{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .sizeItem{
+    margin: 2px;
+    background: none;
+    border: 1px solid #aaa;
+    color: #777;
+    &.selected{
+      background: #222;
+      color: #ccc;
+    }
   }
 }
 
-.sizeItem{
-  margin: 2px;
-  background: none;
-  border: 1px solid #aaa;
-  color: #777;
+.dropMenuSizeList{
+  display: flex;
+  flex-direction: column;
+  width: 100px;
 
-  &.selected{
-    background: #222;
-    color: #ccc;
+
+  .sizeItem{
+    cursor: pointer;
+    margin: 2px;
+    background: none;
+    color: #777;
+    height: 30px;
+    width: 100%;
+    border: none;
+    height: 60px;
+
+    &.selected{
+      background: #222;
+      color: #ccc;
+      margin: 0;
+    }
   }
 }

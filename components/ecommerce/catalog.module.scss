@@ -1,7 +1,43 @@
+@import '../../styles/mixin.scss';
+@import "../../styles/theme.scss";
 
+$mobile-max: 600px;
 
-$dark-green: #266150;
-$light-green: #65807C;
+.showResultButtonContainer{
+  height: 70px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button{
+
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 250px;
+    background: black;
+    color: white;
+  }
+
+  @include min-width($mobile-max){
+    display: none;
+  }
+}
+
+.openFilterMenuButton{
+  @include min-width($mobile-max){
+    display: none;
+  }
+  width: 40px;
+  background: $light-green;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  cursor:pointer;
+}
 
 .paginationBar{
   position: fixed;
@@ -14,7 +50,7 @@ $light-green: #65807C;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0.4rem;
+  //padding: 0.4rem;
   box-sizing: border-box;
 
   h6{
@@ -23,11 +59,30 @@ $light-green: #65807C;
     font-weight: 200;
   }
 
+  .paginationAndSortContainer{
+    @include max-width($mobile-max){
+      display: none;
+    }
+    display: flex;
+    flex-direction: row;
+  }
+
+  .statContainer{
+    @include max-width($mobile-max){
+      display: none;
+    }
+  }
+
   .paginationBarLeft{
-    width: 200px;
+    @include min-width($mobile-max){
+      width: 240px;
+    }
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
+
   }
 
   .paginationBarMiddle{
@@ -40,6 +95,7 @@ $light-green: #65807C;
   .paginationBarRight{
     display: flex;
     flex-direction: row;
+
   }
 }
 
@@ -47,18 +103,13 @@ $light-green: #65807C;
   display: flex;
   position: relative;
   flex-direction: row;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 120px);
   max-width: 100%;
   top: 60px;
-
-
+  box-sizing: border-box;
 }
 
-@mixin max-width($width) {
-  @media screen and (max-width: $width) {
-    @content;
-  }
-}
+
 
 .catalogSection{
   height: 100%;
@@ -101,41 +152,74 @@ $light-green: #65807C;
   }
 }
 
+
+
+
 .item{
-  height: 240px;
-  width: 200px;
+
+  height: min-content;
+  width: 180px;
+  max-width: 100%;
   margin: 1rem 0 1rem 1rem;
-  background: black;
+ // background: black;
   display: flex;
   flex-direction: column;
-  align-items: flex-start ;
+  align-items: flex-start;
+
+  @include max-width(450px){
+    width:180px;
+    margin: 0;
+  }
+
+  @include max-width(400px){
+    width:150px;
+  }
+
+  @include max-width(350px){
+    width:120px;
+  }
+
+  @include max-width(300px){
+    width:90px;
+  }
+
+
   img{
-    width: 100%;
-    height: 140px;
-    display: block;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
+
+    @include max-width(450px){
+      height: 240px;
+      width:180px;
+    }
+    @include max-width(400px){
+      height: 200px;
+      width:150px;
+    }
+    @include max-width(350px){
+      height: 160px;
+      width:120px;
+    }
+    @include max-width(300px){
+      height: 120px;
+      width:90px;
+    }
+
+    background: black;
+    height: 240px;
+    width:180px;
   }
   .item > div{
-    //display: flex;
-    //flex-direction: column;
-    //align-items: center;
-    //width: 100%;
-    //height: min-content;
-    //
-    //div{
-    //  margin: 0;
-    //}
+
     width: 100%;
     text-align: center;
   }
   .itemBrand{
-    height: 40px;
+    text-align: left;
+    height: min-content;
     margin: 0.2rem 0;
     font-size: 1rem;
   }
   .itemName{
+    text-align: left;
     height: 40px;
     font-weight: 300;
     margin: 0 0;
