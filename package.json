@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--inspect' next dev",
     "dev-prod": "cross-env NODE_ENV=production NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "deploy": "netlify build && netlify deploy --prod",
+    "deploy": "yarn clean && netlify build && netlify deploy --prod",
+    "clean": "rm -rf out_functions && rm -rf out_publish",
     "start": "next build && cross-env NODE_ENV=production next start",
     "export": "next export"
   },
