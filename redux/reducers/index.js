@@ -42,6 +42,10 @@ import sizes from "./ecommerce/sizes";
 import tags from './ecommerce/tags'
 import profile from './account/profile'
 import users from './cms/users'
+import addWishItem from "./ecommerce/wishlist/addWishItem";
+import removeWishItem from "./ecommerce/wishlist/removeWishItem";
+import wishItems from "./ecommerce/wishlist/wishItems";
+import wishItemDetail from "./ecommerce/wishlist/wisItemDetail";
 
 import { combineReducers } from 'redux'
 
@@ -88,7 +92,11 @@ const reducer = {
   profile,
   sizes,
   users,
-  tags
+  tags,
+  addWishItem,
+  removeWishItem,
+  wishItems,
+  wishItemDetail
 };
 
 

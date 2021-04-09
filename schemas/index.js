@@ -177,4 +177,14 @@ export const userSchema = new schema.Entity(
 
 export const arrayOfUsers = new schema.Array(userSchema);
 
+export const widSchema = new schema.Entity(
+  'wids',
+  {},
+  {
+    idAttribute: 'id'
+  }
+);
+
+export const arrayOfWids = new schema.Array(widSchema);
+
 

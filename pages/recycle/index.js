@@ -98,9 +98,6 @@ export default function Cart(){
               </div>
               { token !== null ?
               <div className={st.bottomSection}>
-                <div className={st.corneringLeftContainer}>
-                  <div/>
-                </div>
                 <div className={st.bottomRightSection}>
 
                   <div className={st.conclusion}>
@@ -115,15 +112,13 @@ export default function Cart(){
                   <div className={st.checkoutButtonContainer}>
                     <Link href={'/recycle/checkout'}>
                       <div className={st.checkoutButton}>
-                        <h4 >Checkout </h4>
+                        <h4>Checkout </h4>
                       </div>
                     </Link>
                   </div>
 
                 </div>
-                <div className={st.corneringRightContainer}>
-                  <div/>
-                </div>
+
               </div> : null }
 
             </div>
