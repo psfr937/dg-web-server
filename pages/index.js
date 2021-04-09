@@ -99,11 +99,11 @@ export default function Home({ posts }){
             </div>
 
           </div>
-            <Link href="/recycle">
+
               <button className={st.actionButton}>
-                Recycle now
+                <a href="mailto:psc13579@hotmail.com">We may be coming soon. Give us your opinion! </a>
               </button>
-            </Link>
+
           </div>
 
 
@@ -151,7 +151,7 @@ export default function Home({ posts }){
               <button className={"actionButton"}>
                 Shop now
               </button>
-            </Link>
+
           </div>
           <div className={classNames(st.homePageSection, st.second)}>
             <div className={st.after}>

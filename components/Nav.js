@@ -34,9 +34,11 @@ export default function Nav() {
     <div className={st.appNav}>
       <div className={st.appNavHead}>
         <div onClick={toggleBurger} className={st.burgerMenuButton}>
+
           <svg className={st.burgerIcon} viewBox="0 0 24 24">
             <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
           </svg>
+
         </div>
         <Link href="/shopping">
           <img className={st.appNavImg} src="/dress_green_logo.png"/>
