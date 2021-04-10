@@ -4,7 +4,7 @@ import st from './cartSection.module.scss'
 import {FETCH_WIDS_SUCCESS} from "../../redux/reducers/ecommerce/wishlist/wisItemDetail";
 import { FETCH_WIDS, REMOVE_WISH_ITEM } from "../../redux/actions/ecommerce/wishlist"
 import classnames from 'classnames'
-import EmptyBanner from "@components/EmptyBanner";
+import { EmptyBanner } from "@components/EmptyBanner";
 
 function CartItemMenu(){
   return   <div className={st.cartItemOptionsMenu}>

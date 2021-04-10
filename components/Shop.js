@@ -22,6 +22,7 @@ import SizeMenu from "@components/ecommerce/SizeMenu";
 import {useDispatch} from "react-redux";
 import {FETCH_SIZES} from "../redux/actions/ecommerce/sizes";
 import SegmentDropButton from "@components/ecommerce/segmentDropButton";
+import {EmptyShopBanner} from "@components/EmptyBanner";
 
 
 
@@ -214,15 +215,19 @@ function Hit({ hit, cms }) {
 }
 
 
-const Hitts = ({ hits, cms }) => (
-  <ul>
-    {hits.map(hit => (
-      <li>
-      <Hit hit={hit} cms={cms}/>
-      </li>
-    ))}
-  </ul>
-);
+const Hitts = ({ hits, cms }) => {
+  return hits.length === 0 ? <div>
+      <EmptyShopBanner imgSrc={'/empty_stock.jpg'}
+                       text={'No stocks found at the moment. Maybe you can find something else?'}/>
+    </div> :
+    <ul>
+      {hits.map(hit => (
+        <li>
+          <Hit hit={hit} cms={cms}/>
+        </li>
+      ))}
+    </ul>
+};
 
 const CustomHits = connectHits(Hitts);
 

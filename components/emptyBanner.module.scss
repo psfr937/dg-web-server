@@ -4,17 +4,19 @@
   height: calc(100vh - 125px);
   background: repeating-linear-gradient(
                   45deg,
-                  #eeccee55,
-                  #eeecce55 100px,
-                  #fff 100px,
-                  #fff 180px
+                  rgba(170, 196, 238, 0.33),
+                  rgba(170, 196, 238, 0.33) 120px,
+                  #fff 120px,
+                  #fff 200px
   );
   img{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
 
   h4{
-    color: #333;
+    color: #888;
+    font-weight: 500;
+    font-size: 1.4rem;
   }
 
   button{
@@ -28,4 +30,16 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
 
+}
+
+.emptyShopBanner {
+  @extend .emptyBanner;
+
+  background: repeating-linear-gradient(
+                  45deg,
+                  #dddddd55,
+                  #dddddd55 150px,
+                  #fff 150px,
+                  #fff 240px
+  );
 }
