@@ -109,7 +109,9 @@ export default function Cart(){
 
                   <div className={ token !== null? st.hidden : st.show}>
                     <h4 className={st.sectionTitle}>Sign Up </h4>
-                    <CartAuth/>
+                    <div className={st.cartAuthContainer}>
+                      <CartAuth/>
+                    </div>
                   </div>
 
               </div>

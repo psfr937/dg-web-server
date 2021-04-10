@@ -8,6 +8,7 @@ import {END} from 'redux-saga';
 import { wrapper } from "../../../../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {ADD_CART_ITEM} from "../../../../../redux/reducers/ecommerce/cart/cartItems";
+import {ADD_WISH_ITEM} from "../../../../../redux/actions/ecommerce/wishlist";
 
 export default function Product(){
 
@@ -77,8 +78,12 @@ export default function Product(){
                     </div>
                   </div>
                   <div className={st.callToActionSection}>
-                    <button className={st.addToCartButton} onClick={() => addCartItem(inventoryDetail.id)}> Add To Cart </button>
-                    <button className={st.addToWishListButton} onClick={() => addCartItem(inventoryDetail.id)}> Add To Wishlist </button>
+                    <button className={st.addToCartButton}
+                            onClick={() => addCartItem(inventoryDetail.id)}
+                    > Add To Cart </button>
+                    <button className={st.addToWishListButton}
+                            onClick={() => dispatch({ type: ADD_WISH_ITEM, id: inventoryDetail.id})}
+                    > Add To Wishlist </button>
                   </div>
 
 

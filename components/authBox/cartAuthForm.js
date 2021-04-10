@@ -13,8 +13,8 @@ export default function CartAuth() {
   const [form, setForm ] = useState('register');
 
   const isFormActive = (thisForm) => {
-    return thisForm === form ? loginSt.loginForm
-      : classNames(loginSt.loginForm, loginSt.hidden)
+    return thisForm === form ? classNames(loginSt.loginForm, loginSt.embedded)
+      : classNames(loginSt.loginForm, loginSt.embedded, loginSt.hidden)
   };
 
   return (
@@ -23,13 +23,13 @@ export default function CartAuth() {
         <div className={isFormActive('login')}
          >
 
-          <LoginForm popUp={true} setForm={setForm}/>
+          <LoginForm popUp={true} embedded={true} setForm={setForm}/>
         </div>
       </div>
       <div>
         <div className={isFormActive('register')}
         >
-          <RegisterForm popUp={true} setForm={setForm}/>
+          <RegisterForm popUp={true} embedded={true} setForm={setForm}/>
         </div>
       </div>
    </div>

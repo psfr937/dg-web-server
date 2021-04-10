@@ -151,7 +151,7 @@ export default function Home({ posts }){
               <button className={"actionButton"}>
                 Shop now
               </button>
-
+            </Link>
           </div>
           <div className={classNames(st.homePageSection, st.second)}>
             <div className={st.after}>

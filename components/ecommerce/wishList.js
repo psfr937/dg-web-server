@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import st from './cartSection.module.scss'
-import {FETCH_WISHLIST_SUCCESS} from "../../redux/reducers/ecommerce/wishlist/wisItemDetail";
-import { FETCH_WISHLIST, REMOVE_WISHLIST_ITEM_SAGA } from "../../redux/actions/ecommerce/wishlist"
+import {FETCH_WIDS_SUCCESS} from "../../redux/reducers/ecommerce/wishlist/wisItemDetail";
+import { FETCH_WIDS, REMOVE_WISH_ITEM } from "../../redux/actions/ecommerce/wishlist"
 import classnames from 'classnames'
 
 function CartItemMenu(){
@@ -30,13 +30,13 @@ export default function WishList({editable = true}){
   const removeCartItem = (id) => dispatch({type: REMOVE_WISHLIST_ITEM_SAGA, id: id});
 
   useEffect(() => {
-    dispatch({type: FETCH_WISHLIST})
+    dispatch({type: FETCH_WIDS})
   }, []);
 
-  const items = (cids.readyStatus !== FETCH_WISHLIST_SUCCESS) ? []
+  const items = (cids.readyStatus !== FETCH_WIDS_SUCCESS) ? []
     : Object.keys(cids.data).map(k => cids.data[k]);
 
-  const productCost = cids.readyStatus !== FETCH_WISHLIST_SUCCESS ? null :
+  const productCost = cids.readyStatus !== FETCH_WIDS_SUCCESS ? null :
     Object.keys(cids.data)
       .map(k => cids.data[k].price)
       .reduce((acc, cur) => acc + cur, 0);

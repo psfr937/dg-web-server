@@ -40,6 +40,7 @@ $third-color: blue;
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+
 .loginFormContainer{
   @extend .noselect;
   position:  fixed;
@@ -84,6 +85,10 @@ $third-color: blue;
   display: none;
 }
 
+.embeddedLoginFormContainer{
+  background: #28303d;
+}
+
 .loginForm {
   z-index: 3;
   position: relative;
@@ -95,6 +100,11 @@ $third-color: blue;
   max-width: 450px;
   background: #28303d;
   color: white;
+  box-sizing: border-box;
+
+  &.embedded {
+    margin: 0;
+  }
 
   @media only screen and (min-width: 601px) {
     margin: 20px 20px;
@@ -110,6 +120,10 @@ $third-color: blue;
 
   &.hidden{
     z-index: 1;
+  }
+
+  &.embedded{
+    box-shadow: none;
   }
 }
 
