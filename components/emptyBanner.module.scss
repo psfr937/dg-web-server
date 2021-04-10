@@ -1,0 +1,31 @@
+.emptyBanner{
+  padding: 2rem;
+  box-sizing: border-box;
+  height: calc(100vh - 125px);
+  background: repeating-linear-gradient(
+                  45deg,
+                  #eeccee55,
+                  #eeecce55 100px,
+                  #fff 100px,
+                  #fff 180px
+  );
+  img{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+
+  h4{
+    color: #333;
+  }
+
+  button{
+    border: none;
+    background: #4f95ff;
+    color: white;
+    font-weight: 500;
+    padding: 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+
+}

@@ -5,6 +5,7 @@ import {FETCH_CIDS_SUCCESS} from "../../redux/reducers/ecommerce/cart/cartItemDe
 import { FETCH_CIDS, REMOVE_CART_ITEM_SAGA } from "../../redux/actions/ecommerce/cart"
 import classnames from 'classnames'
 import {REMOVE_CART_ITEM} from "../../redux/reducers/ecommerce/cart/cartItems";
+import EmptyBanner from "@components/EmptyBanner";
 
 function CartItemMenu(){
   return   <div className={st.cartItemOptionsMenu}>
@@ -57,7 +58,12 @@ export default function CartSection({editable = true}){
           <div className={st.openCartItemOptionsMenuButtonContainer}>
               </div> : null }
         </div>
-        {
+        { items.length === 0 ? <div>
+            <EmptyBanner
+              imgSrc={'/wish_empty.jpg'}
+              text={'Your shopping cart is empty. Grab something from the shop!'}
+            />
+          </div> :
           items.map(k =>
             <div className={st.cartItemCard}>
 

@@ -4,6 +4,7 @@ import st from './cartSection.module.scss'
 import {FETCH_WIDS_SUCCESS} from "../../redux/reducers/ecommerce/wishlist/wisItemDetail";
 import { FETCH_WIDS, REMOVE_WISH_ITEM } from "../../redux/actions/ecommerce/wishlist"
 import classnames from 'classnames'
+import EmptyBanner from "@components/EmptyBanner";
 
 function CartItemMenu(){
   return   <div className={st.cartItemOptionsMenu}>
@@ -57,7 +58,13 @@ export default function WishList({editable = true}){
             </div> : null }
         </div>
         {
-          items.map(k =>
+          items.length === 0 ? <div>
+            <EmptyBanner
+              imgSrc={'/wish_empty.jpg'}
+              text={'Your wish list is empty. Add something from the shop'}
+            />
+            </div>
+          : items.map(k =>
             <div className={st.cartItemCard}>
 
               <div className={st.cartItemImage}>

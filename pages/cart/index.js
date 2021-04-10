@@ -74,9 +74,8 @@ export default function Cart(){
           <div className={st.container}>
             <div className={st.topSection}>
               <div className={st.subSection}>
-                <div >
+                <div>
                   <h4 className={st.sectionTitle}>Shopping Cart </h4>
-
                   <CartSection/>
                 </div>
                   <div className={token !== null ? st.show: st.hidden}>
