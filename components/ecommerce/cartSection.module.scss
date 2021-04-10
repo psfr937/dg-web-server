@@ -37,6 +37,12 @@ $dark: #3c3a41;
 .cartItemList{
   display: flex;
   flex-direction: column;
+
+
+}
+.wishItemList{
+  @extend .cartItemList;
+  padding-bottom: 4rem;
 }
 
 

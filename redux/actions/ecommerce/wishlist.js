@@ -11,7 +11,6 @@ import { OFFLINE_ADD_WISH_ITEM, OFFLINE_REMOVE_WISH_ITEM } from "../../reducers/
 import { select, put, all, call, takeEvery } from "redux-saga/effects"
 import {normalize} from "normalizr";
 import {arrayOfWids} from "../../../schemas";
-import {FETCH_CIDS_SUCCESS} from "../../reducers/ecommerce/cart/cartItemDetail";
 
 export const FETCH_WIDS = "FETCH_WIDS";
 export const ADD_WISH_ITEM = "ADD_WISH_ITEM";
@@ -19,15 +18,21 @@ export const REMOVE_WISH_ITEM = "REMOVE_WISH_ITEM";
 
 function *fetchWids(){
   const readyStatus = yield select(state => state.wishItemDetail.readyStatus);
-  const wishItemIds = yield select( state => state.wishListDetail);
+  const wishItemIds = yield select( state => state.wishItems);
 
   if(wishItemIds.length === 0) return;
   if([FETCH_WIDS_SUCCESS, FETCH_WIDS_REQUESTING].includes(readyStatus)) return;
-
+  const token = yield select(state => state.auth.token);
   yield put({type: FETCH_WIDS_REQUESTING});
   try {
-    const json = yield call(wishlistAPI.list, { data: wishItemIds} );
-    const normalizedData = yield call (normalize,json.data.data, arrayOfWids);
+    let json;
+    if(token !== null) {
+      json = yield call(wishlistAPI.list);
+    }
+    else{
+      json = yield call(wishlistAPI.guestList, { data: wishItemIds });
+    }
+    let normalizedData = yield call(normalize, json.data.data, arrayOfWids);
     console.log(normalizedData);
     let cids = normalizedData.entities.wids;
     if(typeof cids === 'undefined') cids = {};
@@ -51,11 +56,11 @@ function *removeWishItem({id}){
       let newData;
       const wids = yield select(state => state.wishItemDetail);
       newData = wids.data;
-      if(wids.readyStatus === FETCH_CIDS_SUCCESS && `${id}` in newData){
+      if(wids.readyStatus === FETCH_WIDS_SUCCESS && `${id}` in newData){
         delete newData[id]
       }
       yield all([
-        put({type: FETCH_CIDS_SUCCESS, data: newData}),
+        put({type: FETCH_WIDS_SUCCESS, data: newData}),
         put({type: OFFLINE_REMOVE_WISH_ITEM, id: id}),
         put({type: REMOVE_WISH_ITEM_SUCCESS})
       ])
@@ -68,11 +73,11 @@ function *removeWishItem({id}){
 
     let newData;
     newData = wids.data;
-    if(wids.readyStatus === FETCH_CIDS_SUCCESS && `${id}` in newData){
+    if(wids.readyStatus === FETCH_WIDS_SUCCESS && `${id}` in newData){
       delete newData[id]
     }
     yield all([
-      put({type: FETCH_CIDS_SUCCESS, data: newData}),
+      put({type: FETCH_WIDS_SUCCESS, data: newData}),
       put({type: OFFLINE_REMOVE_WISH_ITEM, id: id}),
       put({type: REMOVE_WISH_ITEM_SUCCESS})
     ])
@@ -80,9 +85,11 @@ function *removeWishItem({id}){
 }
 
 function *addWishItem({id}){
+
   const readyStatus = yield select(state => state.addWishItem.readyStatus);
 
   const token = yield select(state => state.auth.token);
+
   if(token !== null) {
     if([ADD_WISH_ITEM_REQUESTING].includes(readyStatus)) return;
 

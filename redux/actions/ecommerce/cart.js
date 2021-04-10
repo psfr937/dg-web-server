@@ -36,11 +36,10 @@ function *fetchCids(){
 function *removeCartItemSaga({ id }){
 
   const cids = yield select(state => state.cartItemDetail);
-
+  yield id
   let newData;
   newData = cids.data;
-  console.log(id)
-  console.log(id in newData)
+  yield id in newData
   console.log(`${id}` in newData)
   if(cids.readyStatus === FETCH_CIDS_SUCCESS && `${id}` in newData){
     delete newData[id]

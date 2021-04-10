@@ -1,5 +1,5 @@
 export const OFFLINE_ADD_WISH_ITEM = 'OFFLINE_ADD_WISH_ITEM';
-export const OFFLINE_REMOVE_WISH_ITEM = 'REMOVE_WISH_ITEM';
+export const OFFLINE_REMOVE_WISH_ITEM = 'OFFLINE_REMOVE_WISH_ITEM';
 
 const initialState = [];
 

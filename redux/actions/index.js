@@ -18,6 +18,7 @@ import editInventory from "./cms/editInventory";
 import tags from "./ecommerce/tags";
 import sizes from "./ecommerce/sizes";
 import users from "./cms/users";
+import wishlist from "./ecommerce/wishlist";
 
 export default function* rootSaga() {
   yield all([
@@ -37,6 +38,7 @@ export default function* rootSaga() {
     ...editInventory,
     ...tags,
     ...sizes,
-    ...users
+    ...users,
+    ...wishlist
   ])
 }

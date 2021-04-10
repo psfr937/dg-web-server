@@ -18,7 +18,7 @@ const makeStore = (context) => {
     // 2: Add an extra parameter for applying middleware:
     // const middlewares = process.env.NODE_ENV === 'development'
     //   ?  applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware);
-    const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+    const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
     // 3: Run your sagas on server
     store.sagaTask = sagaMiddleware.run(rootSaga);
     return store
@@ -34,7 +34,7 @@ const makeStore = (context) => {
 
     const persistConfig = {
       key: 'nextjs',
-      whitelist: ['cartItems', 'auth'], // make sure it does not clash with server keys
+      whitelist: ['cartItems', 'wishItems', 'auth'], // make sure it does not clash with server keys
       storage
     };
 
